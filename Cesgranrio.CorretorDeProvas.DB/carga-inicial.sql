@@ -3,7 +3,6 @@
 BEGIN TRAN
 
 PRINT 'Realizando carga inicial...'
-
 --elaborador
 IF NOT EXISTS(SELECT 1 FROM Usuario WHERE UsuarioCPF='26140486408')
 	insert into Usuario(UsuarioCPF, UsuarioSenha, GrupoID) values ('26140486408',CONVERT(VARCHAR(32), HashBytes('MD5', 'elaborador'), 2), 1)
