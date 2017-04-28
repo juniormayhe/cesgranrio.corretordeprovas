@@ -1,0 +1,53 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*customizações*/
+
+.navbar-item {
+    line-height: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+}
+
+ul.logado .texto {
+    color: #ddd;
+}
+
+ul.logado strong {
+    color:#fff
+}
+ul.logado, ul.logado li:last-child {
+    float: right;
+    padding-left: 15px
+}
+
+.form-corretor .text-danger {
+    margin-top:10px;
+    display:block;
+}
+h1, h2, h3 {margin-top:40px}
+.alert {padding:20px;margin-top:20px}
+.panel-title {font-size:14px}

@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Acesso Negado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Você precisa iniciar sua sessão!</h2>
+
+<div class="row">
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Prezado(a) usuário(a):</span>
+        Para utilizar o sistema, informe suas credenciais na @Html.ActionLink("Página de acesso", "Login", "Usuario").
+    </div>
+</div>
+
+
