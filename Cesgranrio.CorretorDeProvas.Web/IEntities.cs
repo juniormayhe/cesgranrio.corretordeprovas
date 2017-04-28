@@ -19,7 +19,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
 
         ObjectResult<string> Autenticar(string usuarioCPF, string usuarioSenha);
         Task SaveChangesAsync();
-        DbEntityEntry Entry(Usuario usuario);
+        DbEntityEntry Entry(object usuario);
         void Dispose();
     }
 
@@ -36,9 +36,9 @@ namespace Cesgranrio.CorretorDeProvas.Web
         //    throw new NotImplementedException();
         //}
 
-        DbEntityEntry IEntities.Entry(Usuario usuario)
+        DbEntityEntry IEntities.Entry(object o)
         {
-            return base.Entry(usuario);
+            return base.Entry(o);
         }
 
         Task IEntities.SaveChangesAsync()

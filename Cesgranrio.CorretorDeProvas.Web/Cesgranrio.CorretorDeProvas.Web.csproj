@@ -264,6 +264,7 @@
     <Content Include="Views\Erro\RequisicaoInvalida.cshtml" />
     <Content Include="Views\Erro\FalhaNaApliacacao.cshtml" />
     <Content Include="Views\Questao\_QuestoesPartialView.cshtml" />
+    <Content Include="Views\Questao\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

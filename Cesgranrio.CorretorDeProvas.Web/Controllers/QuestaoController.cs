@@ -2,7 +2,9 @@
 using Cesgranrio.CorretorDeProvas.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -29,11 +31,48 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             return View(vm);
         }
 
-        public ActionResult About()
+        // GET: Questao/Editar/5
+        public async Task<ActionResult> Editar(int? id)
         {
-            ViewBag.Message = "Your application description page.";
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Questao questao = await db.Questao.FindAsync(id);
+            if (questao == null)
+                return HttpNotFound();
 
-            return View();
+            var vm = new QuestaoVM(questao);
+            
+            
+            return View(vm);
+        }
+
+        // POST: Questao/Editar/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Editar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var questao = new Questao {
+                    QuestaoID = vm.QuestaoID,
+                    QuestaoNumero = vm.QuestaoNumero,
+                    QuestaoEnunciado = vm.QuestaoEnunciado,
+                    QuestaoGradeDominioDasRegras = vm.QuestaoGradeDominioDasRegras,
+                    QuestaoGradeFidelidadeAoTema = vm.QuestaoGradeFidelidadeAoTema,
+                    QuestaoGradeNivelDeLinguagem = vm.QuestaoGradeNivelDeLinguagem,
+                    QuestaoGradeOrganizacaoIdeias = vm.QuestaoGradeOrganizacaoIdeias,
+                    Pontuacao = vm.Pontuacao
+                };
+                db.Entry(questao).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Lista");
+            }
+            
+            return View(vm);
         }
 
         public ActionResult Contact()

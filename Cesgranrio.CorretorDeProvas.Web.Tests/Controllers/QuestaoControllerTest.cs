@@ -25,18 +25,18 @@ namespace Cesgranrio.CorretorDeProvas.Web.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            QuestaoController controller = new QuestaoController();
+        //[TestMethod]
+        //public void About()
+        //{
+        //    // Arrange
+        //    QuestaoController controller = new QuestaoController();
 
-            // Act
-            ViewResult result = controller.About() as ViewResult;
+        //    // Act
+        //    ViewResult result = controller.About() as ViewResult;
 
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+        //}
 
         [TestMethod]
         public void Contact()

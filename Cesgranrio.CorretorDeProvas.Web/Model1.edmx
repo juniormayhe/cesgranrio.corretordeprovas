@@ -20,10 +20,10 @@
           <Property Name="UsuarioID" Type="int" Nullable="false" />
           <Property Name="PontuacaoCPFCandidato" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="QuestaoID" Type="int" Nullable="false" />
-          <Property Name="PontuacaoFidelidadeAoTema" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="PontuacaoOrganizacaoDeIdeias" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="PontuacaoNivelDeLinguagem" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="PontuacaoDominioDasRegras" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="PontuacaoFidelidadeAoTema" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PontuacaoOrganizacaoDeIdeias" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PontuacaoNivelDeLinguagem" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PontuacaoDominioDasRegras" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Questao">
           <Key>
@@ -32,10 +32,10 @@
           <Property Name="QuestaoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuestaoNumero" Type="int" Nullable="false" />
           <Property Name="QuestaoEnunciado" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="QuestaoGradeFidelidadeAoTema" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="QuestaoGradeOrganizacaoIdeias" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="QuestaoGradeNivelDeLinguagem" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="QuestaoGradeDominioDasRegras" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="QuestaoGradeFidelidadeAoTema" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="QuestaoGradeOrganizacaoIdeias" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="QuestaoGradeNivelDeLinguagem" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="QuestaoGradeDominioDasRegras" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -146,10 +146,10 @@
           <Property Name="UsuarioID" Type="Int32" Nullable="false" />
           <Property Name="PontuacaoCPFCandidato" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="QuestaoID" Type="Int32" Nullable="false" />
-          <Property Name="PontuacaoFidelidadeAoTema" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
-          <Property Name="PontuacaoOrganizacaoDeIdeias" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
-          <Property Name="PontuacaoNivelDeLinguagem" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
-          <Property Name="PontuacaoDominioDasRegras" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="PontuacaoFidelidadeAoTema" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PontuacaoOrganizacaoDeIdeias" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PontuacaoNivelDeLinguagem" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PontuacaoDominioDasRegras" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <NavigationProperty Name="Questao" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Questao" FromRole="Pontuacao" ToRole="Questao" />
           <NavigationProperty Name="Usuario" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Usuario" FromRole="Pontuacao" ToRole="Usuario" />
         </EntityType>
@@ -160,10 +160,10 @@
           <Property Name="QuestaoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QuestaoNumero" Type="Int32" Nullable="false" />
           <Property Name="QuestaoEnunciado" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="QuestaoGradeFidelidadeAoTema" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
-          <Property Name="QuestaoGradeOrganizacaoIdeias" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
-          <Property Name="QuestaoGradeNivelDeLinguagem" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
-          <Property Name="QuestaoGradeDominioDasRegras" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="QuestaoGradeFidelidadeAoTema" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="QuestaoGradeOrganizacaoIdeias" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="QuestaoGradeNivelDeLinguagem" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="QuestaoGradeDominioDasRegras" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <NavigationProperty Name="Pontuacao" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Questao" FromRole="Questao" ToRole="Pontuacao" />
         </EntityType>
         <EntityType Name="Usuario">
