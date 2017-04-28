@@ -75,6 +75,42 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             return View(vm);
         }
 
+        // GET: Questao/Remover/5
+        public async Task<ActionResult> Remover(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Questao questao = await db.Questao.FindAsync(id);
+            if (questao== null)
+            {
+                return HttpNotFound();
+            }
+            return View(new QuestaoVM
+            {
+                QuestaoID = questao.QuestaoID,
+                QuestaoNumero = questao.QuestaoNumero,
+                QuestaoEnunciado = questao.QuestaoEnunciado,
+                QuestaoGradeDominioDasRegras = questao.QuestaoGradeDominioDasRegras,
+                QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema,
+                QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem,
+                QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias,
+                Pontuacao = questao.Pontuacao
+            });
+        }
+
+        // POST: Questao/RemocaoConcluida/5
+        [HttpPost, ActionName("Remover")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RemocaoConcluida(int id)
+        {
+            Questao questao = await db.Questao.FindAsync(id);
+            db.Questao.Remove(questao);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Lista");
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
