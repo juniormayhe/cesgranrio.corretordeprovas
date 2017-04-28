@@ -31,6 +31,41 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             return View(vm);
         }
 
+        // GET: Questao/Adicionar
+        [VerificarAcessoFilter]
+        public ActionResult Adicionar()
+        {
+            return View();
+        }
+
+        // POST: Questao/Adicionar
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Adicionar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var questao = new Questao
+                {
+                    QuestaoID = vm.QuestaoID,
+                    QuestaoNumero = vm.QuestaoNumero,
+                    QuestaoEnunciado = vm.QuestaoEnunciado,
+                    QuestaoGradeDominioDasRegras = vm.QuestaoGradeDominioDasRegras,
+                    QuestaoGradeFidelidadeAoTema = vm.QuestaoGradeFidelidadeAoTema,
+                    QuestaoGradeNivelDeLinguagem = vm.QuestaoGradeNivelDeLinguagem,
+                    QuestaoGradeOrganizacaoIdeias = vm.QuestaoGradeOrganizacaoIdeias,
+                    Pontuacao = vm.Pontuacao
+                };
+                db.Questao.Add(questao);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Lista");
+            }
+            
+            return View(vm);
+        }
+
         // GET: Questao/Editar/5
         public async Task<ActionResult> Editar(int? id)
         {

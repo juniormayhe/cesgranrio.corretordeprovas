@@ -31,37 +31,43 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
             this.Pontuacao = questao.Pontuacao;
         }
 
+        [Key]
         [Display(Name = "ID")]
         public int QuestaoID { get; set; }
 
         [Required(ErrorMessage = "Por favor informe o número da questão")]
         [Display(Name = "Questão No.")]
         [Range(1,999, ErrorMessage ="O número da questão deve estar entre 1 e 999")]
+        [RegularExpression("([0-9]+)", ErrorMessage = "Por favor informe um número")]
         public int QuestaoNumero { get; set; }
 
         [Required(ErrorMessage = "Por favor informe o enunciado da questão")]
         [Display(Name = "Enunciado")]
-        [MinLength(5, ErrorMessage = "O enunciado conter ao menos 5 caracteres"), MaxLength(500, ErrorMessage = "O enunciado deve conter no máximo 500 caracteres")]
+        [MinLength(5, ErrorMessage = "O enunciado deve conter ao menos 5 caracteres"), MaxLength(500, ErrorMessage = "O enunciado deve conter no máximo 500 caracteres")]
         public string QuestaoEnunciado { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Fidelidade ao tema")]
         [Display(Name = "Fidelidade ao tema")]
-        [Range(0.01, 999.99, ErrorMessage ="Os pontos devem estar entre 0.1 e 99.99")]
+        [Range(0.01, 999.99, ErrorMessage ="Os pontos devem estar entre 0,01 e 999,99")]
+        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeFidelidadeAoTema { get; set; }
 
-        [Required(ErrorMessage = "Por favor informe os pontos para Fidelidade ao tema")]
-        [Display(Name = "Fidelidade ao tema")]
-        [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0.1 e 99.99")]
+        [Required(ErrorMessage = "Por favor informe os pontos para Organização de ideias")]
+        [Display(Name = "Organização de ideias")]
+        [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
+        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeOrganizacaoIdeias { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Nível de Linguagem")]
         [Display(Name = "Nível de Linguagem")]
-        [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0.1 e 99.99")]
+        [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
+        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeNivelDeLinguagem { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Domínio das Regras")]
         [Display(Name = "Domínio das Regras")]
-        [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0.1 e 99.99")]
+        [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
+        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeDominioDasRegras { get; set; }
 
         public virtual ICollection<Pontuacao> Pontuacao { get; set; }

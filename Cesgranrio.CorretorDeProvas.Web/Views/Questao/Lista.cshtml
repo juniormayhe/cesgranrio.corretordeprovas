@@ -8,6 +8,11 @@
 
 <h2>Questões</h2>
 
+<p>
+    @Html.ActionLink("Adicionar", "Adicionar", "Questao", new { @class = "btn btn-primary btn-lg right", @title="Adicionar uma nova questão" })
+    
+</p>
+
 <div id="tabelaQuestoes" class="row">
     @Html.Partial("_QuestoesPartialView", Model)
 </div>
