@@ -18,13 +18,11 @@ namespace Cesgranrio.CorretorDeProvas.Web
         public int UsuarioID { get; set; }
         public string PontuacaoCPFCandidato { get; set; }
         public int QuestaoID { get; set; }
-        public int GradeCorrecaoID { get; set; }
         public decimal PontuacaoFidelidadeAoTema { get; set; }
         public decimal PontuacaoOrganizacaoDeIdeias { get; set; }
         public decimal PontuacaoNivelDeLinguagem { get; set; }
         public decimal PontuacaoDominioDasRegras { get; set; }
     
-        public virtual GradeCorrecao GradeCorrecao { get; set; }
         public virtual Questao Questao { get; set; }
         public virtual Usuario Usuario { get; set; }
     }

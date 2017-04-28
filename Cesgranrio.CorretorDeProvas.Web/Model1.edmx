@@ -4,17 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Cesgranrio.CorretorDeProvasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="GradeCorrecao">
-          <Key>
-            <PropertyRef Name="GradeCorrecaoID" />
-          </Key>
-          <Property Name="GradeCorrecaoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GradeCorrecaoFidelidadeAoTema" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="GradeCorrecaoOrganizacaoIdeias" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="GradeCorrecaoNivelDeLinguagem" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="GradeCorrecaoDominioDasRegras" Type="decimal" Precision="4" Scale="2" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="Cesgranrio.CorretorDeProvasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Grupo">
           <Key>
             <PropertyRef Name="GrupoID" />
@@ -30,7 +20,6 @@
           <Property Name="UsuarioID" Type="int" Nullable="false" />
           <Property Name="PontuacaoCPFCandidato" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="QuestaoID" Type="int" Nullable="false" />
-          <Property Name="GradeCorrecaoID" Type="int" Nullable="false" />
           <Property Name="PontuacaoFidelidadeAoTema" Type="decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="PontuacaoOrganizacaoDeIdeias" Type="decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="PontuacaoNivelDeLinguagem" Type="decimal" Precision="4" Scale="2" Nullable="false" />
@@ -40,10 +29,13 @@
           <Key>
             <PropertyRef Name="QuestaoID" />
           </Key>
-          <Property Name="QuestaoID" Type="int" Nullable="false" />
+          <Property Name="QuestaoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="QuestaoNumero" Type="int" Nullable="false" />
           <Property Name="QuestaoEnunciado" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="GradeCorrecaoID" Type="int" Nullable="false" />
+          <Property Name="QuestaoGradeFidelidadeAoTema" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="QuestaoGradeOrganizacaoIdeias" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="QuestaoGradeNivelDeLinguagem" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="QuestaoGradeDominioDasRegras" Type="decimal" Precision="4" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -54,18 +46,6 @@
           <Property Name="UsuarioSenha" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="GrupoID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Pontuacao_GradeCorrecao">
-          <End Role="GradeCorrecao" Type="Self.GradeCorrecao" Multiplicity="1" />
-          <End Role="Pontuacao" Type="Self.Pontuacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GradeCorrecao">
-              <PropertyRef Name="GradeCorrecaoID" />
-            </Principal>
-            <Dependent Role="Pontuacao">
-              <PropertyRef Name="GradeCorrecaoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pontuacao_Questao">
           <End Role="Questao" Type="Self.Questao" Multiplicity="1" />
           <End Role="Pontuacao" Type="Self.Pontuacao" Multiplicity="*" />
@@ -87,18 +67,6 @@
             </Principal>
             <Dependent Role="Pontuacao">
               <PropertyRef Name="UsuarioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Questao_GradeCorrecao">
-          <End Role="GradeCorrecao" Type="Self.GradeCorrecao" Multiplicity="1" />
-          <End Role="Questao" Type="Self.Questao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GradeCorrecao">
-              <PropertyRef Name="GradeCorrecaoID" />
-            </Principal>
-            <Dependent Role="Questao">
-              <PropertyRef Name="GradeCorrecaoID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -119,15 +87,10 @@
           <Parameter Name="UsuarioSenha" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="CesgranrioCorretorDeProvasModelStoreContainer">
-          <EntitySet Name="GradeCorrecao" EntityType="Self.GradeCorrecao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pontuacao" EntityType="Self.Pontuacao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questao" EntityType="Self.Questao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Pontuacao_GradeCorrecao" Association="Self.FK_Pontuacao_GradeCorrecao">
-            <End Role="GradeCorrecao" EntitySet="GradeCorrecao" />
-            <End Role="Pontuacao" EntitySet="Pontuacao" />
-          </AssociationSet>
           <AssociationSet Name="FK_Pontuacao_Questao" Association="Self.FK_Pontuacao_Questao">
             <End Role="Questao" EntitySet="Questao" />
             <End Role="Pontuacao" EntitySet="Pontuacao" />
@@ -136,39 +99,44 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Pontuacao" EntitySet="Pontuacao" />
           </AssociationSet>
-          <AssociationSet Name="FK_Questao_GradeCorrecao" Association="Self.FK_Questao_GradeCorrecao">
-            <End Role="GradeCorrecao" EntitySet="GradeCorrecao" />
-            <End Role="Questao" EntitySet="Questao" />
-          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Grupo" Association="Self.FK_Usuario_Grupo">
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Cesgranrio.CorretorDeProvasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="GradeCorrecao">
-          <Key>
-            <PropertyRef Name="GradeCorrecaoID" />
-          </Key>
-          <Property Name="GradeCorrecaoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GradeCorrecaoFidelidadeAoTema" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="GradeCorrecaoOrganizacaoIdeias" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="GradeCorrecaoNivelDeLinguagem" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="GradeCorrecaoDominioDasRegras" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Pontuacao" Relationship="Self.FK_Pontuacao_GradeCorrecao" FromRole="GradeCorrecao" ToRole="Pontuacao" />
-          <NavigationProperty Name="Questao" Relationship="Self.FK_Questao_GradeCorrecao" FromRole="GradeCorrecao" ToRole="Questao" />
-        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="Autenticar" ReturnType="Collection(String)">
+            <Parameter Name="UsuarioCPF" Mode="In" Type="String" />
+            <Parameter Name="UsuarioSenha" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Grupo" EntityType="Cesgranrio.CorretorDeProvasModel.Grupo" />
+          <EntitySet Name="Pontuacao" EntityType="Cesgranrio.CorretorDeProvasModel.Pontuacao" />
+          <EntitySet Name="Questao" EntityType="Cesgranrio.CorretorDeProvasModel.Questao" />
+          <EntitySet Name="Usuario" EntityType="Cesgranrio.CorretorDeProvasModel.Usuario" />
+          <AssociationSet Name="FK_Usuario_Grupo" Association="Cesgranrio.CorretorDeProvasModel.FK_Usuario_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pontuacao_Questao" Association="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Questao">
+            <End Role="Questao" EntitySet="Questao" />
+            <End Role="Pontuacao" EntitySet="Pontuacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pontuacao_Usuario" Association="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pontuacao" EntitySet="Pontuacao" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Grupo">
           <Key>
             <PropertyRef Name="GrupoID" />
           </Key>
           <Property Name="GrupoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GrupoNome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Grupo" FromRole="Grupo" ToRole="Usuario" />
+          <Property Name="GrupoNome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Usuario_Grupo" FromRole="Grupo" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Pontuacao">
           <Key>
@@ -176,66 +144,42 @@
           </Key>
           <Property Name="PontuacaoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="PontuacaoCPFCandidato" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PontuacaoCPFCandidato" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="QuestaoID" Type="Int32" Nullable="false" />
-          <Property Name="GradeCorrecaoID" Type="Int32" Nullable="false" />
-          <Property Name="PontuacaoFidelidadeAoTema" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="PontuacaoOrganizacaoDeIdeias" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="PontuacaoNivelDeLinguagem" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <Property Name="PontuacaoDominioDasRegras" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <NavigationProperty Name="GradeCorrecao" Relationship="Self.FK_Pontuacao_GradeCorrecao" FromRole="Pontuacao" ToRole="GradeCorrecao" />
-          <NavigationProperty Name="Questao" Relationship="Self.FK_Pontuacao_Questao" FromRole="Pontuacao" ToRole="Questao" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Pontuacao_Usuario" FromRole="Pontuacao" ToRole="Usuario" />
+          <Property Name="PontuacaoFidelidadeAoTema" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="PontuacaoOrganizacaoDeIdeias" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="PontuacaoNivelDeLinguagem" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="PontuacaoDominioDasRegras" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <NavigationProperty Name="Questao" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Questao" FromRole="Pontuacao" ToRole="Questao" />
+          <NavigationProperty Name="Usuario" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Usuario" FromRole="Pontuacao" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Questao">
           <Key>
             <PropertyRef Name="QuestaoID" />
           </Key>
-          <Property Name="QuestaoID" Type="Int32" Nullable="false" />
+          <Property Name="QuestaoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QuestaoNumero" Type="Int32" Nullable="false" />
-          <Property Name="QuestaoEnunciado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="GradeCorrecaoID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="GradeCorrecao" Relationship="Self.FK_Questao_GradeCorrecao" FromRole="Questao" ToRole="GradeCorrecao" />
-          <NavigationProperty Name="Pontuacao" Relationship="Self.FK_Pontuacao_Questao" FromRole="Questao" ToRole="Pontuacao" />
+          <Property Name="QuestaoEnunciado" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="QuestaoGradeFidelidadeAoTema" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="QuestaoGradeOrganizacaoIdeias" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="QuestaoGradeNivelDeLinguagem" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <Property Name="QuestaoGradeDominioDasRegras" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <NavigationProperty Name="Pontuacao" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Questao" FromRole="Questao" ToRole="Pontuacao" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="UsuarioID" />
           </Key>
           <Property Name="UsuarioID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UsuarioCPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UsuarioSenha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsuarioCPF" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioSenha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GrupoID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Grupo" Relationship="Self.FK_Usuario_Grupo" FromRole="Usuario" ToRole="Grupo" />
-          <NavigationProperty Name="Pontuacao" Relationship="Self.FK_Pontuacao_Usuario" FromRole="Usuario" ToRole="Pontuacao" />
+          <NavigationProperty Name="Grupo" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Usuario_Grupo" FromRole="Usuario" ToRole="Grupo" />
+          <NavigationProperty Name="Pontuacao" Relationship="Cesgranrio.CorretorDeProvasModel.FK_Pontuacao_Usuario" FromRole="Usuario" ToRole="Pontuacao" />
         </EntityType>
-        <Association Name="FK_Pontuacao_GradeCorrecao">
-          <End Role="GradeCorrecao" Type="Self.GradeCorrecao" Multiplicity="1" />
-          <End Role="Pontuacao" Type="Self.Pontuacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GradeCorrecao">
-              <PropertyRef Name="GradeCorrecaoID" />
-            </Principal>
-            <Dependent Role="Pontuacao">
-              <PropertyRef Name="GradeCorrecaoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Questao_GradeCorrecao">
-          <End Role="GradeCorrecao" Type="Self.GradeCorrecao" Multiplicity="1" />
-          <End Role="Questao" Type="Self.Questao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GradeCorrecao">
-              <PropertyRef Name="GradeCorrecaoID" />
-            </Principal>
-            <Dependent Role="Questao">
-              <PropertyRef Name="GradeCorrecaoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Grupo">
-          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Type="Cesgranrio.CorretorDeProvasModel.Grupo" Role="Grupo" Multiplicity="1" />
+          <End Type="Cesgranrio.CorretorDeProvasModel.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grupo">
               <PropertyRef Name="GrupoID" />
@@ -246,8 +190,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pontuacao_Questao">
-          <End Role="Questao" Type="Self.Questao" Multiplicity="1" />
-          <End Role="Pontuacao" Type="Self.Pontuacao" Multiplicity="*" />
+          <End Type="Cesgranrio.CorretorDeProvasModel.Questao" Role="Questao" Multiplicity="1" />
+          <End Type="Cesgranrio.CorretorDeProvasModel.Pontuacao" Role="Pontuacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questao">
               <PropertyRef Name="QuestaoID" />
@@ -258,8 +202,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pontuacao_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Pontuacao" Type="Self.Pontuacao" Multiplicity="*" />
+          <End Type="Cesgranrio.CorretorDeProvasModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="Cesgranrio.CorretorDeProvasModel.Pontuacao" Role="Pontuacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="UsuarioID" />
@@ -269,98 +213,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="GradeCorrecao" EntityType="Self.GradeCorrecao" />
-          <EntitySet Name="Grupo" EntityType="Self.Grupo" />
-          <EntitySet Name="Pontuacao" EntityType="Self.Pontuacao" />
-          <EntitySet Name="Questao" EntityType="Self.Questao" />
-          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <AssociationSet Name="FK_Pontuacao_GradeCorrecao" Association="Self.FK_Pontuacao_GradeCorrecao">
-            <End Role="GradeCorrecao" EntitySet="GradeCorrecao" />
-            <End Role="Pontuacao" EntitySet="Pontuacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Questao_GradeCorrecao" Association="Self.FK_Questao_GradeCorrecao">
-            <End Role="GradeCorrecao" EntitySet="GradeCorrecao" />
-            <End Role="Questao" EntitySet="Questao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Grupo" Association="Self.FK_Usuario_Grupo">
-            <End Role="Grupo" EntitySet="Grupo" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pontuacao_Questao" Association="Self.FK_Pontuacao_Questao">
-            <End Role="Questao" EntitySet="Questao" />
-            <End Role="Pontuacao" EntitySet="Pontuacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pontuacao_Usuario" Association="Self.FK_Pontuacao_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Pontuacao" EntitySet="Pontuacao" />
-          </AssociationSet>
-          <FunctionImport Name="Autenticar" ReturnType="Collection(String)">
-            <Parameter Name="UsuarioCPF" Mode="In" Type="String" />
-            <Parameter Name="UsuarioSenha" Mode="In" Type="String" />
-          </FunctionImport>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CesgranrioCorretorDeProvasModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="GradeCorrecao">
-            <EntityTypeMapping TypeName="Cesgranrio.CorretorDeProvasModel.GradeCorrecao">
-              <MappingFragment StoreEntitySet="GradeCorrecao">
-                <ScalarProperty Name="GradeCorrecaoID" ColumnName="GradeCorrecaoID" />
-                <ScalarProperty Name="GradeCorrecaoFidelidadeAoTema" ColumnName="GradeCorrecaoFidelidadeAoTema" />
-                <ScalarProperty Name="GradeCorrecaoOrganizacaoIdeias" ColumnName="GradeCorrecaoOrganizacaoIdeias" />
-                <ScalarProperty Name="GradeCorrecaoNivelDeLinguagem" ColumnName="GradeCorrecaoNivelDeLinguagem" />
-                <ScalarProperty Name="GradeCorrecaoDominioDasRegras" ColumnName="GradeCorrecaoDominioDasRegras" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Autenticar" FunctionName="Cesgranrio.CorretorDeProvasModel.Store.Autenticar" />
           <EntitySetMapping Name="Grupo">
             <EntityTypeMapping TypeName="Cesgranrio.CorretorDeProvasModel.Grupo">
               <MappingFragment StoreEntitySet="Grupo">
-                <ScalarProperty Name="GrupoID" ColumnName="GrupoID" />
                 <ScalarProperty Name="GrupoNome" ColumnName="GrupoNome" />
+                <ScalarProperty Name="GrupoID" ColumnName="GrupoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pontuacao">
             <EntityTypeMapping TypeName="Cesgranrio.CorretorDeProvasModel.Pontuacao">
               <MappingFragment StoreEntitySet="Pontuacao">
-                <ScalarProperty Name="PontuacaoID" ColumnName="PontuacaoID" />
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="PontuacaoCPFCandidato" ColumnName="PontuacaoCPFCandidato" />
-                <ScalarProperty Name="QuestaoID" ColumnName="QuestaoID" />
-                <ScalarProperty Name="GradeCorrecaoID" ColumnName="GradeCorrecaoID" />
-                <ScalarProperty Name="PontuacaoFidelidadeAoTema" ColumnName="PontuacaoFidelidadeAoTema" />
-                <ScalarProperty Name="PontuacaoOrganizacaoDeIdeias" ColumnName="PontuacaoOrganizacaoDeIdeias" />
-                <ScalarProperty Name="PontuacaoNivelDeLinguagem" ColumnName="PontuacaoNivelDeLinguagem" />
                 <ScalarProperty Name="PontuacaoDominioDasRegras" ColumnName="PontuacaoDominioDasRegras" />
+                <ScalarProperty Name="PontuacaoNivelDeLinguagem" ColumnName="PontuacaoNivelDeLinguagem" />
+                <ScalarProperty Name="PontuacaoOrganizacaoDeIdeias" ColumnName="PontuacaoOrganizacaoDeIdeias" />
+                <ScalarProperty Name="PontuacaoFidelidadeAoTema" ColumnName="PontuacaoFidelidadeAoTema" />
+                <ScalarProperty Name="QuestaoID" ColumnName="QuestaoID" />
+                <ScalarProperty Name="PontuacaoCPFCandidato" ColumnName="PontuacaoCPFCandidato" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
+                <ScalarProperty Name="PontuacaoID" ColumnName="PontuacaoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Questao">
             <EntityTypeMapping TypeName="Cesgranrio.CorretorDeProvasModel.Questao">
               <MappingFragment StoreEntitySet="Questao">
-                <ScalarProperty Name="QuestaoID" ColumnName="QuestaoID" />
-                <ScalarProperty Name="QuestaoNumero" ColumnName="QuestaoNumero" />
+                <ScalarProperty Name="QuestaoGradeDominioDasRegras" ColumnName="QuestaoGradeDominioDasRegras" />
+                <ScalarProperty Name="QuestaoGradeNivelDeLinguagem" ColumnName="QuestaoGradeNivelDeLinguagem" />
+                <ScalarProperty Name="QuestaoGradeOrganizacaoIdeias" ColumnName="QuestaoGradeOrganizacaoIdeias" />
+                <ScalarProperty Name="QuestaoGradeFidelidadeAoTema" ColumnName="QuestaoGradeFidelidadeAoTema" />
                 <ScalarProperty Name="QuestaoEnunciado" ColumnName="QuestaoEnunciado" />
-                <ScalarProperty Name="GradeCorrecaoID" ColumnName="GradeCorrecaoID" />
+                <ScalarProperty Name="QuestaoNumero" ColumnName="QuestaoNumero" />
+                <ScalarProperty Name="QuestaoID" ColumnName="QuestaoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="Cesgranrio.CorretorDeProvasModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="UsuarioCPF" ColumnName="UsuarioCPF" />
-                <ScalarProperty Name="UsuarioSenha" ColumnName="UsuarioSenha" />
                 <ScalarProperty Name="GrupoID" ColumnName="GrupoID" />
+                <ScalarProperty Name="UsuarioSenha" ColumnName="UsuarioSenha" />
+                <ScalarProperty Name="UsuarioCPF" ColumnName="UsuarioCPF" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Autenticar" FunctionName="Cesgranrio.CorretorDeProvasModel.Store.Autenticar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

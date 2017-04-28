@@ -1,0 +1,48 @@
+﻿@model Cesgranrio.CorretorDeProvas.Web.Models.QuestaoVM
+
+@using X.PagedList
+@using X.PagedList.Mvc
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Questão No.</th>
+            <th>Enunciado</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Questao item in Model.Lista)
+        {
+            <tr>
+                <th scope="row">
+                    @Html.DisplayFor(modelItem => item.QuestaoNumero)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestaoEnunciado)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { @id = item.QuestaoID }) |
+                    @Html.ActionLink("Remover", "Remover", new { @id = item.QuestaoID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- paginador ajax -->
+@Html.PagedListPager(Model.Lista, page => Url.Action("Lista", new { page = page }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions(),
+            new AjaxOptions()
+            {
+                HttpMethod = "GET",
+                UpdateTargetId = "tabelaQuestoes",
+                InsertionMode = InsertionMode.Replace
+            }
+        )
+)
+
+<!--renderiza os javascripts minimizados -->
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

@@ -10,16 +10,16 @@ using Cesgranrio.CorretorDeProvas.Web.Controllers;
 namespace Cesgranrio.CorretorDeProvas.Web.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class QuestaoControllerTest
     {
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            QuestaoController controller = new QuestaoController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.Lista() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -29,7 +29,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            QuestaoController controller = new QuestaoController();
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +42,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            QuestaoController controller = new QuestaoController();
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

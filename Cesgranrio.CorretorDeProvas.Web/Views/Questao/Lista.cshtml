@@ -1,0 +1,14 @@
+﻿@model Cesgranrio.CorretorDeProvas.Web.Models.QuestaoVM
+
+@using X.PagedList.Mvc
+@{
+    ViewBag.Title = "Questões";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Questões</h2>
+
+<div id="tabelaQuestoes" class="row">
+    @Html.Partial("_QuestoesPartialView", Model)
+</div>
+

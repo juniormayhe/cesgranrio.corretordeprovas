@@ -27,7 +27,6 @@ namespace Cesgranrio.CorretorDeProvas.Web
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<GradeCorrecao> GradeCorrecao { get; set; }
         public virtual DbSet<Grupo> Grupo { get; set; }
         public virtual DbSet<Pontuacao> Pontuacao { get; set; }
         public virtual DbSet<Questao> Questao { get; set; }

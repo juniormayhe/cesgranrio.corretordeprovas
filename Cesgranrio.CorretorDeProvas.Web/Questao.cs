@@ -23,9 +23,11 @@ namespace Cesgranrio.CorretorDeProvas.Web
         public int QuestaoID { get; set; }
         public int QuestaoNumero { get; set; }
         public string QuestaoEnunciado { get; set; }
-        public int GradeCorrecaoID { get; set; }
+        public decimal QuestaoGradeFidelidadeAoTema { get; set; }
+        public decimal QuestaoGradeOrganizacaoIdeias { get; set; }
+        public decimal QuestaoGradeNivelDeLinguagem { get; set; }
+        public decimal QuestaoGradeDominioDasRegras { get; set; }
     
-        public virtual GradeCorrecao GradeCorrecao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pontuacao> Pontuacao { get; set; }
     }

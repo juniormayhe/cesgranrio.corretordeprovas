@@ -17,8 +17,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
     
     public class UsuarioController : MainController
     {
-        private Entities db = new Entities();
-
+        
         /// <summary>  
         /// GET: /Account/Login    
         /// </summary>  

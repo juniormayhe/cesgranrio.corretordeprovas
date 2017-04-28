@@ -20,13 +20,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Corretor de Provas", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Corretor de Provas", "Lista", "Questao", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav logado">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Início", "Lista", "Questao")</li>
+                    <li>@Html.ActionLink("Sobre", "About", "Questao")</li>
+                    <li>@Html.ActionLink("Contato", "Contact", "Questao")</li>
                     @if (cpf == null)
                     {
                         <li>@Html.ActionLink("Entrar", "Login", "Usuario")</li>

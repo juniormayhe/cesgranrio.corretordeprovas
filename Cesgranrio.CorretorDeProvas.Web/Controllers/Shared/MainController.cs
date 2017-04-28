@@ -11,6 +11,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers.Shared
     /// </summary>
     public abstract class MainController : Controller
     {
+        //repositório disponível para os controllers
+        protected IEntities db = new Entities();
+
         protected ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -19,7 +22,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers.Shared
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Lista", "Questao");
             }
         }
     }

@@ -17,7 +17,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
             var controllerName = (string)filterContext.RouteData.Values["controller"];
             var actionName = (string)filterContext.RouteData.Values["action"];
             
-            var cpf = HttpContext.Current.Items["CPF"] as string;
+            var cpf = HttpContext.Current.Session["cpf"] as string;
             
             if (string.IsNullOrEmpty(cpf))
             {

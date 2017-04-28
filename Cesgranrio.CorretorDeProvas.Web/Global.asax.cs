@@ -17,6 +17,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BundleTable.EnableOptimizations = true;
         }
 
         /// <summary>
