@@ -6,13 +6,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Questões</h2>
 
-<p>
-    @Html.ActionLink("Adicionar", "Adicionar", "Questao", new { @class = "btn btn-primary btn-lg right", @title="Adicionar uma nova questão" })
-    
-</p>
 
-<div id="tabelaQuestoes" class="row">
-    @Html.Partial("_QuestoesPartialView", Model)
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <div class="col-md-10">
+                    <h4 class="title">Lista de questões</h4>
+                    <p class="category">Abaixo está a lista de questões cadastradas pelo elaborador</p>
+                </div>
+                <div class="col-md-2 adicionar">
+                    @Html.ActionLink("Adicionar", "Adicionar", "Questao", new { @class = "btn btn-primary", @title = "Adicionar uma nova questão" })
+                </div>
+            </div>
+            
+            <div class="table-responsive table-full-width">
+
+                <span id="tabelaQuestoes">
+                    @Html.Partial("_QuestoesPartialView", Model)
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+
 </div>

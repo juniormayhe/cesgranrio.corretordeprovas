@@ -36,7 +36,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
         public int QuestaoID { get; set; }
 
         [Required(ErrorMessage = "Por favor informe o número da questão")]
-        [Display(Name = "Questão No.")]
+        [Display(Name = "Questão Nº")]
         [Range(1,999, ErrorMessage ="O número da questão deve estar entre 1 e 999")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Por favor informe um número")]
         public int QuestaoNumero { get; set; }

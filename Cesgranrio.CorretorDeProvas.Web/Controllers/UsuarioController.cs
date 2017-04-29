@@ -93,6 +93,27 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             return this.View(lvm);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            try
+            {
+                bool autenticou = Session.Ler<string>("CPF")!=null; 
+                if (autenticou)
+                {
+                    Session.Abandon();
+                    return this.RedirectToAction("Login");
+                }   
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+            }
+            
+            return this.View();
+        }
+
         // GET: Usuario
         [VerificarAcessoFilter]
         public async Task<ActionResult> Index()

@@ -1,40 +1,15 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+﻿
+/*
+    customizações
 */
-.dl-horizontal dt {
-    white-space: normal;
-}
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-/*customizações*/
-
-.navbar-item {
+/*.navbar-item {
     line-height: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
     
 }
 
-ul.logado .texto {
-    color: #ddd;
-}
 
 ul.logado strong {
     color:#fff
@@ -42,13 +17,19 @@ ul.logado strong {
 ul.logado, ul.logado li:last-child {
     float: right;
     padding-left: 15px
+}*/
+.texto {
+    color: #9a73da;
 }
 
 .form-corretor .text-danger {
     margin-top:10px;
     display:block;
 }
-h1, h2, h3 {margin-top:40px}
+h1, h2, h3,h4 {
+    margin-top: 40px; 
+}
+
 .alert {padding:20px;margin-top:20px}
 .panel-title {font-size:14px}
 
@@ -74,12 +55,74 @@ textarea {
 .ml {
     margin-left: 27px;
 }
-#tabelaQuestoes {
-    clear: both;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 70px;
-}
+.mb{margin-bottom:27px}
+
+.card {padding:20px}
 .right {
     float:right
+}
+
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+textarea {
+    border: 1px solid #E3E3E3;
+    -webkit-box-shadow:none;
+}
+.wrapper {
+    width: calc(100% - 1px);
+}
+
+.table-responsive {
+    margin:0 30px
+}
+
+
+.footer .container-fluid {
+    margin-left: 10px
+}
+
+.card label {
+    padding-left:0px
+}
+.card .salvar > .btn-primary,
+.card .salvar > .sidekick {
+    display: block;
+    float: left;
+    margin: 20px 20px 0px 0px;
+}
+.card .salvar > .sidekick {
+    
+    padding: 17px;
+}
+
+.card .adicionar > .btn-primary {
+    float: right;
+    
+}
+
+.card .adicionar > .btn-primary a {
+    margin: auto;
+    float: right;
+}
+
+@media (max-width: 991px) {
+    .table-responsive {
+        width: calc(100% - 53px) !important;
+    }
+
+    .card .adicionar >.btn-primary a {
+        float: none;
+        margin: 20px 0px 20px;
+    }
+}
+.form-control.numero ,
+.form-control.grade {
+    width: auto
+}
+.card > .row:last-child{
+    margin-bottom: 0
 }
