@@ -1838,9 +1838,9 @@ margin:0 auto}
             display: block;
             margin-bottom: 3px;
         }
-
+        
             .footer nav > ul a:not(.btn):hover, .footer nav > ul a:not(.btn):focus {
-                color: #777777;
+                color: #1DC7EA;
             }
 
     .footer .social-area {
@@ -1867,16 +1867,21 @@ margin:0 auto}
             }
 
     .footer .copyright {
-        color: #777777;
+        color: #9A9A9A;
         padding: 10px 15px;
         margin: 10px 3px;
         line-height: 20px;
         font-size: 14px;
     }
-
-    .footer hr {
-        border-color: #DDDDDD;
-    }
+        .footer .copyright a {
+            color: #777777;
+        }
+        .footer .copyright > a:hover {
+            color: #1DC7EA;
+        }
+        .footer hr {
+            border-color: #DDDDDD;
+        }
 
     .footer .title {
         color: #777777;

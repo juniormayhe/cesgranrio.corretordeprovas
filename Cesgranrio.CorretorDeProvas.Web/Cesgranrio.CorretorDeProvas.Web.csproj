@@ -271,9 +271,11 @@
     <Content Include="Views\Questao\_QuestoesPartialView.cshtml" />
     <Content Include="Views\Questao\Editar.cshtml" />
     <Content Include="Views\Questao\Remover.cshtml" />
-    <Content Include="Views\Questao\Adicionar.cshtml" />
+    <None Include="Views\Questao\Adicionar.cshtml.old" />
     <Content Include="Views\Usuario\Login - Copy.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Questao\Adicionar.cshtml" />
+    <None Include="Views\Questao\Remover - Copy.cshtml.old" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

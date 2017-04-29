@@ -47,6 +47,21 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool numeroExiste = await db.Questao.AnyAsync(x => x.QuestaoNumero == vm.QuestaoNumero);
+                //caso o número já esteja em uso, o sistema pode ser mais simpático 
+                //e propor um novo número ao elaborador 
+                if (numeroExiste) {
+
+                    int numeroSugerido = 0;
+                    try {
+                        numeroSugerido = await db.Questao.MaxAsync(x => x.QuestaoNumero);
+                    }
+                    catch { }
+                    numeroSugerido++;
+                    ModelState.AddModelError("QuestaoNumero", $"Este número de questão já existe. Tente outro como por exemplo: {numeroSugerido}");
+                    return View(vm);
+                }
+
                 var questao = new Questao
                 {
                     QuestaoID = vm.QuestaoID,
