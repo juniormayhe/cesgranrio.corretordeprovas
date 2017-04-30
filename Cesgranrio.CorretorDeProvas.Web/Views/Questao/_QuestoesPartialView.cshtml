@@ -32,7 +32,7 @@
 </table>
 
 <!-- paginador ajax -->
-@Html.PagedListPager(Model.Lista, page => Url.Action("Lista", new { page = page }),
+@Html.PagedListPager(Model.Lista, page => Url.Action("Listar", new { page = page }),
         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions(),
             new AjaxOptions()
             {

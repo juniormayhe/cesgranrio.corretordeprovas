@@ -14,10 +14,12 @@ namespace Cesgranrio.CorretorDeProvas.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            UnityConfig.RegisterComponents();//gestor de injecao de dependencias
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             BundleTable.EnableOptimizations = true;
+            
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
 
                 //falha da própria aplicação
                 routeData.Values["controller"] = "Erro";
-                routeData.Values["action"] = "FalhaNaApliacacao";
+                routeData.Values["action"] = "FalhaNaAplicacao";
 
                 routeData.Values.Add("Erro", excecaoOriginal.GetType().FullName);
                 routeData.Values.Add("Descrição", excecaoOriginal.Message);

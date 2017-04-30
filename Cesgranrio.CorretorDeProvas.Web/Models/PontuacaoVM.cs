@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Cesgranrio.CorretorDeProvas.DAL.Model;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using X.PagedList;
@@ -13,7 +14,6 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
     public class PontuacaoVM
     {
         
-
         public PontuacaoVM()
         {
             
@@ -40,6 +40,10 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
 
         [Display(Name = "Questão")]
         public int QuestaoID { get; set; }
+
+        [Display(Name = "ID do professor")]
+        public int UsuarioID { get; set; }
+        
 
         [Display(Name = "CPF do Candidato")]
         public string PontuacaoCPFCandidato { get; set; }

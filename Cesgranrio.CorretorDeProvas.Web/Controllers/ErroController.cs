@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Cesgranrio.CorretorDeProvas.DAL;
 
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
@@ -13,6 +14,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
     /// </summary>
     public class ErroController : MainController
     {
+
         //erro 403, usado em VerificarAcessoFilterAttribute
         public ActionResult AcessoNegado()
         {
@@ -32,10 +34,14 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         }
 
         //erro 500, pode ser disparado por qualquer erro de aplicação (ex: NullReferenceException, ApplicationException, etc)
-        public ActionResult FalhaNaApliacacao()
+        public ActionResult FalhaNaAplicacao()
         {
-            var vm = new ErroVM { Erro = RouteData.Values["Erro"] as string, Descrição = RouteData.Values["Descrição"] as string };
-
+            ErroVM vm;
+            if (TempData["Erro"]!= null)
+                vm = TempData["Erro"] as ErroVM;
+            else
+                vm = new ErroVM { Erro = RouteData.Values["Erro"] as string, Descrição = RouteData.Values["Descrição"] as string };
+            
             return View(vm);
         }
     }

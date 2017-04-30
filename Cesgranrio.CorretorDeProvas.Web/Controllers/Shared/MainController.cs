@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cesgranrio.CorretorDeProvas.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +12,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers.Shared
     /// </summary>
     public abstract class MainController : Controller
     {
-        //repositório disponível para os controllers
-        protected IEntities db = new Entities();
-
+        
         protected ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -22,7 +21,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers.Shared
             }
             else
             {
-                return RedirectToAction("Lista", "Questao");
+                return RedirectToAction("Listar", "Questao");
             }
         }
     }

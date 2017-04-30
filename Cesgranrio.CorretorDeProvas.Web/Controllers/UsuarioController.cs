@@ -1,23 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Cesgranrio.CorretorDeProvas.Web;
+﻿using Cesgranrio.CorretorDeProvas.DAL;
+using Cesgranrio.CorretorDeProvas.DAL.Model;
+using Cesgranrio.CorretorDeProvas.Util;
 using Cesgranrio.CorretorDeProvas.Web.Controllers.Shared;
 using Cesgranrio.CorretorDeProvas.Web.Models;
-using Cesgranrio.CorretorDeProvas.Util;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using X.PagedList;
+
 
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
     
     public class UsuarioController : MainController
     {
-        
+        private ILoginUsuarioRepository<Usuario> _repository;
+
+        const int pageSize = 5;
+
+        public UsuarioController(ILoginUsuarioRepository<Usuario> repository)
+        {
+            _repository = repository;
+        }
+
         /// <summary>  
         /// GET: /Account/Login    
         /// </summary>  
@@ -54,19 +64,21 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginVM lvm, string returnUrl)
+        public async Task<ActionResult> Login(LoginVM lvm, string returnUrl)
         {
             try
             {
                 
                 if (ModelState.IsValid)
                 {
-
+                    
                     if (lvm.CPF.RetirarFormato().ÉCPFVálido())
                     {
-                        var login = this.db.Autenticar(lvm.CPF.RetirarFormato(), lvm.Senha.ConverterParaMD5()).ToList();
+                        
+                        var usuario = await _repository.Autenticar(lvm.CPF.RetirarFormato(), lvm.Senha.ConverterParaMD5());
+                        List<string> logins = usuario.ToList();
 
-                        bool autenticou = login != null && login.FirstOrDefault() == "1";
+                        bool autenticou = logins != null && logins.FirstOrDefault() == "1";
                         if (autenticou)
                         {
                             //memoriza cpf que se autenticou para mostrar em outras áreas do site
@@ -88,7 +100,11 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             catch (Exception ex)
             {
                 
-                Console.Write(ex);
+                System.Diagnostics.Trace.WriteLine(ex);
+                TempData["Erro"] = new ErroVM { Erro = ex.GetType().FullName, Descrição=ex.Message};
+                
+                return this.RedirectToAction("FalhaNaAplicacao", "Erro");
+
             }
             //algo falhou e devolvemos o viewmodel
             return this.View(lvm);
@@ -117,33 +133,34 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 
         // GET: Usuario
         [VerificarAcessoFilter]
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var usuario = db.Usuario.Include(u => u.Grupo);
-            return View(await usuario.ToListAsync());
+            throw new NotImplementedException();
+            //var usuario = db.Usuario.Include(u => u.Grupo);
+            //return View(await usuario.ToListAsync());
         }
 
         // GET: Usuario/Details/5
         [VerificarAcessoFilter]
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = await db.Usuario.FindAsync(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
+            throw new NotImplementedException();
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Usuario usuario = await db.Usuario.FindAsync(id);
+            //if (usuario == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(usuario);
         }
 
-        // GET: Usuario/Create
+        // GET: Usuario/Adicionar
         [VerificarAcessoFilter]
-        public ActionResult Create()
+        public ActionResult Adicionar()
         {
-            ViewBag.GrupoID = new SelectList(db.Grupo, "GrupoID", "GrupoNome");
             return View();
         }
 
@@ -152,34 +169,36 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UsuarioID,UsuarioCPF,UsuarioSenha,GrupoID")] Usuario usuario)
+        public ActionResult Adicionar([Bind(Include = "UsuarioID,UsuarioCPF,UsuarioSenha,GrupoID")] Usuario usuario)
         {
-            if (ModelState.IsValid)
-            {
-                db.Usuario.Add(usuario);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+            throw new NotImplementedException();
+            //if (ModelState.IsValid)
+            //{
+            //    db.Usuario.Add(usuario);
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
 
-            ViewBag.GrupoID = new SelectList(db.Grupo, "GrupoID", "GrupoNome", usuario.GrupoID);
-            return View(usuario);
+            //ViewBag.GrupoID = new SelectList(db.Grupo, "GrupoID", "GrupoNome", usuario.GrupoID);
+            //return View(usuario);
         }
 
         // GET: Usuario/Edit/5
         [VerificarAcessoFilter]
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Alterar(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = await db.Usuario.FindAsync(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.GrupoID = new SelectList(db.Grupo, "GrupoID", "GrupoNome", usuario.GrupoID);
-            return View(usuario);
+            throw new NotImplementedException();
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Usuario usuario = await db.Usuario.FindAsync(id);
+            //if (usuario == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //ViewBag.GrupoID = new SelectList(db.Grupo, "GrupoID", "GrupoNome", usuario.GrupoID);
+            //return View(usuario);
         }
 
         // POST: Usuario/Edit/5
@@ -187,31 +206,33 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UsuarioID,UsuarioCPF,UsuarioSenha,GrupoID")] Usuario usuario)
+        public ActionResult Alterar([Bind(Include = "UsuarioID,UsuarioCPF,UsuarioSenha,GrupoID")] Usuario usuario)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(usuario).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.GrupoID = new SelectList(db.Grupo, "GrupoID", "GrupoNome", usuario.GrupoID);
-            return View(usuario);
+            throw new NotImplementedException();
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(usuario).State = EntityState.Modified;
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
+            //ViewBag.GrupoID = new SelectList(db.Grupo, "GrupoID", "GrupoNome", usuario.GrupoID);
+            //return View(usuario);
         }
 
         // GET: Usuario/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = await db.Usuario.FindAsync(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
+            throw new NotImplementedException();
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Usuario usuario = await db.Usuario.FindAsync(id);
+            //if (usuario == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(usuario);
         }
 
         // POST: Usuario/Delete/5
@@ -219,19 +240,13 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Usuario usuario = await db.Usuario.FindAsync(id);
-            db.Usuario.Remove(usuario);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            throw new NotImplementedException();
+            //Usuario usuario = await db.Usuario.FindAsync(id);
+            //db.Usuario.Remove(usuario);
+            //await db.SaveChangesAsync();
+            //return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

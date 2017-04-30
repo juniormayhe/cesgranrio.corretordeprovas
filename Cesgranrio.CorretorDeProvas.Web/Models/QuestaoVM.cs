@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Cesgranrio.CorretorDeProvas.DAL.Model;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using X.PagedList;

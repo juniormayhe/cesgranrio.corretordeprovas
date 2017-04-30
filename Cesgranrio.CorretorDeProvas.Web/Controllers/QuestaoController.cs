@@ -1,4 +1,6 @@
-﻿using Cesgranrio.CorretorDeProvas.Web.Controllers.Shared;
+﻿using Cesgranrio.CorretorDeProvas.DAL;
+using Cesgranrio.CorretorDeProvas.DAL.Model;
+using Cesgranrio.CorretorDeProvas.Web.Controllers.Shared;
 using Cesgranrio.CorretorDeProvas.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -9,19 +11,30 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using X.PagedList;
+
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
     [VerificarAcessoFilter]
     public class QuestaoController : MainController
     {
+        private IRepository<Questao> _repository;
+
         //5 itens por página
         const int pageSize = 5;
 
-        public ActionResult Lista(int? page = 1)
+        public QuestaoController(IRepository<Questao> repository)
         {
-            
-            var paginaComQuestoes = db.Questao.OrderBy(p => p.QuestaoNumero).ToPagedList(page ?? 1, pageSize);
-            
+            _repository = repository;
+        }
+
+
+        public async Task<ActionResult> Listar(int? page = 1)
+        {
+
+            var lista = await _repository.Listar();
+
+            IPagedList<Questao> paginaComQuestoes = lista.OrderBy(p => p.QuestaoNumero).ToPagedList(page ?? 1, pageSize);
+
             QuestaoVM vm = new QuestaoVM { Lista = paginaComQuestoes };
 
             if (Request.IsAjaxRequest())
@@ -47,14 +60,14 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool numeroExiste = await db.Questao.AnyAsync(x => x.QuestaoNumero == vm.QuestaoNumero);
+                bool numeroExiste = await _repository.Existe(vm.QuestaoNumero);
                 //caso o número já esteja em uso, o sistema pode ser mais simpático 
                 //e propor um novo número ao elaborador 
                 if (numeroExiste) {
 
                     int numeroSugerido = 0;
                     try {
-                        numeroSugerido = await db.Questao.MaxAsync(x => x.QuestaoNumero);
+                        numeroSugerido = await _repository.MaximoID();
                     }
                     catch { }
                     numeroSugerido++;
@@ -73,9 +86,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     QuestaoGradeOrganizacaoIdeias = vm.QuestaoGradeOrganizacaoIdeias,
                     Pontuacao = vm.Pontuacao
                 };
-                db.Questao.Add(questao);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Lista");
+                await _repository.Adicionar(questao);
+                
+                return RedirectToAction("Listar");
             }
             
             return View(vm);
@@ -88,7 +101,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Questao questao = await db.Questao.FindAsync(id);
+            Questao questao = await _repository.Procurar(id.Value);
             if (questao == null)
                 return HttpNotFound();
 
@@ -117,9 +130,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     QuestaoGradeOrganizacaoIdeias = vm.QuestaoGradeOrganizacaoIdeias,
                     Pontuacao = vm.Pontuacao
                 };
-                db.Entry(questao).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Lista");
+                await _repository.Alterar(questao);
+                
+                return RedirectToAction("Listar");
             }
             
             return View(vm);
@@ -132,7 +145,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Questao questao = await db.Questao.FindAsync(id);
+            Questao questao = await _repository.Procurar(id.Value);
             if (questao== null)
             {
                 return HttpNotFound();
@@ -155,10 +168,8 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemocaoConcluida(int id)
         {
-            Questao questao = await db.Questao.FindAsync(id);
-            db.Questao.Remove(questao);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Lista");
+            await _repository.Remover(id);
+            return RedirectToAction("Listar");
         }
 
 

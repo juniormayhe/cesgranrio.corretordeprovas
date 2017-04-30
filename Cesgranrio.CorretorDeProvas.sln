@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cesgranrio.CorretorDeProvas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cesgranrio.CorretorDeProvas.Util", "Cesgranrio.CorretorDeProvas.Util\Cesgranrio.CorretorDeProvas.Util.csproj", "{9647233F-4332-4EEE-A54A-91C513658EEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cesgranrio.CorretorDeProvas.DAL", "Cesgranrio.CorretorDeProvas.DAL\Cesgranrio.CorretorDeProvas.DAL.csproj", "{CBE71D81-119C-447C-A0A3-86532AD05634}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9647233F-4332-4EEE-A54A-91C513658EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9647233F-4332-4EEE-A54A-91C513658EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9647233F-4332-4EEE-A54A-91C513658EEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE71D81-119C-447C-A0A3-86532AD05634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE71D81-119C-447C-A0A3-86532AD05634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE71D81-119C-447C-A0A3-86532AD05634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE71D81-119C-447C-A0A3-86532AD05634}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

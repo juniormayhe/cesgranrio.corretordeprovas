@@ -24,7 +24,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
             routes.MapRoute(
                 name: "Questoes",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Questao", action = "Lista", page = UrlParameter.Optional }
+                defaults: new { controller = "Questao", action = "Listar", page = UrlParameter.Optional }
             );
             
 
