@@ -72,6 +72,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
 
         public virtual ICollection<Pontuacao> Pontuacao { get; set; }
 
+        /// <summary>
+        /// Lista de questões cadastradas pelo elaborador
+        /// </summary>
         public IPagedList<Questao> Lista { get; set; }
         
     }

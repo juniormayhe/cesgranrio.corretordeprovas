@@ -16,6 +16,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
     {
         public int PontuacaoID { get; set; }
         public int UsuarioID { get; set; }
+        public string PontuacaoRespostaCandidato { get; set; }
         public string PontuacaoCPFCandidato { get; set; }
         public int QuestaoID { get; set; }
         public decimal PontuacaoFidelidadeAoTema { get; set; }

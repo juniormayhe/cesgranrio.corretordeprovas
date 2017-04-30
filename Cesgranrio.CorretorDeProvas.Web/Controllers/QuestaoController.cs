@@ -161,11 +161,6 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             return RedirectToAction("Lista");
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
     }
 }

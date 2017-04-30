@@ -1,0 +1,60 @@
+﻿@model Cesgranrio.CorretorDeProvas.Web.Models.PontuacaoVM
+
+@using X.PagedList
+@using X.PagedList.Mvc
+
+@if (Model.Lista.Count > 0)
+{
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Questão N&ordm;</th>
+            <th>Enunciado</th>
+            <th>Resposta</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Pontuacao item in Model.Lista)
+        {
+            <tr>
+                <th scope="row">
+                    @Html.DisplayFor(modelItem => item.Questao.QuestaoNumero)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Questao.QuestaoEnunciado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PontuacaoRespostaCandidato)
+                </td>
+                <td>
+                    @Html.ActionLink("Corrigir", "Corrigir", new { @id = item.PontuacaoID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- paginador ajax -->
+@Html.PagedListPager(Model.Lista, page => Url.Action("CorrigirRespostas", new { page = page }),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions(),
+                new AjaxOptions()
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "tabelaQuestoes",
+                    InsertionMode = InsertionMode.Replace
+                }
+            )
+    )
+    
+}//count
+else
+{
+    ViewData["Mensagem"]= $"Nenhuma resposta foi gerada pelo simulador de respostas. Para gerar respostas, visite o {Html.ActionLink("simulador", "SimularRespostas")}";
+    Html.RenderPartial("_SemRegistros", ViewData);
+}
+
+<!--renderiza os javascripts minimizados -->
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")

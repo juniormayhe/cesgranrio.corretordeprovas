@@ -2216,9 +2216,9 @@ margin:0 auto}
             padding-left: 65px;
         }
 
-.card-user .image {
+/*.card-user .image {
     height: 110px;
-}
+}*/
 
 .card-user .image-plain {
     height: 0;
@@ -2247,9 +2247,9 @@ margin:0 auto}
     line-height: 24px;
 }
 
-.card-user .content {
+/*.card-user .content {
     min-height: 240px;
-}
+}*/
 
 .card-user .footer,
 .card-price .footer {
@@ -3788,4 +3788,15 @@ margin:0 auto}
         -ms-overflow-style: -ms-autohiding-scrollbar;
         -webkit-overflow-scrolling: touch;
     }
+}
+
+.purple {
+    background: #9368E9;
+    background: -moz-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9368E9), color-stop(100%, #943bea));
+    background: -webkit-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: -o-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: -ms-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: linear-gradient(to bottom, #9368E9 0%, #943bea 100%);
+    background-size: 150% 150%;
 }

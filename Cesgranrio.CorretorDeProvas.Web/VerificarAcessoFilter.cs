@@ -14,6 +14,14 @@ namespace Cesgranrio.CorretorDeProvas.Web
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            bool permiteAnonimo = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), false)
+                || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), false);
+
+            if (permiteAnonimo)
+            {
+                return;
+            }
+
             var controllerName = (string)filterContext.RouteData.Values["controller"];
             var actionName = (string)filterContext.RouteData.Values["action"];
             

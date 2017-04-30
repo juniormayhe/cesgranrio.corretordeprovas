@@ -4,15 +4,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>A página que você deseja não existe!</h2>
 
 <div class="row">
-    <div class="alert alert-warning" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Prezado(a) usuário(a):</span>
-        Você tentou acessar um endereço inexistente. Retorne à @Html.ActionLink("Página inicial", "Lista", "Questao").
+    <div class="col-md-12">
+
+
+        <div class="card-user alert radius purple fundo">
+            <h4 class="title text-center">
+                Página não existe
+            </h4>
+            <br />
+
+
+            <div class="image text-center img-rounded">
+
+                <img id="jim" src="http://24.media.tumblr.com/09d752c4d06b88eaa7d75dfdbf63e32f/tumblr_mpehgjiJHQ1r8swqdo2_400.gif" class="img-responsive img-rounded"/>
+            </div>
+            <br/>
+            <div class="content text-center">
+                <p>
+                    Oh não! A página que você <br>
+                    tentou acessar <br>
+                    não está por aqui!
+                </p>
+                <p>Retorne à @Html.ActionLink("Página inicial", "Lista", "Questao").</p>
+            </div>
+
+
+        </div>
     </div>
+
+            
 </div>
-
-
-
+   

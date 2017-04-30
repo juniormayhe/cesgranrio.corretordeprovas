@@ -47,7 +47,8 @@ namespace Cesgranrio.CorretorDeProvas.Web
                 switch (codigoHttp)
                 {
                     case (int)HttpStatusCode.InternalServerError /*500*/:
-                        if (excecao.Message.Contains("A potentially dangerous"))
+                        //tentativa de injection
+                        if (excecao is HttpRequestValidationException)
                         {
                             routeData.Values["controller"] = "Erro";
                             routeData.Values["action"] = "RequisicaoInvalida";

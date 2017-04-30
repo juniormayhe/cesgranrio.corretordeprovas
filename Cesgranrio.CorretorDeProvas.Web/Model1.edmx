@@ -18,6 +18,7 @@
           </Key>
           <Property Name="PontuacaoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UsuarioID" Type="int" Nullable="false" />
+          <Property Name="PontuacaoRespostaCandidato" Type="varchar" MaxLength="500" />
           <Property Name="PontuacaoCPFCandidato" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="QuestaoID" Type="int" Nullable="false" />
           <Property Name="PontuacaoFidelidadeAoTema" Type="decimal" Precision="5" Scale="2" Nullable="false" />
@@ -129,7 +130,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Pontuacao" EntitySet="Pontuacao" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Grupo">
           <Key>
             <PropertyRef Name="GrupoID" />
@@ -144,6 +145,7 @@
           </Key>
           <Property Name="PontuacaoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UsuarioID" Type="Int32" Nullable="false" />
+          <Property Name="PontuacaoRespostaCandidato" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PontuacaoCPFCandidato" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="QuestaoID" Type="Int32" Nullable="false" />
           <Property Name="PontuacaoFidelidadeAoTema" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
@@ -213,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -237,6 +239,7 @@
                 <ScalarProperty Name="PontuacaoFidelidadeAoTema" ColumnName="PontuacaoFidelidadeAoTema" />
                 <ScalarProperty Name="QuestaoID" ColumnName="QuestaoID" />
                 <ScalarProperty Name="PontuacaoCPFCandidato" ColumnName="PontuacaoCPFCandidato" />
+                <ScalarProperty Name="PontuacaoRespostaCandidato" ColumnName="PontuacaoRespostaCandidato" />
                 <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
                 <ScalarProperty Name="PontuacaoID" ColumnName="PontuacaoID" />
               </MappingFragment>
@@ -265,7 +268,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

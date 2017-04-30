@@ -62,7 +62,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    if (lvm.CPF.ÉCPFVálido())
+                    if (lvm.CPF.RetirarFormato().ÉCPFVálido())
                     {
                         var login = this.db.Autenticar(lvm.CPF.RetirarFormato(), lvm.Senha.ConverterParaMD5()).ToList();
 
@@ -76,6 +76,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                         else
                         {
                             ModelState.AddModelError(string.Empty, "Usuário ou senha inválida.");
+                            
                         }
                     }
                     else {

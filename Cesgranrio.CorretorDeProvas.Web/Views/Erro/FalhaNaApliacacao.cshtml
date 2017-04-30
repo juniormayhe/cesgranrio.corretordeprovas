@@ -4,24 +4,31 @@
     ViewBag.Title = "Falha na aplicação";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Falha na aplicação</h2>
-
 <div class="row">
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Prezado(a) usuário(a):</span>
-        Prezado(a) usuário(a), ocorreu um problema durante o processamento de sua requisição.
-    </div>
+    <div class="col-md-12">
 
-    <div class="panel panel-danger"> 
-        <div class="panel-heading">
-            <h3 class="panel-title">Detalhes do erro</h3> 
-        </div>
-        <div class="panel-body">
-            <p><strong>Erro:</strong> @Model.Erro</p>
-            <p><strong>Descrição:</strong> @Model.Descrição</p>
-            <p>Por favor informe este problema para juniormayhe@gmail.com e retorne à @Html.ActionLink("Página inicial", "Lista", "Questao").</p>
+
+        <div class="card-user alert radius purple fundo">
+            <h4 class="title text-center">
+                Falha na aplicação
+            </h4>
+            <br />
+
+
+            <div class="image text-center img-rounded">
+
+                <img id="jim" src="http://68.media.tumblr.com/4f7f34b34edb6c891649dcd0cce6c6fa/tumblr_inline_np89f67t7e1qf97xk_500.gif" class="img-responsive img-rounded" />
+            </div>
+            <br />
+            <div class="content text-center">
+                <p>
+                    Opa! Ocorreu um problema durante o processamento de sua requisição.
+                </p>
+                <p>Por favor informe este problema para juniormayhe@gmail.com<br /> e retorne à @Html.ActionLink("Página inicial", "Lista", "Questao").</p>
+                
+                <p><strong>Erro:</strong> @Model.Erro</p>
+                <p><strong>Descrição:</strong> @Model.Descrição</p>
+            </div>
         </div>
     </div>
 </div>

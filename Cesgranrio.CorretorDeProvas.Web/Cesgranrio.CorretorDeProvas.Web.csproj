@@ -156,7 +156,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErroController.cs" />
+    <Compile Include="Controllers\PontuacaoController.cs" />
     <Compile Include="IEntities.cs" />
+    <Compile Include="Models\PontuacaoVM.cs" />
     <Compile Include="Models\QuestaoVM.cs" />
     <Compile Include="Models\ErroVM.cs" />
     <Compile Include="Controllers\QuestaoController.cs" />
@@ -271,11 +273,11 @@
     <Content Include="Views\Questao\_QuestoesPartialView.cshtml" />
     <Content Include="Views\Questao\Editar.cshtml" />
     <Content Include="Views\Questao\Remover.cshtml" />
-    <None Include="Views\Questao\Adicionar.cshtml.old" />
-    <Content Include="Views\Usuario\Login - Copy.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Questao\Adicionar.cshtml" />
-    <None Include="Views\Questao\Remover - Copy.cshtml.old" />
+    <Content Include="Views\Pontuacao\SimularRespostas.cshtml" />
+    <Content Include="Views\Pontuacao\CorrigirRespostas.cshtml" />
+    <Content Include="Views\Pontuacao\_PontuacoesPartialView.cshtml" />
+    <Content Include="Views\Shared\_SemRegistros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

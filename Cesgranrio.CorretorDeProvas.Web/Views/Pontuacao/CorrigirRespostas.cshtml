@@ -1,0 +1,32 @@
+﻿@model Cesgranrio.CorretorDeProvas.Web.Models.PontuacaoVM
+
+@using X.PagedList.Mvc
+@{
+    ViewBag.Title = "Corrigir respostas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <div class="col-md-12">
+                    <h4 class="title">Corrigir respostas</h4>
+                    <p class="category">Abaixo está a lista de questões respondidas pelos candidatos</p>
+                </div>
+                
+            </div>
+            
+            <div class="table-responsive table-full-width">
+
+                <span id="tabelaQuestoes">
+                    @Html.Partial("_PontuacoesPartialView", Model)
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

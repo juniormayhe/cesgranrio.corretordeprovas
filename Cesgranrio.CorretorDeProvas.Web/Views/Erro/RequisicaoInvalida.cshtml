@@ -4,15 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Os dados enviados são inválidos</h2>
-
 <div class="row">
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Prezado(a) usuário(a):</span>
-        Você informou dados inválidos. Retorne à @Html.ActionLink("Página inicial", "Lista", "Questao") e preencha corretamente os dados necessários.
+    <div class="col-md-12">
+        <div class="card-user alert radius purple fundo">
+            <h4 class="title text-center">
+                Requisição inválida
+            </h4>
+            <br />
+            <div class="image text-center img-rounded">
+                <img id="jim" src="https://media.giphy.com/media/o0vwzuFwCGAFO/giphy.gif" class="img-responsive img-rounded" />
+            </div>
+            <br />
+            <div class="content text-center">
+                <p>Você informou dados inválidos.<br />Retorne à @Html.ActionLink("Página inicial", "Lista", "Questao") e preencha corretamente os dados necessários.</p>
+            </div>
+        </div>
     </div>
 </div>
-
-
-

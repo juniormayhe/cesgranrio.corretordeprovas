@@ -6,7 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@if (Model.Lista.Count > 0)
+{
 
 <div class="row">
     <div class="col-md-12">
@@ -30,6 +31,10 @@
             </div>
         </div>
     </div>
-
-
 </div>
+}//count
+else
+{
+    ViewData["Mensagem"]= "Nenhuma questão foi criada pelo elaborador.";
+    Html.Partial("_SemRegistros", ViewData);
+}

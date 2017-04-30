@@ -38,17 +38,17 @@ namespace Cesgranrio.CorretorDeProvas.Web.Tests.Controllers
         //    Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         //}
 
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            QuestaoController controller = new QuestaoController();
+        //[TestMethod]
+        //public void Contact()
+        //{
+        //    // Arrange
+        //    QuestaoController controller = new QuestaoController();
 
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
+        //    // Act
+        //    ViewResult result = controller.Contact() as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        //    // Assert
+        //    Assert.IsNotNull(result);
+        //}
     }
 }
