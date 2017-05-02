@@ -9,8 +9,11 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
     [Table("Resposta")]
     public partial class Resposta
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RespostaID { get; set; }
         public int UsuarioID { get; set; }
+        
         public int CandidatoID { get; set; }
         public int QuestaoID { get; set; }
         [Column(TypeName = "image")]

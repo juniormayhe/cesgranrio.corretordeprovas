@@ -15,6 +15,8 @@
             this.Resposta = new HashSet<Resposta>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CandidatoID { get; set; }
         public string CandidatoNome { get; set; }
         public string CandidatoCPF { get; set; }

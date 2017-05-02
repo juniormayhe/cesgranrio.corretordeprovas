@@ -58,6 +58,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public int Adicionar(Candidato item)
         {
+            
             _context.Candidato.Add(item);
             return _context.SaveChanges();
         }

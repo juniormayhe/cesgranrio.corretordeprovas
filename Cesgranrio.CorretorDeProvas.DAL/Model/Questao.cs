@@ -15,6 +15,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
             Resposta = new HashSet<Resposta>();
         }
 
+        [Key]
         public int QuestaoID { get; set; }
 
         public int QuestaoNumero { get; set; }

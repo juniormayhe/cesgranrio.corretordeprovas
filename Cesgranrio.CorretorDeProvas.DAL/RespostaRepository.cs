@@ -170,9 +170,17 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// Limpar respostas
         /// </summary>
         /// <returns></returns>
-        public Task LimparResposta()
+        public Task LimparRespostaAsync()
         {
             return _context.Database.ExecuteSqlCommandAsync("EXEC LimparRespostas");
+        }
+
+        public void LimparResposta()
+        {
+            //return _context.Database.ExecuteSqlCommand("EXEC LimparRespostas");
+            //_context.Database.SqlQuery<string>("EXEC LimparRespostas");
+            _context.Database.ExecuteSqlCommand("exec LimparRespostas");
+            //_context.Database.SqlQuery<object>("LimparRespostas");
         }
     }
 }

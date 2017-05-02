@@ -15,6 +15,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
             Usuario = new HashSet<Usuario>();
         }
 
+        [Key]
         public int GrupoID { get; set; }
 
         [Required]

@@ -24,6 +24,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            
+            
+            
             modelBuilder.Entity<Candidato>()
                 .Property(e => e.CandidatoNome)
                 .IsUnicode(false);
@@ -70,6 +73,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
                 .HasMany(e => e.Resposta)
                 .WithRequired(e => e.Questao)
                 .WillCascadeOnDelete(false);
+
+
+            
 
             modelBuilder.Entity<Resposta>()
                 .Property(e => e.RespostaFidelidadeAoTema)
