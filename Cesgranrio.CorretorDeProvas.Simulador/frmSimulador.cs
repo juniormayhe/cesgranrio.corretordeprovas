@@ -33,20 +33,21 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
             InitializeComponent();
             //valor máximo da barra de progresso geral
             progressBar1.Maximum = TOTAL_CANDIDATOS;
-            
-
-
         }
         
-
-        private void logarSaida(string s) {
+        /// <summary>
+        /// apresenta dados do processamento no listbox
+        /// </summary>
+        /// <param name="indice"></param>
+        /// <param name="mensagem"></param>
+        private void logarSaida(int indice, string mensagem) {
             if (lsbSaida.Items.Count > 10000) {
                 lsbSaida.Items.Add("Descartando entradas anteriores...");
                 lsbSaida.Items.Clear();
             }
             
             Invoke(new Action(() => { 
-                lsbSaida.Items.Add($"{lsbSaida.Items.Count+1} {s}");
+                lsbSaida.Items.Add($"{indice} {mensagem}");
                 lsbSaida.Update();
                 
                 //scroll
@@ -56,120 +57,129 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
             
         }
 
-        private void gerar()
+        /// <summary>
+        /// gera imagens de respostas
+        /// </summary>
+        private void gerarImagens()
         {
             Invoke(new Action(() => { btnGerar.Text = "Aguarde..."; }));
-
-
-            //sempre num único contexto
-
-
-
-            #region inicializa
-            _db = new CorretorDeProvasDbContext("name=CorretorDeProvasDbContext");
-            //System.Data.Entity.Database.SetInitializer(new System.Data.Entity.CreateDatabaseIfNotExists<CorretorDeProvasDbContext>());
-            //_db.Database.Connection.Close();
-            //_db.Database.Connection.Open();
-
-            _questaoRepository = new QuestaoRepository(_db);
-            _repostaRepository = new RespostaRepository(_db);
-            _professorRepository = new UsuarioRepository(_db);
-            _candidatoRepository = new CandidatoRepository(_db);
-
-
-            //desativa botão da UI
-            Invoke(new Action(() => { btnGerar.Enabled = false; btnGerar.Text = "Conectando.."; }));
-
-
-            //descobre qual elaborador podemos pegar da base para registrar a simulação do grupo 1 elaboradores
-            Usuario elaborador = _db.Usuario.FirstOrDefault(x => x.GrupoID == 1);
-
-            if (null == elaborador)
-            {
-                MessageBox.Show("Por favor cadastre um elaborador no grupo 1.\n\nPersistindo o problema entre em contato com juniormayhe@gmail.com", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var questoes = _db.Questao.ToList();
-            //nao existem questoes cadastradas?
-            if (0 == questoes.Count())
-            {
-                MessageBox.Show("Nenhuma questão foi encontrada.\n\nCrie algumas questões ou verifique se a configuração de banco de dados está correta e se o banco está acessível.\n\nPersistindo o problema entre em contato com juniormayhe@gmail.com", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            #endregion
-
-
-            _repostaRepository.LimparResposta();
-                
-            //informa a barra de progresso de questoes ao valor máximo possível da barra
-            int totalQuestoes = TOTAL_CANDIDATOS * questoes.Count();
-            Invoke(new Action(() => { progressBar2.Maximum = totalQuestoes; }));
-
-            //geramos uma populacao de candidatos com cpfs unicos
-            int i = 0;
-            int contaThread = 0;
-            List<Task> tarefas = new List<Task>();
-            for (i = 0; i < TOTAL_CANDIDATOS; i++)
-            {
-                System.Diagnostics.Trace.WriteLine($"i={i}");
-                Candidato candidato = new Candidato { CandidatoCPF = Util.GerarCPF(i), CandidatoNome = Util.GerarPalavras() };
-                Task tarefa = new Task(() =>
-                {
-
-                        
-                    _candidatoRepository.Adicionar(candidato);
-
-                    foreach (Questao questao in questoes)
-                    {
-                        //cria a pontuacao simulada
-                        Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoCPF);
-                        Resposta pontuacao = criarResposta(elaborador, questao, candidato, img);
-                        _repostaRepository.Adicionar(pontuacao);
-                        Invoke(new Action(() => { pictureBox1.Image = img; }));
-
-                        logarSaida($"{DateTime.Now.ToString("HH:mm:ss.fff")}, {pontuacao.ParaTexto()}");
-                        System.Diagnostics.Trace.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}, {pontuacao.ParaTexto()}");
-                    }
-                });
-                tarefas.Add(tarefa);
-                contaThread++;
-                if (contaThread == 8 || tarefas.Count()<8)
-                {
-                    foreach (var acao in tarefas)
-                        acao.RunSynchronously();
-                        
-                    //Task.WaitAll(tarefas.ToArray());
-                    contaThread = 0;
-                    tarefas.Clear();
-                }
-                tarefas.Clear();
-                atualizaProgresso(i);
-            }
-            atualizaProgresso(i);
-                
-            _questaoRepository = null;
-            _repostaRepository = null;
-            _professorRepository = null;
-            _candidatoRepository = null;
-
-            _db.Dispose();
-            _db = null;
             
+            
+            //sempre num único contexto
+            using (var _db = new CorretorDeProvasDbContext("name=CorretorDeProvasDbContext")) {
+                
+                #region inicializa    
+                _questaoRepository = new QuestaoRepository(_db);
+                _repostaRepository = new RespostaRepository(_db);
+                _professorRepository = new UsuarioRepository(_db);
+                _candidatoRepository = new CandidatoRepository(_db);
+                
+                
+                //descobre qual elaborador podemos pegar da base para registrar a simulação do grupo 1 elaboradores
+                Usuario elaborador = _db.Usuario.FirstOrDefault(x => x.GrupoID == 1);
+
+                if (null == elaborador)
+                {
+                    MessageBox.Show("Por favor cadastre um elaborador no grupo 1.\n\nPersistindo o problema entre em contato com juniormayhe@gmail.com", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var questoes = _db.Questao.ToList();
+                //nao existem questoes cadastradas?
+                if (0 == questoes.Count())
+                {
+                    MessageBox.Show("Nenhuma questão foi encontrada.\n\nCrie algumas questões ou verifique se a configuração de banco de dados está correta e se o banco está acessível.\n\nPersistindo o problema entre em contato com juniormayhe@gmail.com", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                #endregion
+
+
+                _repostaRepository.LimparRespostasCandidatos();
+                
+                //informa a barra de progresso de questoes ao valor máximo possível da barra
+                int totalQuestoes = TOTAL_CANDIDATOS * questoes.Count();
+                Invoke(new Action(() => { progressBar2.Maximum = totalQuestoes; }));
+
+                //geramos uma populacao de candidatos com cpfs unicos
+                int i = 0;
+                int contaThread = 0;
+                int contaResposta = 1;
+                List<Task> tarefas = new List<Task>();
+                for (i = 0; i < TOTAL_CANDIDATOS; i++)
+                {
+                    System.Diagnostics.Trace.WriteLine($"i={i}");
+                    Candidato candidato = new Candidato { CandidatoCPF = Util.GerarCPF(i), CandidatoNome = Util.GerarPalavras() };
+                    Task tarefa = new Task(() =>
+                    {
+                        #region uma nova thread
+                        //adiciona um candidato
+                        _candidatoRepository.Adicionar(candidato);
+                        
+                        foreach (Questao questao in questoes)
+                        {
+                            //gera uma imagem
+                            Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoCPF);
+                            //adiciona uma resposta com a imagem
+                            Resposta resposta = criarResposta(elaborador, questao, candidato, img);
+                            _repostaRepository.Adicionar(resposta);
+
+                            //mostra ultima imagem gerada
+                            Invoke(new Action(() => { pictureBox1.Image = img; }));
+                            
+                            logarSaida(contaResposta++, $"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
+                            System.Diagnostics.Trace.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
+                        }
+                        #endregion
+                    });
+                    tarefas.Add(tarefa);
+                    contaThread++;
+                    //nao se aconselha manipular dbcontext com parallel então temos que abrir diferentes ações e dispará-las qdo atingirem 8 threads 
+                    if (contaThread == 8 || tarefas.Count()<8)
+                    {
+                        foreach (var acao in tarefas)
+                            acao.RunSynchronously();
+                        
+                        //Task.WaitAll(tarefas.ToArray());
+                        contaThread = 0;
+                        tarefas.Clear();
+                    }
+                    tarefas.Clear();
+                    atualizaProgresso(i);
+                }
+                atualizaProgresso(i);
+                
+                _questaoRepository = null;
+                _repostaRepository = null;
+                _professorRepository = null;
+                _candidatoRepository = null;
+
+            }//using
+
             Invoke(new Action(() => { btnGerar.Enabled = true; btnGerar.Text = "Gerar respostas"; }));
             
         }
 
+        /// <summary>
+        /// atualiza progresso geral
+        /// </summary>
+        /// <param name="i"></param>
         private void atualizaProgresso(int i) {
             Invoke(new Action(() => { progressBar1.Value = i; lblProgresso.Text = $"Progresso {(i * 100 / TOTAL_CANDIDATOS)}%"; }));
         }
         
-        
+        /// <summary>
+        /// Cria uma resposta simulada do candidato
+        /// </summary>
+        /// <param name="elaborador"></param>
+        /// <param name="questao"></param>
+        /// <param name="candidato"></param>
+        /// <param name="img"></param>
+        /// <returns></returns>
         private static Resposta criarResposta(Usuario elaborador, Questao questao, Candidato candidato, Image img)
         {
             var resposta = new Resposta
             {
-                QuestaoID = 2,
+                QuestaoID = questao.QuestaoID,
                 Questao = questao,
 
                 /*dados para candidato*/
@@ -192,13 +202,8 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
 
         private void btnGerar_Click(object sender, EventArgs e)
         {
-
-            
-            gerar();
-            
-            
-
-
+            gerarImagens();
+         
         }
     }
 }

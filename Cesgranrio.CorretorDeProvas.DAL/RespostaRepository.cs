@@ -167,20 +167,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         }
         
         /// <summary>
-        /// Limpar respostas
+        /// Limpar respostas e candidatos
         /// </summary>
-        /// <returns></returns>
-        public Task LimparRespostaAsync()
+        public void LimparRespostasCandidatos()
         {
-            return _context.Database.ExecuteSqlCommandAsync("EXEC LimparRespostas");
-        }
-
-        public void LimparResposta()
-        {
-            //return _context.Database.ExecuteSqlCommand("EXEC LimparRespostas");
-            //_context.Database.SqlQuery<string>("EXEC LimparRespostas");
             _context.Database.ExecuteSqlCommand("exec LimparRespostas");
-            //_context.Database.SqlQuery<object>("LimparRespostas");
+            
         }
     }
 }
