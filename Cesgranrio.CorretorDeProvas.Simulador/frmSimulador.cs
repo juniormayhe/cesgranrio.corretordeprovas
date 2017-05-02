@@ -98,20 +98,21 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 
                 //informa a barra de progresso de questoes ao valor máximo possível da barra
                 int totalQuestoes = TOTAL_CANDIDATOS * questoes.Count();
-                Invoke(new Action(() => { progressBar2.Maximum = totalQuestoes; }));
+                
 
                 //geramos uma populacao de candidatos com cpfs unicos
                 int i = 0;
-                int contaThread = 0;
+                
                 int contaResposta = 1;
                 List<Task> tarefas = new List<Task>();
                 for (i = 0; i < TOTAL_CANDIDATOS; i++)
                 {
                     System.Diagnostics.Trace.WriteLine($"i={i}");
                     Candidato candidato = new Candidato { CandidatoCPF = Util.GerarCPF(i), CandidatoNome = Util.GerarPalavras() };
+                    #region adicionamos uma nova thread
                     Task tarefa = new Task(() =>
                     {
-                        #region uma nova thread
+                        
                         //adiciona um candidato
                         _candidatoRepository.Adicionar(candidato);
                         
@@ -128,23 +129,33 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                             
                             logarSaida(contaResposta++, $"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
                             System.Diagnostics.Trace.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
+                            
                         }
-                        #endregion
+                        
                     });
                     tarefas.Add(tarefa);
-                    contaThread++;
-                    //nao se aconselha manipular dbcontext com parallel então temos que abrir diferentes ações e dispará-las qdo atingirem 8 threads 
-                    if (contaThread == 8 || tarefas.Count()<8)
+                    #endregion
+
+                    
+                }
+                //nao se aconselha manipular dbcontext com multithread então temos que abrir diferentes ações e dispará-las de forma sincrona
+                while (tarefas.Count > 0)
+                {
+
+                    int total = tarefas.Count() < 0 ? tarefas.Count() : 8;
+                    var grupo = tarefas.Take(8).ToList();
+                    System.Diagnostics.Trace.WriteLine($">grupo de 8 threads");
+                    foreach (var item in grupo)
                     {
-                        foreach (var acao in tarefas)
-                            acao.RunSynchronously();
-                        
-                        //Task.WaitAll(tarefas.ToArray());
-                        contaThread = 0;
-                        tarefas.Clear();
+                        System.Diagnostics.Trace.WriteLine($"....Executando tarefa");
+                        item.RunSynchronously();
+                        //remove da lista o item executado
+                        tarefas.Remove(item);
+                        System.Diagnostics.Trace.WriteLine($"tarefas count {tarefas.Count()}");
                     }
-                    tarefas.Clear();
-                    atualizaProgresso(i);
+                    System.Diagnostics.Trace.WriteLine("Aguardando o grupo de oito tarefas");
+                    Task.WaitAll(grupo.ToArray());
+
                 }
                 atualizaProgresso(i);
                 

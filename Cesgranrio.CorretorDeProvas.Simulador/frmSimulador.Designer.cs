@@ -37,14 +37,12 @@
             this.lblProgresso = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblQuestao = new System.Windows.Forms.Label();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lsbSaida
@@ -55,10 +53,10 @@
             this.lsbSaida.FormattingEnabled = true;
             this.lsbSaida.HorizontalScrollbar = true;
             this.lsbSaida.ItemHeight = 21;
-            this.lsbSaida.Location = new System.Drawing.Point(30, 106);
+            this.lsbSaida.Location = new System.Drawing.Point(30, 64);
             this.lsbSaida.Name = "lsbSaida";
             this.lsbSaida.ScrollAlwaysVisible = true;
-            this.lsbSaida.Size = new System.Drawing.Size(706, 319);
+            this.lsbSaida.Size = new System.Drawing.Size(706, 361);
             this.lsbSaida.TabIndex = 0;
             // 
             // btnGerar
@@ -131,8 +129,6 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.lblQuestao);
-            this.panel2.Controls.Add(this.progressBar2);
             this.panel2.Controls.Add(this.lblProgresso);
             this.panel2.Controls.Add(this.lsbSaida);
             this.panel2.Controls.Add(this.progressBar1);
@@ -142,32 +138,6 @@
             this.panel2.Size = new System.Drawing.Size(1213, 463);
             this.panel2.TabIndex = 9;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(14, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(600, 1300);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
-            // lblQuestao
-            // 
-            this.lblQuestao.AutoSize = true;
-            this.lblQuestao.Location = new System.Drawing.Point(26, 61);
-            this.lblQuestao.Name = "lblQuestao";
-            this.lblQuestao.Size = new System.Drawing.Size(156, 21);
-            this.lblQuestao.TabIndex = 9;
-            this.lblQuestao.Text = "Respostas geradas %";
-            // 
-            // progressBar2
-            // 
-            this.progressBar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar2.Location = new System.Drawing.Point(217, 61);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(519, 23);
-            this.progressBar2.TabIndex = 8;
-            // 
             // panel3
             // 
             this.panel3.AutoScroll = true;
@@ -176,6 +146,14 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(434, 402);
             this.panel3.TabIndex = 11;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(14, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(600, 1300);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // frmSimulador
             // 
@@ -194,8 +172,8 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -210,8 +188,6 @@
         private System.Windows.Forms.Label lblProgresso;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lblQuestao;
-        private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel3;
     }
