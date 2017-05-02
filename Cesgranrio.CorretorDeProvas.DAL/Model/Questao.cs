@@ -12,7 +12,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Questao()
         {
-            Pontuacao = new HashSet<Pontuacao>();
+            Resposta = new HashSet<Resposta>();
         }
 
         public int QuestaoID { get; set; }
@@ -32,6 +32,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
         public decimal QuestaoGradeDominioDasRegras { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pontuacao> Pontuacao { get; set; }
+        public virtual ICollection<Resposta> Resposta { get; set; }
     }
 }

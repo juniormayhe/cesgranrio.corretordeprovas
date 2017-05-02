@@ -17,7 +17,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
 
         public QuestaoVM()
         {
-            this.Pontuacao = new HashSet<Pontuacao>();
+            this.Resposta = new HashSet<Resposta>();
         }
 
         public QuestaoVM(Questao questao)
@@ -29,7 +29,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
             this.QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema;
             this.QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem;
             this.QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias;
-            this.Pontuacao = questao.Pontuacao;
+            this.Resposta = questao.Resposta;
         }
 
         [Key]
@@ -71,7 +71,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeDominioDasRegras { get; set; }
 
-        public virtual ICollection<Pontuacao> Pontuacao { get; set; }
+        public virtual ICollection<Resposta> Resposta { get; set; }
 
         /// <summary>
         /// Lista de questões cadastradas pelo elaborador

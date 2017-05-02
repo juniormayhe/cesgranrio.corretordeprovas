@@ -1,4 +1,4 @@
-﻿@model Cesgranrio.CorretorDeProvas.Web.Models.PontuacaoVM
+﻿@model Cesgranrio.CorretorDeProvas.Web.Models.RespostaVM
 
 @using X.PagedList
 @using X.PagedList.Mvc
@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Pontuacao item in Model.Lista)
+        @foreach (Resposta item in Model.Lista)
         {
             <tr>
                 <th scope="row">
@@ -26,10 +26,10 @@
                     @Html.DisplayFor(modelItem => item.Questao.QuestaoEnunciado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PontuacaoRespostaCandidato)
+                    @Html.DisplayFor(modelItem => item.RespostaRespostaCandidato)
                 </td>
                 <td>
-                    @Html.ActionLink("Corrigir", "Corrigir", new { @id = item.PontuacaoID })
+                    @Html.ActionLink("Corrigir", "Corrigir", new { @id = item.RespostaID })
                 </td>
             </tr>
         }

@@ -11,33 +11,33 @@ using System.Threading.Tasks;
 namespace Cesgranrio.CorretorDeProvas.DAL
 {
     /// <summary>
-    /// Repositório de usuários
+    /// Repositório de candidato
     /// </summary>
-    public class UsuarioRepository : IRepository<Usuario>, ILoginUsuarioRepository<Usuario>
+    public class CandidatoRepository : IRepository<Candidato>
     {
         private ICorretorDeProvasDbContext _context;
 
-        public UsuarioRepository(ICorretorDeProvasDbContext context)
+        public CandidatoRepository(ICorretorDeProvasDbContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Listar usuários
+        /// Listar candidatos
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Usuario>> ListarAsync()
+        public async Task<IEnumerable<Candidato>> ListarAsync()
         {
-            return await _context.Usuario.ToListAsync();
+            return await _context.Candidato.ToListAsync();
         }
 
         /// <summary>
         /// Listar usuarios
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Usuario> Listar()
+        public IEnumerable<Candidato> Listar()
         {
-            return _context.Usuario.ToList();
+            return _context.Candidato.ToList();
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AdicionarAsync(Usuario item)
+        public async Task AdicionarAsync(Candidato item)
         {
-            _context.Usuario.Add(item);
+            _context.Candidato.Add(item);
             await _context.SaveChangesAsync();
         }
 
@@ -56,9 +56,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int Adicionar(Usuario item)
+        public int Adicionar(Candidato item)
         {
-            _context.Usuario.Add(item);
+            _context.Candidato.Add(item);
             return _context.SaveChanges();
         }
 
@@ -67,9 +67,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<Usuario> ProcurarAsync(int id)
+        public Task<Candidato> ProcurarAsync(int id)
         {
-            return _context.Usuario.FirstOrDefaultAsync(t => t.UsuarioID == id);
+            return _context.Candidato.FirstOrDefaultAsync(t => t.CandidatoID == id);
         }
 
         /// <summary>
@@ -77,9 +77,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Usuario Procurar(int id)
+        public Candidato Procurar(int id)
         {
-            return _context.Usuario.FirstOrDefault(t => t.UsuarioID == id);
+            return _context.Candidato.FirstOrDefault(t => t.CandidatoID == id);
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="cpf"></param>
         /// <returns></returns>
-        public Task<Usuario> ProcurarPorCPF(string cpf)
+        public Task<Candidato> ProcurarPorCPF(string cpf)
         {
-            return _context.Usuario.FirstOrDefaultAsync(t => t.UsuarioCPF == cpf);
+            return _context.Candidato.FirstOrDefaultAsync(t => t.CandidatoCPF == cpf);
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public async Task RemoverAsync(int id)
         {
-            var entity = _context.Usuario.First(t => t.UsuarioID == id);
-            _context.Usuario.Remove(entity);
+            var entity = _context.Candidato.First(t => t.CandidatoID == id);
+            _context.Candidato.Remove(entity);
             await _context.SaveChangesAsync();
         }
 
@@ -111,8 +111,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public int Remover(int id)
         {
-            var entity = _context.Usuario.First(t => t.UsuarioID == id);
-            _context.Usuario.Remove(entity);
+            var entity = _context.Candidato.First(t => t.CandidatoID == id);
+            _context.Candidato.Remove(entity);
             return _context.SaveChanges();
         }
 
@@ -122,7 +122,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <param name="item"></param>
         /// <param name="original"></param>
         /// <returns></returns>
-        public async Task AlterarAsync(Usuario item)
+        public async Task AlterarAsync(Candidato item)
         {
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -133,7 +133,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int Alterar(Usuario item)
+        public int Alterar(Candidato item)
         {
             _context.Entry(item).State = EntityState.Modified;
             return _context.SaveChanges();
@@ -146,7 +146,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public Task<bool> ExisteAsync(int id)
         {
-            return _context.Usuario.AnyAsync(t => t.UsuarioID == id);
+            return _context.Candidato.AnyAsync(t => t.CandidatoID == id);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public bool Existe(int id)
         {
-            return _context.Usuario.Any(t => t.UsuarioID == id);
+            return _context.Candidato.Any(t => t.CandidatoID == id);
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public Task<int> MaximoIDAsync()
         {
-            return _context.Usuario.MaxAsync(t => t.UsuarioID);
+            return _context.Candidato.MaxAsync(t => t.CandidatoID);
         }
 
         /// <summary>
@@ -174,23 +174,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public int MaximoID()
         {
-            return _context.Usuario.Max(t => t.UsuarioID);
+            return _context.Candidato.Max(t => t.CandidatoID);
         }
 
-        /// <summary>
-        /// Autenticar usuário via procedure
-        /// </summary>
-        /// <param name="usuarioCPF"></param>
-        /// <param name="usuarioSenha"></param>
-        /// <returns></returns>
-        public async Task<IEnumerable<string>> Autenticar(string usuarioCPF, string usuarioSenha)
-        {
-            ObjectContext o = ((IObjectContextAdapter)_context).ObjectContext;
-            
-            var lista = await _context.Database.SqlQuery<string>("EXEC Autenticar {0}, {1}", usuarioCPF, usuarioSenha).ToListAsync();
-            return lista.AsEnumerable();
-            //return await Task.Run(() => o.ExecuteFunction<string>("Autenticar", new ObjectParameter("UsuarioCPF", usuarioCPF), new ObjectParameter("UsuarioSenha", usuarioSenha)));
-        }
 
         
     }

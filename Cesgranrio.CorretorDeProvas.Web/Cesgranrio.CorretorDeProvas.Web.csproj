@@ -172,8 +172,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\ErroController.cs" />
-    <Compile Include="Controllers\PontuacaoController.cs" />
-    <Compile Include="Models\PontuacaoVM.cs" />
+    <Compile Include="Controllers\RespostaController.cs" />
+    <Compile Include="Models\RespostaVM.cs" />
     <Compile Include="Models\QuestaoVM.cs" />
     <Compile Include="Models\ErroVM.cs" />
     <Compile Include="Controllers\QuestaoController.cs" />
@@ -187,7 +187,7 @@
     <Compile Include="VerificarAcessoFilter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\oldbootstrap - Copy.old" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Content\tema\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\tema\light-bootstrap-dashboard.css" />
@@ -215,7 +215,9 @@
     <Content Include="Scripts\tema\bootstrap-checkbox-radio-switch.js" />
     <Content Include="Scripts\tema\bootstrap-notify.js" />
     <Content Include="Scripts\tema\light-bootstrap-dashboard.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

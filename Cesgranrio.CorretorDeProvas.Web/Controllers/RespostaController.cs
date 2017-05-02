@@ -16,13 +16,13 @@ using X.PagedList;
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
     [VerificarAcessoFilter]
-    public class PontuacaoController : MainController
+    public class RespostaController : MainController
     {
-        private IRepository<Pontuacao> _repository;
+        private IRepository<Resposta> _repository;
 
         const int pageSize = 5;
 
-        public PontuacaoController(IRepository<Pontuacao> repository)
+        public RespostaController(IRepository<Resposta> repository)
         {
             _repository = repository;
         }
@@ -35,11 +35,11 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         public async Task<ActionResult> CorrigirRespostas(int? page = 1)
         {
             //TODO: RANDOMIZAR APRESENTACAO DA LISTA
-            var lista = await _repository.Listar();
+            var lista = await _repository.ListarAsync();
             
-            IPagedList<Pontuacao> paginaComRespostas = lista.OrderBy(p => p.PontuacaoID).ToPagedList(page ?? 1, pageSize);
+            IPagedList<Resposta> paginaComRespostas = lista.OrderBy(p => p.RespostaID).ToPagedList(page ?? 1, pageSize);
 
-            PontuacaoVM vm = new PontuacaoVM { Lista = paginaComRespostas };
+            RespostaVM vm = new RespostaVM { Lista = paginaComRespostas };
 
             if (Request.IsAjaxRequest())
             {
@@ -55,12 +55,12 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var pontuacao = await _repository.Procurar(id.Value);
+            var pontuacao = await _repository.ProcurarAsync(id.Value);
 
             if (pontuacao == null)
                 return HttpNotFound();
 
-            var vm = new PontuacaoVM(pontuacao);
+            var vm = new RespostaVM(pontuacao);
             
             
             return View(vm);
@@ -71,25 +71,26 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Corrigir([Bind(Include = "PontuacaoID,QuestaoID,UsuarioID,PontuacaoCPFCandidato,PontuacaoGradeDominioDasRegras,PontuacaoGradeFidelidadeAoTema,PontuacaoGradeNivelDeLinguagem,PontuacaoGradeOrganizacaoIdeias")] PontuacaoVM vm)
+        public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,RespostaDominioDasRegras,RespostaFidelidadeAoTema,RespostaNivelDeLinguagem,RespostaOrganizacaoIdeias")] RespostaVM vm)
         {
             if (ModelState.IsValid)
             {
-                var pontuacao = new Pontuacao {
+                var resposta = new Resposta {
                     
-                    PontuacaoID = vm.PontuacaoID,
+                    RespostaID = vm.RespostaID,
                     QuestaoID = vm.QuestaoID,
                     Questao = vm.Questao,
                     UsuarioID = vm.UsuarioID,/*id professor*/
                     Usuario = vm.Usuario,/*dados professor*/
-                    PontuacaoCPFCandidato = vm.PontuacaoCPFCandidato,
-                    PontuacaoDominioDasRegras = vm.PontuacaoGradeDominioDasRegras,
-                    PontuacaoFidelidadeAoTema = vm.PontuacaoGradeFidelidadeAoTema,
-                    PontuacaoNivelDeLinguagem = vm.PontuacaoGradeNivelDeLinguagem,
-                    PontuacaoOrganizacaoDeIdeias = vm.PontuacaoGradeOrganizacaoIdeias,
+                    CandidatoID=vm.CandidatoID,
+                    Candidato= vm.Candidato,
+                    RespostaDominioDasRegras = vm.RespostaGradeDominioDasRegras,
+                    RespostaFidelidadeAoTema = vm.RespostaGradeFidelidadeAoTema,
+                    RespostaNivelDeLinguagem = vm.RespostaGradeNivelDeLinguagem,
+                    RespostaOrganizacaoDeIdeias = vm.RespostaGradeOrganizacaoIdeias,
                     
                 };
-                await _repository.Alterar(pontuacao);
+                await _repository.AlterarAsync(resposta);
                 return RedirectToAction("CorrigirRespostas");
             }
             

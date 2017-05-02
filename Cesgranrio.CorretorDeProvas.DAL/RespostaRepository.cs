@@ -10,183 +10,169 @@ using System.Threading.Tasks;
 namespace Cesgranrio.CorretorDeProvas.DAL
 {
     /// <summary>
-    /// Repositório de questões
+    /// Repositório de respostas
     /// </summary>
-    public class QuestaoRepository : IRepository<Questao>
+    public class RespostaRepository : IRepository<Resposta>
     {
         private ICorretorDeProvasDbContext _context;
         
-        public QuestaoRepository(ICorretorDeProvasDbContext context)
+        public RespostaRepository(ICorretorDeProvasDbContext context)
         {
             _context = context;
         }
 
         /// <summary>
-        /// Listar questoes
+        /// Listar respostas
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Questao>> ListarAsync()
+        public async Task<IEnumerable<Resposta>> ListarAsync()
         {
-            return await _context.Questao.ToListAsync();
+            return await _context.Resposta.ToListAsync();
         }
 
         /// <summary>
-        /// Listar questoes
+        /// Listar respostas
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Questao> Listar()
+        public IEnumerable<Resposta> Listar()
         {
-            return _context.Questao.ToList();
+            return _context.Resposta.ToList();
         }
 
         /// <summary>
-        /// Adicionar questão
+        /// Adicionar resposta
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AdicionarAsync(Questao item)
+        public async Task AdicionarAsync(Resposta item)
         {
-            
-            _context.Questao.Add(item);
+            _context.Resposta.Add(item);
             await _context.SaveChangesAsync();
-            
         }
 
         /// <summary>
-        /// Adicionar questao
+        /// Adicionar resposta
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int Adicionar(Questao item)
+        public int Adicionar(Resposta item)
         {
-            _context.Questao.Add(item);
+            _context.Resposta.Add(item);
             return _context.SaveChanges();
         }
 
         /// <summary>
-        /// Procurar por QuestaoID
+        /// Procurar por RespostaID
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<Questao> ProcurarAsync(int id)
+        public Task<Resposta> ProcurarAsync(int id)
         {
-            return _context.Questao.FirstOrDefaultAsync(t => t.QuestaoID == id);
+            return _context.Resposta.FirstOrDefaultAsync(t => t.RespostaID == id);
         }
 
         /// <summary>
-        /// Procurar por QuestaoID
+        /// Procurar por RespostaID
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Questao Procurar(int id)
+        public Resposta Procurar(int id)
         {
-            return _context.Questao.FirstOrDefault(t => t.QuestaoID == id);
+            return _context.Resposta.FirstOrDefault(t => t.RespostaID == id);
         }
-
+        
         /// <summary>
-        /// Remover questão
+        /// Remover resposta
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task RemoverAsync(int id)
         {
-            var entity = _context.Questao.First(t => t.QuestaoID == id);
-            _context.Questao.Remove(entity);
+            var entity = _context.Resposta.First(t => t.RespostaID == id);
+            _context.Resposta.Remove(entity);
             await _context.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Remover questao
+        /// Remover resposta
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public int Remover(int id)
         {
-            var entity = _context.Questao.First(t => t.QuestaoID == id);
-            _context.Questao.Remove(entity);
+            var entity = _context.Resposta.First(t => t.RespostaID == id);
+            _context.Resposta.Remove(entity);
             return _context.SaveChanges();
         }
 
+
         /// <summary>
-        /// Alterar questão
+        /// Alterar resposta
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="original"></param>
         /// <returns></returns>
-        public async Task AlterarAsync(Questao item)
+        public async Task AlterarAsync(Resposta item)
         {
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
         /// <summary>
-        /// Alterar questão
+        /// Alterar resposta
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int Alterar(Questao item)
+        public int Alterar(Resposta item)
         {
             _context.Entry(item).State = EntityState.Modified;
             return _context.SaveChanges();
         }
-
+        
         /// <summary>
-        /// Verifica se o QuestaoID já existe
+        /// Verifica se a resposta já existe
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public Task<bool> ExisteAsync(int id)
         {
-            return _context.Questao.AnyAsync(t => t.QuestaoID == id);
+            return _context.Resposta.AnyAsync(t => t.RespostaID == id);
         }
 
         /// <summary>
-        /// Verifica se questão já existe
+        /// Verifica se resposta já existe
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public bool Existe(int id)
         {
-            return _context.Questao.Any(t => t.QuestaoID == id);
+            return _context.Resposta.Any(t => t.RespostaID == id);
         }
-
+        
         /// <summary>
-        /// Verifica se número de questão já existe
-        /// </summary>
-        /// <param name="numero"></param>
-        /// <returns></returns>
-        public Task<bool> ExisteNumeroAsync(int numero)
-        {
-            return _context.Questao.AnyAsync(t => t.QuestaoNumero == numero);
-        }
-
-        /// <summary>
-        /// Retorna o maior valor de QuestaoID no banco de dados
+        /// Retorna o maior valor de RespostaID no banco de dados
         /// </summary>
         /// <returns></returns>
         public Task<int> MaximoIDAsync()
         {
-            return _context.Questao.MaxAsync(t => t.QuestaoID);
+            return _context.Resposta.MaxAsync(t => t.RespostaID);
         }
-
+        
         /// <summary>
-        /// Retorna o maior valor de QuestaoID no banco de dados
+        /// Retorna o maior valor de RespostaID no banco de dados
         /// </summary>
         /// <returns></returns>
         public int MaximoID()
         {
-            return _context.Questao.Max(t => t.QuestaoID);
-        }
-
-        /// <summary>
-        /// Procurar pelo número da questão
-        /// </summary>
-        /// <param name="numero"></param>
-        /// <returns></returns>
-        public Task<Questao> ProcurarPorNumeroAsync(int numero)
-        {
-            return _context.Questao.FirstOrDefaultAsync(t => t.QuestaoNumero == numero);
+            return _context.Resposta.Max(t => t.RespostaID);
         }
         
+        /// <summary>
+        /// Limpar respostas
+        /// </summary>
+        /// <returns></returns>
+        public Task LimparResposta()
+        {
+            return _context.Database.ExecuteSqlCommandAsync("EXEC LimparRespostas");
+        }
     }
 }

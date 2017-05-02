@@ -52,12 +52,14 @@
     <Compile Include="CorretorDeProvasDbContext.cs" />
     <Compile Include="ICorretorDeProvasDbContext.cs" />
     <Compile Include="ILoginUsuarioRepository.cs" />
+    <Compile Include="Model\Candidato.cs" />
     <Compile Include="Model\Grupo.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="Model\Pontuacao.cs" />
+    <Compile Include="Model\Resposta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Questao.cs" />
-    <Compile Include="PontuacaoRepository.cs" />
+    <Compile Include="RespostaRepository.cs" />
+    <Compile Include="CandidatoRepository.cs" />
     <Compile Include="UsuarioRepository.cs" />
     <Compile Include="QuestaoRepository.cs" />
     <Compile Include="Model\Usuario.cs" />

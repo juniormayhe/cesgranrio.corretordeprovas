@@ -9,78 +9,78 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
 {
     
     /// <summary>
-    /// Transporta dados das pontuacoes
+    /// Transporta dados das respostas
     /// </summary>
-    public class PontuacaoVM
+    public class RespostaVM
     {
         
-        public PontuacaoVM()
+        public RespostaVM()
         {
             
         }
 
-        public PontuacaoVM(Pontuacao pontuacao)
+        public RespostaVM(Resposta resposta)
         {
-            this.PontuacaoID = pontuacao.PontuacaoID;
-            this.QuestaoID = pontuacao.QuestaoID;
-
-            this.PontuacaoCPFCandidato = pontuacao.Usuario.UsuarioCPF;
-            this.PontuacaoRespostaCandidato = pontuacao.PontuacaoRespostaCandidato;
-            this.PontuacaoGradeDominioDasRegras = pontuacao.PontuacaoDominioDasRegras;
-            this.PontuacaoGradeFidelidadeAoTema = pontuacao.PontuacaoFidelidadeAoTema;
-            this.PontuacaoGradeNivelDeLinguagem = pontuacao.PontuacaoNivelDeLinguagem;
-            this.PontuacaoGradeOrganizacaoIdeias = pontuacao.PontuacaoOrganizacaoDeIdeias;
-            this.Questao = pontuacao.Questao;
-            this.Usuario = pontuacao.Usuario;
+            this.RespostaID = resposta.RespostaID;
+            this.QuestaoID = resposta.QuestaoID;
+            this.UsuarioID= resposta.UsuarioID;
+            this.CandidatoID = resposta.CandidatoID;
+            this.RespostaGradeDominioDasRegras = resposta.RespostaDominioDasRegras;
+            this.RespostaGradeFidelidadeAoTema = resposta.RespostaFidelidadeAoTema;
+            this.RespostaGradeNivelDeLinguagem = resposta.RespostaNivelDeLinguagem;
+            this.RespostaGradeOrganizacaoIdeias = resposta.RespostaOrganizacaoDeIdeias;
+            this.Questao = resposta.Questao;
+            this.Usuario = resposta.Usuario;
+            this.Candidato = resposta.Candidato;
         }
 
         [Key]
         [Display(Name = "ID")]
-        public int PontuacaoID { get; set; }
+        public int RespostaID { get; set; }
 
         [Display(Name = "Questão")]
         public int QuestaoID { get; set; }
 
         [Display(Name = "ID do professor")]
         public int UsuarioID { get; set; }
-        
 
-        [Display(Name = "CPF do Candidato")]
-        public string PontuacaoCPFCandidato { get; set; }
-        
+        [Display(Name = "ID do candidato")]
+        public int CandidatoID { get; set; }
+
         [Display(Name = "Resposta do candidato")]
-        public string PontuacaoRespostaCandidato { get; set; }
+        public string RespostaRespostaCandidato { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Fidelidade ao tema")]
         [Display(Name = "Fidelidade ao tema")]
         [Range(0.01, 999.99, ErrorMessage ="Os pontos devem estar entre 0,01 e 999,99")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal PontuacaoGradeFidelidadeAoTema { get; set; }
+        public decimal RespostaGradeFidelidadeAoTema { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Organização de ideias")]
         [Display(Name = "Organização de ideias")]
         [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal PontuacaoGradeOrganizacaoIdeias { get; set; }
+        public decimal RespostaGradeOrganizacaoIdeias { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Nível de Linguagem")]
         [Display(Name = "Nível de Linguagem")]
         [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal PontuacaoGradeNivelDeLinguagem { get; set; }
+        public decimal RespostaGradeNivelDeLinguagem { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Domínio das Regras")]
         [Display(Name = "Domínio das Regras")]
         [Range(0.01, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal PontuacaoGradeDominioDasRegras { get; set; }
+        public decimal RespostaGradeDominioDasRegras { get; set; }
 
         public virtual Questao Questao { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Candidato Candidato { get; set; }
 
         /// <summary>
         /// Lista de respostas a serem pontuadas pelo professor
         /// </summary>
-        public IPagedList<Pontuacao> Lista { get; set; }
+        public IPagedList<Resposta> Lista { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-namespace Cesgranrio.CorretorDeProvas.DAL.Model
+﻿namespace Cesgranrio.CorretorDeProvas.DAL.Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,28 +6,18 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Usuario")]
-    public partial class Usuario
+    [Table("Candidato")]
+    public partial class Candidato
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public Candidato()
         {
-            Resposta = new HashSet<Resposta>();
+            this.Resposta = new HashSet<Resposta>();
         }
 
-        public int UsuarioID { get; set; }
-
-        [Required]
-        [StringLength(11)]
-        public string UsuarioCPF { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string UsuarioSenha { get; set; }
-
-        public int GrupoID { get; set; }
-
-        public virtual Grupo Grupo { get; set; }
+        public int CandidatoID { get; set; }
+        public string CandidatoNome { get; set; }
+        public string CandidatoCPF { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Resposta> Resposta { get; set; }

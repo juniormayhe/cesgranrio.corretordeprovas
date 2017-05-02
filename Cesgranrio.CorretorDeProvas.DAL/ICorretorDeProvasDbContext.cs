@@ -2,17 +2,23 @@
 using System.Threading.Tasks;
 using Cesgranrio.CorretorDeProvas.DAL.Model;
 using System.Data.Entity.Infrastructure;
+using System;
+using System.Threading;
 
 namespace Cesgranrio.CorretorDeProvas.DAL
 {
-    public interface ICorretorDeProvasDbContext
+    public interface ICorretorDeProvasDbContext : IDisposable
     {
         DbSet<Grupo> Grupo { get; set; }
-        DbSet<Pontuacao> Pontuacao { get; set; }
+        DbSet<Resposta> Resposta { get; set; }
         DbSet<Questao> Questao { get; set; }
         DbSet<Usuario> Usuario { get; set; }
+        DbSet<Candidato> Candidato{ get; set; }
 
-        Task Salvar();
+        int SaveChanges();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task<int> SaveChangesAsync();
+
         DbEntityEntry Entry(object o);
         
         Database Database { get; }

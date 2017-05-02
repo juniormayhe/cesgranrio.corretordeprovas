@@ -6,21 +6,37 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     using System.Linq;
     using Cesgranrio.CorretorDeProvas.DAL.Model;
     using System.Threading.Tasks;
+    using System.Threading;
 
     public partial class CorretorDeProvasDbContext : DbContext, ICorretorDeProvasDbContext
     {
-        public CorretorDeProvasDbContext()
-            : base("name=CorretorDeProvasDbContext")
+        //"name=CorretorDeProvasDbContext"
+        public CorretorDeProvasDbContext(string nameOrConnectionString)
+            : base(nameOrConnectionString)
         {
         }
 
         public virtual DbSet<Grupo> Grupo { get; set; }
-        public virtual DbSet<Pontuacao> Pontuacao { get; set; }
+        public virtual DbSet<Resposta> Resposta { get; set; }
         public virtual DbSet<Questao> Questao { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Candidato> Candidato { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Candidato>()
+                .Property(e => e.CandidatoNome)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Candidato>()
+                .Property(e => e.CandidatoCPF)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Candidato>()
+                .HasMany(e => e.Resposta)
+                .WithRequired(e => e.Candidato)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Grupo>()
                 .Property(e => e.GrupoNome)
                 .IsUnicode(false);
@@ -29,30 +45,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL
                 .HasMany(e => e.Usuario)
                 .WithRequired(e => e.Grupo)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Pontuacao>()
-                .Property(e => e.PontuacaoRespostaCandidato)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Pontuacao>()
-                .Property(e => e.PontuacaoCPFCandidato)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Pontuacao>()
-                .Property(e => e.PontuacaoFidelidadeAoTema)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<Pontuacao>()
-                .Property(e => e.PontuacaoOrganizacaoDeIdeias)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<Pontuacao>()
-                .Property(e => e.PontuacaoNivelDeLinguagem)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<Pontuacao>()
-                .Property(e => e.PontuacaoDominioDasRegras)
-                .HasPrecision(5, 2);
 
             modelBuilder.Entity<Questao>()
                 .Property(e => e.QuestaoEnunciado)
@@ -75,9 +67,25 @@ namespace Cesgranrio.CorretorDeProvas.DAL
                 .HasPrecision(5, 2);
 
             modelBuilder.Entity<Questao>()
-                .HasMany(e => e.Pontuacao)
+                .HasMany(e => e.Resposta)
                 .WithRequired(e => e.Questao)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Resposta>()
+                .Property(e => e.RespostaFidelidadeAoTema)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Resposta>()
+                .Property(e => e.RespostaOrganizacaoDeIdeias)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Resposta>()
+                .Property(e => e.RespostaNivelDeLinguagem)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Resposta>()
+                .Property(e => e.RespostaDominioDasRegras)
+                .HasPrecision(5, 2);
 
             modelBuilder.Entity<Usuario>()
                 .Property(e => e.UsuarioCPF)
@@ -88,17 +96,11 @@ namespace Cesgranrio.CorretorDeProvas.DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<Usuario>()
-                .HasMany(e => e.Pontuacao)
+                .HasMany(e => e.Resposta)
                 .WithRequired(e => e.Usuario)
                 .WillCascadeOnDelete(false);
+            
         }
 
-        public async Task Salvar()
-        {
-            await base.SaveChangesAsync();
-        }
-
-        
-        //public Database Database { get => base.Database; }
     }
 }
