@@ -38,11 +38,9 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// <param name="minValue"></param>
         /// <param name="maxValue"></param>
         /// <returns></returns>
-        public static double GeraNota(double minValue, double maxValue)
+        public static int GeraNota(int minValue, int maxValue)
         {
-            var next = rnd.NextDouble();
-
-            return minValue + (next * (maxValue - minValue));
+            return rnd.Next(minValue, maxValue-1);
         }
 
         /// <summary>

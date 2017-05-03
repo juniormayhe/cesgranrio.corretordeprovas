@@ -92,7 +92,31 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. A resposta foi apagada.");
                 return View(vm);
             }
-            
+
+            bool rangeNotaParaDominioÉValido = vm.RespostaGradeDominioDasRegras >= 0 &&  vm.RespostaGradeDominioDasRegras <= vm.Questao.QuestaoGradeDominioDasRegras;
+            bool rangeNotaParaFidelidadeÉValido = vm.RespostaGradeFidelidadeAoTema >= 0 && vm.RespostaGradeFidelidadeAoTema <= vm.Questao.QuestaoGradeFidelidadeAoTema;
+            bool rangeNotaParaLinguagemÉValido = vm.RespostaGradeNivelDeLinguagem >= 0 && vm.RespostaGradeNivelDeLinguagem <= vm.Questao.QuestaoGradeNivelDeLinguagem;
+            bool rangeNotaParaOrganizacaoÉValido = vm.RespostaGradeOrganizacaoIdeias >= 0 && vm.RespostaGradeOrganizacaoIdeias <= vm.Questao.QuestaoGradeOrganizacaoIdeias;
+            if (!rangeNotaParaDominioÉValido) {
+                ModelState.AddModelError(string.Empty, $"O intervalo válido para Domínio das regras é {0,00} a {vm.Questao.QuestaoGradeDominioDasRegras}");
+                return View(vm);
+            }
+            if (!rangeNotaParaFidelidadeÉValido)
+            {
+                ModelState.AddModelError(string.Empty, $"O intervalo válido para Fidelidade ao tema é {0,00} a {vm.Questao.QuestaoGradeFidelidadeAoTema}");
+                return View(vm);
+            }
+            if (!rangeNotaParaLinguagemÉValido)
+            {
+                ModelState.AddModelError(string.Empty, $"O intervalo válido para Nível de liguagem é {0,00} a {vm.Questao.QuestaoGradeNivelDeLinguagem}");
+                return View(vm);
+            }
+            if (!rangeNotaParaOrganizacaoÉValido)
+            {
+                ModelState.AddModelError(string.Empty, $"O intervalo válido para Organização de ideias é {0,00} a {vm.Questao.QuestaoGradeOrganizacaoIdeias}");
+                return View(vm);
+            }
+
             try
             {
                 if (TryUpdateModel(respostaParaAtualizar, new string[] { "RespostaID", "UsuarioID", "CandidatoID", "QuestaoID", "RespostaGradeFidelidadeAoTema", "RespostaGradeOrganizacaoIdeias", "RespostaGradeNivelDeLinguagem", "RespostaGradeDominioDasRegras", "RespostaControleVersao" }))

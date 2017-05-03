@@ -201,13 +201,33 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 UsuarioID = elaborador.UsuarioID,
                 Usuario = elaborador,
 
-                /*pontuacao dada pelo professor*/
-                RespostaGradeDominioDasRegras = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
-                RespostaGradeFidelidadeAoTema = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
-                RespostaGradeNivelDeLinguagem = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
-                RespostaGradeOrganizacaoIdeias = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
+                /*folha de redação*/
                 RespostaImagem = Util.ConverterParaArray(img)
             };
+            /*pontuacao dada pelo professor*/
+
+            decimal sobra = 50;
+            resposta.RespostaGradeDominioDasRegras = Convert.ToDecimal(Util.GeraNota(0, 50));
+            sobra -= resposta.RespostaGradeDominioDasRegras;
+            if (sobra > 0)
+            {
+                resposta.RespostaGradeFidelidadeAoTema = Convert.ToDecimal(Util.GeraNota(0, Convert.ToInt32(sobra)));
+                sobra -= resposta.RespostaGradeFidelidadeAoTema;
+            }
+
+            if (sobra > 0)
+            {
+                resposta.RespostaGradeNivelDeLinguagem = Convert.ToDecimal(Util.GeraNota(0, Convert.ToInt32(sobra)));
+                sobra -= resposta.RespostaGradeNivelDeLinguagem;
+            }
+
+            if (sobra > 0)
+            {
+                resposta.RespostaGradeOrganizacaoIdeias = Convert.ToDecimal(sobra);
+
+            }
+
+
             return resposta;
         }
 
