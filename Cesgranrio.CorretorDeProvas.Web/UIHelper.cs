@@ -23,6 +23,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
             string classe = string.Empty;
             //@ViewContext.ObterEstiloMenuAtivo("Questao")
             if ((controller == opcao && opcao=="questao")
+                || (controller == opcao && opcao == "usuario")
                 || (controller == "resposta" && opcao == "simularrespostas" && acao ==opcao)
                 || (controller == "resposta" && opcao == "corrigirrespostas" && acao == opcao))
                 classe ="active";

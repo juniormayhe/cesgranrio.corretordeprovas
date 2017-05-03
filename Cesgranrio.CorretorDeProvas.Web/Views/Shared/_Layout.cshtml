@@ -22,6 +22,10 @@
                         Corretor de provas
                     </a>
                 </div>
+@using (Html.BeginForm("Logout", "Usuario", FormMethod.Post, new { @id = "sessao" }))
+{
+    /*evitamos cross site request forgery*/
+    @Html.AntiForgeryToken();
 
                 <ul class="nav">
                     <li class="@ViewContext.ObterEstiloMenuAtivo("Questao")">
@@ -43,8 +47,27 @@
                         </a>
                     </li>
                     
-                
+
+                    @if (cpf == null)
+                    {
+                        <li class="@ViewContext.ObterEstiloMenuAtivo("Usuario")">
+                            <a href="/Usuario/Login">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <p>Entrar</p>
+                                </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="javascript:" onclick="$('#sessao').submit();" title="Terminar sessão de @Html.Raw(cpf.FormatarCPF())">
+                                <i class="glyphicon glyphicon-off"></i>
+                                <p>Sair</p>
+                            </a>
+                        </li>
+                    }
                 </ul>
+}
             </div>
         </div>
 
@@ -64,7 +87,7 @@
                     <div class="collapse navbar-collapse">
                         
 
-                    @using (Html.BeginForm("Logout", "Usuario", FormMethod.Post, new { @id = "sessao" }))
+                    @using (Html.BeginForm("Logout", "Usuario", FormMethod.Post, new { @id = "sessao2" }))
                     {
                         /*evitamos cross site request forgery*/
                         @Html.AntiForgeryToken();
@@ -80,7 +103,7 @@
                                 <span>Bem-vindo <strong class="texto">@Html.Raw(cpf.FormatarCPF())</strong></span>
                             </li>
                             <li>
-                                <a href="javascript:" onclick="$('#sessao').submit();">Sair</a>
+                                <a href="javascript:" onclick="$('#sessao2').submit();">Sair</a>
                             </li>
                         }
                         
