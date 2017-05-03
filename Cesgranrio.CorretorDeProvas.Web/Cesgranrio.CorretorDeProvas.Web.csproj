@@ -263,6 +263,7 @@
     <Content Include="Views\Resposta\_RespostasPartialView.cshtml" />
     <Content Include="Views\Shared\_SemRegistros.cshtml" />
     <Content Include="Views\Resposta\Corrigir.cshtml" />
+    <Content Include="Views\Usuario\Logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
