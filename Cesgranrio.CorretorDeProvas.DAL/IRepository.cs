@@ -11,6 +11,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     {
         int Adicionar(T item);
         Task AdicionarAsync(T item);
+
         IEnumerable<T> Listar();
         Task<IEnumerable<T>> ListarAsync();
         T Procurar(int id);
@@ -19,8 +20,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         Task RemoverAsync(int id);
         int Alterar(T item);
         Task AlterarAsync(T item);
-        
-        
+        Task AlterarAsync(T item, byte[] respostaControleVersao);
+
         bool Existe(int id);
         Task<bool> ExisteAsync(int id);
         int MaximoID();

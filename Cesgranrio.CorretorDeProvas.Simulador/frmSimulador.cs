@@ -108,7 +108,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 for (i = 0; i < TOTAL_CANDIDATOS; i++)
                 {
                     System.Diagnostics.Trace.WriteLine($"i={i}");
-                    Candidato candidato = new Candidato { CandidatoCPF = Util.GerarCPF(i), CandidatoNome = Util.GerarPalavras() };
+                    Candidato candidato = new Candidato { CandidatoCPF = Util.GerarCPF(i), CandidatoNome = Util.GerarNomeCandidato() };
                     #region adicionamos uma nova thread
                     Task tarefa = new Task(() =>
                     {
@@ -119,7 +119,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                         foreach (Questao questao in questoes)
                         {
                             //gera uma imagem
-                            Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoCPF);
+                            Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoNome);
                             //adiciona uma resposta com a imagem
                             Resposta resposta = criarResposta(elaborador, questao, candidato, img);
                             _repostaRepository.Adicionar(resposta);
@@ -202,10 +202,10 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 Usuario = elaborador,
 
                 /*pontuacao dada pelo professor*/
-                RespostaDominioDasRegras = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
-                RespostaFidelidadeAoTema = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
-                RespostaNivelDeLinguagem = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
-                RespostaOrganizacaoDeIdeias = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
+                RespostaGradeDominioDasRegras = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
+                RespostaGradeFidelidadeAoTema = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
+                RespostaGradeNivelDeLinguagem = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
+                RespostaGradeOrganizacaoIdeias = Convert.ToDecimal(Util.GeraNota(0.01, 11.0)),
                 RespostaImagem = Util.ConverterParaArray(img)
             };
             return resposta;

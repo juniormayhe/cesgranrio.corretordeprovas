@@ -187,6 +187,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         {
             return _context.Questao.FirstOrDefaultAsync(t => t.QuestaoNumero == numero);
         }
-        
+
+        public Task AlterarAsync(Questao item, byte[] respostaControleVersao)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

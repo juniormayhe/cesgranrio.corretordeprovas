@@ -27,7 +27,7 @@ Licensed under the Creative Commons Attribution 2.5 License - http://creativecom
     }
 
     LightboxOptions.prototype.albumLabel = function(curImageNum, albumSize) {
-      return "Image " + curImageNum + " of " + albumSize;
+      return "Prova " + curImageNum + " de " + albumSize;
     };
 
     return LightboxOptions;

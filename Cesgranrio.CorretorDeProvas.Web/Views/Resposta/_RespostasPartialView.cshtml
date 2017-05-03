@@ -4,7 +4,8 @@
 @using X.PagedList.Mvc
 
 @if (Model.Lista.Count > 0)
-{
+    {
+        int i = 0;
 
 <table class="table table-hover table-striped">
     <thead>
@@ -29,11 +30,9 @@
                     @Html.DisplayFor(modelItem => item.Candidato.CandidatoNome)
                 </td>
                 <td>
-                    
-
-                    
-                    <a href="http://lokeshdhakar.com/projects/lightbox2/images/image-1.jpg" data-lightbox="image-1" data-title="Mostrar resposta gerada pelo simulador">Ver imagem</a>
                     @Html.ActionLink("Corrigir", "Corrigir", new { @id = item.RespostaID })
+                     | <a href="data:image/jpg;base64,@(Convert.ToBase64String(item.RespostaImagem))" alt="Imagem da resposta" data-lightbox="image-@i++" data-title="Mostrar resposta gerada pelo simulador">Ver imagem</a>
+                    
                 </td>
             </tr>
         }
@@ -65,3 +64,11 @@ else
 @Scripts.Render("~/bundles/lightbox")
 @Styles.Render("~/Content/lightbox")
 
+<script>
+    //após paginar o lightbox é acionado automaticamente devido a uma incompatbilidade dele com pagedlist
+    //então temos que ocultar o element após uma paginação que corre via ajax
+    $('.pagination').on('click', 'a', function (e) {
+        e.stopPropagation();
+        $('.lightbox').css("display", "none");
+    });
+</script>

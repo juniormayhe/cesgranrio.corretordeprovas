@@ -26,7 +26,13 @@ namespace Cesgranrio.CorretorDeProvas.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Questao", action = "Listar", page = UrlParameter.Optional }
             );
-            
+
+            routes.MapRoute(
+                name: "Respostas",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Resposta", action = "CorrigirRespostas", page = UrlParameter.Optional }
+            );
+
 
         }
     }

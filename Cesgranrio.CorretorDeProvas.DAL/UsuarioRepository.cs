@@ -192,6 +192,79 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             //return await Task.Run(() => o.ExecuteFunction<string>("Autenticar", new ObjectParameter("UsuarioCPF", usuarioCPF), new ObjectParameter("UsuarioSenha", usuarioSenha)));
         }
 
-        
+        int IRepository<Usuario>.Adicionar(Usuario item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<Usuario>.AdicionarAsync(Usuario item)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Usuario> IRepository<Usuario>.Listar()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IEnumerable<Usuario>> IRepository<Usuario>.ListarAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Usuario IRepository<Usuario>.Procurar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Usuario> IRepository<Usuario>.ProcurarAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IRepository<Usuario>.Remover(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<Usuario>.RemoverAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IRepository<Usuario>.Alterar(Usuario item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<Usuario>.AlterarAsync(Usuario item)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IRepository<Usuario>.AlterarAsync(Usuario item, byte[] respostaControleVersao)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IRepository<Usuario>.Existe(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IRepository<Usuario>.ExisteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IRepository<Usuario>.MaximoID()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IRepository<Usuario>.MaximoIDAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

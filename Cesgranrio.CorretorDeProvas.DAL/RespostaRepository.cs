@@ -111,11 +111,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AlterarAsync(Resposta item, byte[] respostaControlVersao)
+        public async Task AlterarAsync(Resposta item, byte[] respostaControleVersao)
         {
-            _context.Entry(item).OriginalValues["RespostaControleVersao"] = respostaControlVersao;
+            _context.Entry(item).OriginalValues["RespostaControleVersao"] = respostaControleVersao;
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            _context.Entry(item).Reload();
         }
 
         /// <summary>
@@ -127,6 +128,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         {
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            _context.Entry(item).Reload();
+            
         }
 
         /// <summary>

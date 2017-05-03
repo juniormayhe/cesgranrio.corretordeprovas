@@ -18,10 +18,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
         public int QuestaoID { get; set; }
         [Column(TypeName = "image")]
         public byte[] RespostaImagem { get; set; }
-        public decimal RespostaFidelidadeAoTema { get; set; }
-        public decimal RespostaOrganizacaoDeIdeias { get; set; }
-        public decimal RespostaNivelDeLinguagem { get; set; }
-        public decimal RespostaDominioDasRegras { get; set; }
+        public decimal RespostaGradeFidelidadeAoTema { get; set; }
+        public decimal RespostaGradeOrganizacaoIdeias { get; set; }
+        public decimal RespostaGradeNivelDeLinguagem { get; set; }
+        public decimal RespostaGradeDominioDasRegras { get; set; }
 
         public virtual Candidato Candidato { get; set; }
         public virtual Questao Questao { get; set; }

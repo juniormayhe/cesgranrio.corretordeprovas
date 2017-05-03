@@ -49,7 +49,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         }
         
         // GET: Questao/Editar/5
-        public async Task<ActionResult> Corrigir(int? id, byte[] respostaControleVersao)
+        public async Task<ActionResult> Corrigir(int? id)
         {
             if (id == null)
             {
@@ -57,7 +57,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             }
             
             var resposta = await _repository.ProcurarAsync(id.Value);
-
+            
             if (resposta == null)
                 return HttpNotFound();
 
@@ -72,45 +72,48 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,RespostaDominioDasRegras,RespostaFidelidadeAoTema,RespostaNivelDeLinguagem,RespostaOrganizacaoIdeias,RespostaControleVersao")] RespostaVM vm, byte[] respostaControleVersao)
+        public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,RespostaGradeFidelidadeAoTema,RespostaGradeOrganizacaoIdeias,RespostaGradeNivelDeLinguagem,RespostaGradeDominioDasRegras")] RespostaVM vm, byte[] respostaControleVersao)
         {
             if (vm == null || vm.RespostaID == 0) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var respostaParaAtualizar = await _repository.ProcurarAsync(vm.RespostaID);
+            Resposta respostaParaAtualizar = await _repository.ProcurarAsync(vm.RespostaID);
+
+            vm.Questao = respostaParaAtualizar.Questao;
+            vm.Usuario = respostaParaAtualizar.Usuario;
+            vm.Candidato = respostaParaAtualizar.Candidato;
+
             //verificar se foi apagado
             if (respostaParaAtualizar == null)
             {
                 Resposta respostaApagada = new Resposta();
                 TryUpdateModel(respostaApagada);
                 ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. A resposta foi apagada.");
-                return View(respostaApagada);
+                return View(vm);
             }
-
-            if (ModelState.IsValid)
+            
+            try
             {
-                respostaParaAtualizar = new Resposta {
-                    
-                    RespostaID = vm.RespostaID,
-                    QuestaoID = vm.QuestaoID,
-                    Questao = vm.Questao,
-                    UsuarioID = vm.UsuarioID,/*id professor*/
-                    Usuario = vm.Usuario,/*dados professor*/
-                    CandidatoID=vm.CandidatoID,
-                    Candidato= vm.Candidato,
-                    RespostaDominioDasRegras = vm.RespostaGradeDominioDasRegras,
-                    RespostaFidelidadeAoTema = vm.RespostaGradeFidelidadeAoTema,
-                    RespostaNivelDeLinguagem = vm.RespostaGradeNivelDeLinguagem,
-                    RespostaOrganizacaoDeIdeias = vm.RespostaGradeOrganizacaoIdeias,
-                    
-                };
-                
-                await _repository.AlterarAsync(respostaParaAtualizar);
-                return RedirectToAction("CorrigirRespostas");
+                if (TryUpdateModel(respostaParaAtualizar, new string[] { "RespostaID", "UsuarioID", "CandidatoID", "QuestaoID", "RespostaGradeFidelidadeAoTema", "RespostaGradeOrganizacaoIdeias", "RespostaGradeNivelDeLinguagem", "RespostaGradeDominioDasRegras", "RespostaControleVersao" }))
+                {
+
+                    await _repository.AlterarAsync(respostaParaAtualizar, respostaControleVersao);
+                    return RedirectToAction("CorrigirRespostas");
+                }
+            }
+            catch (DbUpdateConcurrencyException dbex) {
+                ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças pois outro professor acabou de modificar esta resposta! Tente mais tarde.");
+
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Não foi possível salvar os dados. Entre em contato com o administrator.");
             }
             
             return View(vm);
+
         }
 
         /// <summary>

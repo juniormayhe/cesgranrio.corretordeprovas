@@ -59,7 +59,10 @@
                 if ($(this).val().trim() == '') return;
                 try {
                     var n = parseInt($(this).val().replace(/[^0-9]/g, "")) + '';
-
+                    if (isNaN(n)) {
+                        $(this).val("");
+                        return;
+                    }
                     $(this).val(formatarCPF(padLeft(n, 11)));
                 }
                 catch (ex) {

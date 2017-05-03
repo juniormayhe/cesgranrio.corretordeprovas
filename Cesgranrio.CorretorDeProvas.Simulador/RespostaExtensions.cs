@@ -18,7 +18,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// <returns></returns>
         public static string ParaTexto(this Resposta p)
         {
-            return $"Enunciado: {p.Questao.QuestaoEnunciado} -> CPF: {p.Candidato.CandidatoCPF}, Nome: {p.Candidato.CandidatoNome}, Organizacao: {p.RespostaOrganizacaoDeIdeias}, Linguagem: {p.RespostaNivelDeLinguagem}, Fidelidade: {p.RespostaFidelidadeAoTema}, Regras: {p.RespostaDominioDasRegras}";
+            return $"Enunciado: {p.Questao.QuestaoEnunciado} -> CPF: {p.Candidato.CandidatoCPF}, Nome: {p.Candidato.CandidatoNome}, Organizacao: {p.RespostaGradeOrganizacaoIdeias}, Linguagem: {p.RespostaGradeNivelDeLinguagem}, Fidelidade: {p.RespostaGradeFidelidadeAoTema}, Regras: {p.RespostaGradeDominioDasRegras}";
         }
     }
 }

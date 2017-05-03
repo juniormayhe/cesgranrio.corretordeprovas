@@ -78,19 +78,19 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             
 
             modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaFidelidadeAoTema)
+                .Property(e => e.RespostaGradeFidelidadeAoTema)
                 .HasPrecision(5, 2);
 
             modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaOrganizacaoDeIdeias)
+                .Property(e => e.RespostaGradeOrganizacaoIdeias)
                 .HasPrecision(5, 2);
 
             modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaNivelDeLinguagem)
+                .Property(e => e.RespostaGradeNivelDeLinguagem)
                 .HasPrecision(5, 2);
 
             modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaDominioDasRegras)
+                .Property(e => e.RespostaGradeDominioDasRegras)
                 .HasPrecision(5, 2);
 
             modelBuilder.Entity<Usuario>()
@@ -111,5 +111,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL
 
         }
 
+        //public System.Data.Entity.DbSet<Cesgranrio.CorretorDeProvas.Web.Models.RespostaVM> RespostaVMs { get; set; }
     }
 }

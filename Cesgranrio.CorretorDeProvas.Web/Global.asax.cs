@@ -37,9 +37,12 @@ namespace Cesgranrio.CorretorDeProvas.Web
             var routeData = new RouteData();
             routeData.Values["controller"] = "Erro";
             routeData.Values["action"] = "PaginaNaoEncontrada";
+            routeData.Values.Add("Erro", excecaoOriginal.GetType().FullName);
+            routeData.Values.Add("Descrição", excecaoOriginal.Message);
+
+            //Response.StatusCode = (int)HttpStatusCode.BadRequest;
             
-            Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            
+
             if (excecaoOriginal is HttpException)
             {
                 /*aqui podemos tratar erros http*/
@@ -49,15 +52,32 @@ namespace Cesgranrio.CorretorDeProvas.Web
                 switch (codigoHttp)
                 {
                     case (int)HttpStatusCode.InternalServerError /*500*/:
-                        //tentativa de injection
+
                         if (excecao is HttpRequestValidationException)
                         {
+                            //tentativa de injection
+                            if (excecao.Message.Contains("danger") || excecao.Message.Contains("perigo"))
+                            {
+                                routeData.Values["controller"] = "Erro";
+                                routeData.Values["action"] = "RequisicaoInvalida";
+                                Response.StatusCode = (int)HttpStatusCode.Conflict;/*400*/
+                            }
+                        }
+                        else
+                        {
+                            //ex: excecao is HttpCompileException....
                             routeData.Values["controller"] = "Erro";
-                            routeData.Values["action"] = "RequisicaoInvalida";
-                            Response.StatusCode = (int)HttpStatusCode.Conflict;/*400*/
+                            routeData.Values["action"] = "FalhaNaAplicacao";
                         }
                         break;
+
+                    case (int)HttpStatusCode.BadRequest /*400*/:
+                        //pode ser um erro numa view
+                        routeData.Values["controller"] = "Erro";
+                        routeData.Values["action"] = "FalhaNaAplicacao";
                         
+                        break;
+
                 }//switch
             }
             else {
@@ -65,9 +85,6 @@ namespace Cesgranrio.CorretorDeProvas.Web
                 //falha da própria aplicação
                 routeData.Values["controller"] = "Erro";
                 routeData.Values["action"] = "FalhaNaAplicacao";
-
-                routeData.Values.Add("Erro", excecaoOriginal.GetType().FullName);
-                routeData.Values.Add("Descrição", excecaoOriginal.Message);
                 Response.StatusCode = (int)HttpStatusCode.InternalServerError; /*500*/
 
 

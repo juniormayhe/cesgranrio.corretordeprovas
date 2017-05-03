@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201705022333342_RespostaControleVersao.Designer.cs">
       <DependentUpon>201705022333342_RespostaControleVersao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705031848423_Resposta.cs" />
+    <Compile Include="Migrations\201705031848423_Resposta.Designer.cs">
+      <DependentUpon>201705031848423_Resposta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Candidato.cs" />
     <Compile Include="Model\Grupo.cs" />
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705022333342_RespostaControleVersao.resx">
       <DependentUpon>201705022333342_RespostaControleVersao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705031848423_Resposta.resx">
+      <DependentUpon>201705031848423_Resposta.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -85,6 +85,26 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         }
 
         /// <summary>
+        /// Gera um nome de candidato
+        /// </summary>
+        /// <returns></returns>
+        public static string GerarNomeCandidato()
+        {
+            var homens = new  List<string> { "Alberto", "Arnaldo", "Carlos", "Eduardo", "Fábio", "Gustavo", "Heraldo", "Idalgo", "Julio", "Lauro", "Mário", "Naldo", "Osvaldo", "Paulo", "Roberto", "Sérgio", "Thiago", "Vitor","Washington" };
+            var mulheres = new List<string> { "Alba", "Andreia", "Bruna", "Carla", "Daniela", "Flávia", "Hilda", "Julia", "Luisa", "Mariana", "Nair", "Olivia", "Pamela", "Renata", "Simone","Tania", "Valéria", "Zuleida" };
+            var sobrenomes = new List<string> { "Silva", "Costa", "dos Santos", "Martins", "Cavalcante", "Aguiar", "Monteiro", "Queiroz", "Uribe", "Benitez", "Fernandes", "Correia", "Gutierrez", "Santana", "Fonseca", "Ribeiro", "da Rocha" };
+            string nome=string.Empty;
+
+            if (rnd.Next(1, 2) == 1)
+                nome = homens.ElementAt(rnd.Next(0, homens.Count() - 1));
+            else
+                nome = mulheres.ElementAt(rnd.Next(0, mulheres.Count() - 1));
+
+            return $"{nome} {sobrenomes.ElementAt(rnd.Next(0, sobrenomes.Count()-1))}";
+
+        }
+
+        /// <summary>
         /// Gera palavras simulando uma resposta
         /// </summary>
         /// <returns></returns>

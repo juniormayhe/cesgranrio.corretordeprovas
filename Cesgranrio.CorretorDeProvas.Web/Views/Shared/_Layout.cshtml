@@ -24,19 +24,19 @@
                 </div>
 
                 <ul class="nav">
-                    <li class="active">
-                        <a href="/Questao/Lista">
+                    <li class="@ViewContext.ObterEstiloMenuAtivo("Questao")">
+                        <a href="/Questao/Listar">
                             <i class="glyphicon glyphicon-list-alt"></i>
                             <p>Questões</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="@ViewContext.ObterEstiloMenuAtivo("SimularRespostas")">
                         <a href="/Resposta/SimularRespostas">
                             <i class="glyphicon glyphicon-flash"></i>
                             <p>Simular respostas</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="@ViewContext.ObterEstiloMenuAtivo("CorrigirRespostas")">
                         <a href="/Resposta/CorrigirRespostas">
                             <i class="glyphicon glyphicon-edit"></i>
                             <p>Corrigir questões</p>
@@ -54,7 +54,7 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                            <span class="sr-only">Toggle navigation</span>
+                            <span class="sr-only">Menu</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>

@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIHelper.cs" />
     <Compile Include="VerificarAcessoFilter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,6 +262,7 @@
     <Content Include="Views\Resposta\CorrigirRespostas.cshtml" />
     <Content Include="Views\Resposta\_RespostasPartialView.cshtml" />
     <Content Include="Views\Shared\_SemRegistros.cshtml" />
+    <Content Include="Views\Resposta\Corrigir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

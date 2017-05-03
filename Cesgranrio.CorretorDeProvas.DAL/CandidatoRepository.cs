@@ -178,7 +178,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             return _context.Candidato.Max(t => t.CandidatoID);
         }
 
-
-        
+        public Task AlterarAsync(Candidato item, byte[] respostaControleVersao)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
