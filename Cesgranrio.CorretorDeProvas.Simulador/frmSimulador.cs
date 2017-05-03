@@ -204,30 +204,26 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 /*folha de redação*/
                 RespostaImagem = Util.ConverterParaArray(img)
             };
-            /*pontuacao dada pelo professor*/
-
+            /*pontuacao dada pelo professor deve ser com base na grade de correcao*/
             decimal sobra = 50;
-            resposta.RespostaGradeDominioDasRegras = Convert.ToDecimal(Util.GeraNota(0, 50));
+            resposta.RespostaGradeDominioDasRegras = Util.GeraNota(0, resposta.Questao.QuestaoGradeDominioDasRegras);
             sobra -= resposta.RespostaGradeDominioDasRegras;
             if (sobra > 0)
             {
-                resposta.RespostaGradeFidelidadeAoTema = Convert.ToDecimal(Util.GeraNota(0, Convert.ToInt32(sobra)));
+                resposta.RespostaGradeFidelidadeAoTema = Util.GeraNota(0, Convert.ToInt32(sobra));
                 sobra -= resposta.RespostaGradeFidelidadeAoTema;
             }
 
             if (sobra > 0)
             {
-                resposta.RespostaGradeNivelDeLinguagem = Convert.ToDecimal(Util.GeraNota(0, Convert.ToInt32(sobra)));
+                resposta.RespostaGradeNivelDeLinguagem = Util.GeraNota(0, Convert.ToInt32(sobra));
                 sobra -= resposta.RespostaGradeNivelDeLinguagem;
             }
 
             if (sobra > 0)
             {
                 resposta.RespostaGradeOrganizacaoIdeias = Convert.ToDecimal(sobra);
-
             }
-
-
             return resposta;
         }
 

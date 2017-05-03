@@ -38,9 +38,14 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// <param name="minValue"></param>
         /// <param name="maxValue"></param>
         /// <returns></returns>
-        public static int GeraNota(int minValue, int maxValue)
+        public static decimal GeraNota(decimal minValue, decimal maxValue)
         {
-            return rnd.Next(minValue, maxValue-1);
+            //magica
+            const int fator = 100;
+            int minimo = Convert.ToInt32(minValue * fator);
+            int maximo = Convert.ToInt32((maxValue-1) * fator);
+            int random = rnd.Next(minimo, maximo-1);
+            return Decimal.Divide(random, fator);
         }
 
         /// <summary>

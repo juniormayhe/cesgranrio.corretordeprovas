@@ -93,6 +93,8 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 return View(vm);
             }
 
+            #region validação de negócio
+            
             bool rangeNotaParaDominioÉValido = vm.RespostaGradeDominioDasRegras >= 0 &&  vm.RespostaGradeDominioDasRegras <= vm.Questao.QuestaoGradeDominioDasRegras;
             bool rangeNotaParaFidelidadeÉValido = vm.RespostaGradeFidelidadeAoTema >= 0 && vm.RespostaGradeFidelidadeAoTema <= vm.Questao.QuestaoGradeFidelidadeAoTema;
             bool rangeNotaParaLinguagemÉValido = vm.RespostaGradeNivelDeLinguagem >= 0 && vm.RespostaGradeNivelDeLinguagem <= vm.Questao.QuestaoGradeNivelDeLinguagem;
@@ -116,6 +118,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 ModelState.AddModelError(string.Empty, $"O intervalo válido para Organização de ideias é {0,00} a {vm.Questao.QuestaoGradeOrganizacaoIdeias}");
                 return View(vm);
             }
+            #endregion
 
             try
             {
