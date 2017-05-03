@@ -22,6 +22,12 @@ namespace Cesgranrio.CorretorDeProvas.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            //lightbox para imagens
+            bundles.Add(new ScriptBundle("~/bundles/lightbox").Include(
+                        "~/Scripts/lightbox-2.6.js"));
+            bundles.Add(new StyleBundle("~/Content/lightbox").Include(
+                        "~/Content/lightbox.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",

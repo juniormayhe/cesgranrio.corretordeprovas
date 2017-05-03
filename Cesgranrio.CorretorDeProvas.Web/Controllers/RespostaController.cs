@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using X.PagedList;
-
+using System.Data.Entity.Infrastructure;
 
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
@@ -43,24 +43,25 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_PontuacoesPartialView", vm);
+                return PartialView("_RespostasPartialView", vm);
             }
             return View(vm);
         }
         
         // GET: Questao/Editar/5
-        public async Task<ActionResult> Corrigir(int? id)
+        public async Task<ActionResult> Corrigir(int? id, byte[] respostaControleVersao)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var pontuacao = await _repository.ProcurarAsync(id.Value);
+            
+            var resposta = await _repository.ProcurarAsync(id.Value);
 
-            if (pontuacao == null)
+            if (resposta == null)
                 return HttpNotFound();
 
-            var vm = new RespostaVM(pontuacao);
+            var vm = new RespostaVM(resposta);
             
             
             return View(vm);
@@ -71,11 +72,25 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,RespostaDominioDasRegras,RespostaFidelidadeAoTema,RespostaNivelDeLinguagem,RespostaOrganizacaoIdeias")] RespostaVM vm)
+        public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,RespostaDominioDasRegras,RespostaFidelidadeAoTema,RespostaNivelDeLinguagem,RespostaOrganizacaoIdeias,RespostaControleVersao")] RespostaVM vm, byte[] respostaControleVersao)
         {
+            if (vm == null || vm.RespostaID == 0) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var respostaParaAtualizar = await _repository.ProcurarAsync(vm.RespostaID);
+            //verificar se foi apagado
+            if (respostaParaAtualizar == null)
+            {
+                Resposta respostaApagada = new Resposta();
+                TryUpdateModel(respostaApagada);
+                ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. A resposta foi apagada.");
+                return View(respostaApagada);
+            }
+
             if (ModelState.IsValid)
             {
-                var resposta = new Resposta {
+                respostaParaAtualizar = new Resposta {
                     
                     RespostaID = vm.RespostaID,
                     QuestaoID = vm.QuestaoID,
@@ -90,7 +105,8 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     RespostaOrganizacaoDeIdeias = vm.RespostaGradeOrganizacaoIdeias,
                     
                 };
-                await _repository.AlterarAsync(resposta);
+                
+                await _repository.AlterarAsync(respostaParaAtualizar);
                 return RedirectToAction("CorrigirRespostas");
             }
             

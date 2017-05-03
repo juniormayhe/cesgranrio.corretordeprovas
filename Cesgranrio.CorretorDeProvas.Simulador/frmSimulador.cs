@@ -66,7 +66,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
             
             
             //sempre num único contexto
-            using (var _db = new CorretorDeProvasDbContext("name=CorretorDeProvasDbContext")) {
+            using (var _db = new CorretorDeProvasDbContext()) {
                 
                 #region inicializa    
                 _questaoRepository = new QuestaoRepository(_db);

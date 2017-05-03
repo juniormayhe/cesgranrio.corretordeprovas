@@ -11,7 +11,7 @@
         <tr>
             <th>Questão N&ordm;</th>
             <th>Enunciado</th>
-            <th>Resposta</th>
+            <th>Candidato</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -26,9 +26,13 @@
                     @Html.DisplayFor(modelItem => item.Questao.QuestaoEnunciado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RespostaRespostaCandidato)
+                    @Html.DisplayFor(modelItem => item.Candidato.CandidatoNome)
                 </td>
                 <td>
+                    
+
+                    
+                    <a href="http://lokeshdhakar.com/projects/lightbox2/images/image-1.jpg" data-lightbox="image-1" data-title="Mostrar resposta gerada pelo simulador">Ver imagem</a>
                     @Html.ActionLink("Corrigir", "Corrigir", new { @id = item.RespostaID })
                 </td>
             </tr>
@@ -58,3 +62,6 @@ else
 <!--renderiza os javascripts minimizados -->
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/lightbox")
+@Styles.Render("~/Content/lightbox")
+

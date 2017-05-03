@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\favicon.ico" />
+    <Content Include="Content\lightbox.css" />
     <Content Include="Content\tema\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\tema\light-bootstrap-dashboard.css" />
@@ -198,10 +199,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
+    <Content Include="img\close.png" />
+    <Content Include="img\loading.gif" />
+    <Content Include="img\next.png" />
+    <Content Include="img\prev.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="sass\_variables.sass" />
+    <Content Include="sass\screen.sass" />
+    <Content Include="sass\lightbox.sass" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\corretordeprovas.validate.js" />
     <Content Include="Scripts\corretordeprovas.util.js" />
@@ -210,6 +218,8 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\lightbox-2.6.js" />
+    <Content Include="Scripts\lightbox-2.6.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\tema\bootstrap-checkbox-radio-switch.js" />
@@ -247,9 +257,9 @@
     <Content Include="Views\Questao\Editar.cshtml" />
     <Content Include="Views\Questao\Remover.cshtml" />
     <Content Include="Views\Questao\Adicionar.cshtml" />
-    <Content Include="Views\Pontuacao\SimularRespostas.cshtml" />
-    <Content Include="Views\Pontuacao\CorrigirRespostas.cshtml" />
-    <Content Include="Views\Pontuacao\_PontuacoesPartialView.cshtml" />
+    <Content Include="Views\Resposta\SimularRespostas.cshtml" />
+    <Content Include="Views\Resposta\CorrigirRespostas.cshtml" />
+    <Content Include="Views\Resposta\_RespostasPartialView.cshtml" />
     <Content Include="Views\Shared\_SemRegistros.cshtml" />
   </ItemGroup>
   <ItemGroup>

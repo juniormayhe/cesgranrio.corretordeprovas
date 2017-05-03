@@ -26,5 +26,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
         public virtual Candidato Candidato { get; set; }
         public virtual Questao Questao { get; set; }
         public virtual Usuario Usuario { get; set; }
+
+        [Timestamp]
+        public byte[] RespostaControleVersao { get; set; }
     }
 }

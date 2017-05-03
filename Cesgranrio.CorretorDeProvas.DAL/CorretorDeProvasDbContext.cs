@@ -11,8 +11,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     public partial class CorretorDeProvasDbContext : DbContext, ICorretorDeProvasDbContext
     {
         //"name=CorretorDeProvasDbContext"
-        public CorretorDeProvasDbContext(string nameOrConnectionString)
-            : base(nameOrConnectionString)
+        public CorretorDeProvasDbContext(/*string nameOrConnectionString*/)
+            : base("name=CorretorDeProvasDbContext")
         {
         }
 
@@ -105,7 +105,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL
                 .HasMany(e => e.Resposta)
                 .WithRequired(e => e.Usuario)
                 .WillCascadeOnDelete(false);
-            
+
+            modelBuilder.Entity<Resposta>()
+                .Property(p => p.RespostaControleVersao).IsConcurrencyToken();
+
         }
 
     }

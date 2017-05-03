@@ -19,10 +19,16 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         Task RemoverAsync(int id);
         int Alterar(T item);
         Task AlterarAsync(T item);
+        
+        
         bool Existe(int id);
         Task<bool> ExisteAsync(int id);
         int MaximoID();
         Task<int> MaximoIDAsync();
 
+    }
+    public interface IRepositoryControleVersao<T>
+    {
+        Task AlterarAsync(T item, byte[] respostaControlVersao);
     }
 }

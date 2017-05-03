@@ -12,7 +12,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     /// <summary>
     /// Repositório de respostas
     /// </summary>
-    public class RespostaRepository : IRepository<Resposta>
+    public class RespostaRepository : IRepository<Resposta>, IRepositoryControleVersao<Resposta>
     {
         private ICorretorDeProvasDbContext _context;
         
@@ -107,6 +107,18 @@ namespace Cesgranrio.CorretorDeProvas.DAL
 
 
         /// <summary>
+        /// Alterar resposta com verificacao de versao
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public async Task AlterarAsync(Resposta item, byte[] respostaControlVersao)
+        {
+            _context.Entry(item).OriginalValues["RespostaControleVersao"] = respostaControlVersao;
+            _context.Entry(item).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Alterar resposta
         /// </summary>
         /// <param name="item"></param>
@@ -174,5 +186,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             _context.Database.ExecuteSqlCommand("exec LimparRespostas");
             
         }
+
+        
     }
 }
