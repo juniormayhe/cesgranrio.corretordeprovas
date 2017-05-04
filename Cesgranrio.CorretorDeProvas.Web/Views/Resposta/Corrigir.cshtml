@@ -42,10 +42,10 @@
                                     <h5>Grade de correção</h5>
                                     <ul>
                                         
-                                        <li>Fidelidade ao tema: @Html.Raw(Model.Questao.QuestaoGradeFidelidadeAoTema)</li>
-                                        <li>Organizacao de ideias: @Html.Raw(Model.Questao.QuestaoGradeOrganizacaoIdeias)</li>
-                                        <li>Nivel de Linguagem: @Html.Raw(Model.Questao.QuestaoGradeNivelDeLinguagem)</li>
-                                        <li>Domínio das regras: @Html.Raw(Model.Questao.QuestaoGradeDominioDasRegras)</li>
+                                        <li>Fidelidade ao tema: @Html.Raw(Model.Questao.QuestaoGradeFidelidadeAoTema.ToString("N2"))</li>
+                                        <li>Organizacao de ideias: @Html.Raw(Model.Questao.QuestaoGradeOrganizacaoIdeias.ToString("N2"))</li>
+                                        <li>Nivel de Linguagem: @Html.Raw(Model.Questao.QuestaoGradeNivelDeLinguagem.ToString("N2"))</li>
+                                        <li>Domínio das regras: @Html.Raw(Model.Questao.QuestaoGradeDominioDasRegras.ToString("N2"))</li>
                                         <li><hr /><strong>Total: @Html.Raw(Model.Questao.QuestaoGradeDominioDasRegras + Model.Questao.QuestaoGradeFidelidadeAoTema + Model.Questao.QuestaoGradeNivelDeLinguagem + Model.Questao.QuestaoGradeOrganizacaoIdeias) pontos</strong></li>
                                     </ul>
 
@@ -153,7 +153,7 @@
             <div class="card">
                 
                 <div class="content">
-                    <a href="data:image/jpg;base64,@(Convert.ToBase64String(Convert.FromBase64String(Model.RespostaImagem)))" alt="Imagem da resposta" data-lightbox="image-@i++" data-title="Mostrar resposta gerada pelo simulador"><img src="data:image/jpg;base64,@(Convert.ToBase64String(Convert.FromBase64String(Model.RespostaImagem)))" alt="" width="100%" /></a>
+                    <a href="data:image/jpg;base64,@Convert.ToBase64String(Model.RespostaImagem)" alt="Imagem da resposta" data-lightbox="image-@i++" data-title="Mostrar resposta gerada pelo simulador"><img src="data:image/jpg;base64,@Convert.ToBase64String(Model.RespostaImagem)" alt="" width="100%" /></a>
                     <br />
                     <p class="category text-center">Obs: esta imagem foi gerada num Simulador</p>
                 </div>

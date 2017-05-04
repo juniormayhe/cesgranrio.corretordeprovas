@@ -20,11 +20,10 @@
                     @Html.DisplayFor(modelItem => item.QuestaoNumero)
                 </th>
                 <td>
-                    @Html.DisplayFor(modelItem => item.QuestaoEnunciado)
+                    @Html.ActionLink(item.QuestaoEnunciado, "Editar", new { @id = item.QuestaoID })
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Editar", new { @id = item.QuestaoID }) |
-                    @Html.ActionLink("Remover", "Remover", new { @id = item.QuestaoID })
+                    @Html.ActionLink("Remover", "Remover", new { @id = item.QuestaoID }, htmlAttributes: new { @class = "text-danger" })
                 </td>
             </tr>
         }

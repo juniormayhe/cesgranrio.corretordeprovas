@@ -84,6 +84,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             vm.Usuario = respostaParaAtualizar.Usuario;
             vm.Candidato = respostaParaAtualizar.Candidato;
             vm.RespostaControleVersao = respostaControleVersao;
+            vm.RespostaImagem = respostaParaAtualizar.RespostaImagem;
 
             #region verificar se foi apagado
             if (respostaParaAtualizar == null)

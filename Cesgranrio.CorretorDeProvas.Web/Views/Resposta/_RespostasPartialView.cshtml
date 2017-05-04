@@ -24,15 +24,13 @@
                     @Html.DisplayFor(modelItem => item.Questao.QuestaoNumero)
                 </th>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Questao.QuestaoEnunciado)
+                    @Html.ActionLink(item.Questao.QuestaoEnunciado, "Corrigir", new { @id = item.RespostaID })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Candidato.CandidatoNome)
                 </td>
                 <td>
-                    @Html.ActionLink("Corrigir", "Corrigir", new { @id = item.RespostaID })
-                     | <a href="data:image/jpg;base64,@(Convert.ToBase64String(item.RespostaImagem))" alt="Imagem da resposta" data-lightbox="image-@i++" data-title="Mostrar resposta gerada pelo simulador">Ver imagem</a>
-                    
+                    <a href="data:image/jpg;base64,@(Convert.ToBase64String(item.RespostaImagem))" alt="Imagem da resposta" data-lightbox="image-@i++" data-title="Mostrar resposta gerada pelo simulador">Ver imagem</a>
                 </td>
             </tr>
         }

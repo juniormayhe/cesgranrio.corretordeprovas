@@ -32,7 +32,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
             this.RespostaGradeOrganizacaoIdeias = resposta.RespostaGradeOrganizacaoIdeias;
             //this.RespostaControleVersao = Convert.ToBase64String(resposta.RespostaControleVersao);
             this.RespostaControleVersao = resposta.RespostaControleVersao;
-            this.RespostaImagem = Convert.ToBase64String(resposta.RespostaImagem);
+            this.RespostaImagem = resposta.RespostaImagem;
             this.Questao = resposta.Questao;
             this.Usuario = resposta.Usuario;
             this.Candidato = resposta.Candidato;
@@ -52,7 +52,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
         public int CandidatoID { get; set; }
 
         [Display(Name = "Imagem da prova")]
-        public string RespostaImagem { get; set; }
+        public byte[] RespostaImagem { get; set; }
 
         [Required(ErrorMessage = "Por favor informe os pontos para Fidelidade ao tema")]
         [Display(Name = "Fidelidade ao tema")]

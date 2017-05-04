@@ -126,7 +126,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 
             Questao questaoParaAtualizar = await _repository.ProcurarAsync(vm.QuestaoID);
             vm.QuestaoControleVersao = questaoControleVersao;
-
+            
             #region verificar se foi apagado
             if (questaoParaAtualizar == null)
             {
@@ -159,7 +159,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             }
             catch (DbUpdateConcurrencyException dbex)
             {
-                ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças pois outro professor acabou de modificar esta resposta! Tente mais tarde.");
+                ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças pois outro elaborador acabou de modificar esta questão! Tente mais tarde.");
             }
             catch (RetryLimitExceededException dex)
             {
