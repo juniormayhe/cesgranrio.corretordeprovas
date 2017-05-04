@@ -120,6 +120,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                             Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoNome);
                             //adiciona uma resposta com a imagem
                             Resposta resposta = CriarResposta(elaborador, questao, candidato, img);
+                            
                             _repostaRepository.Adicionar(resposta);
 
                             //mostra ultima imagem gerada
@@ -204,7 +205,10 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 
                 //por falta de tempo vamos deixar a grade fixa "1" o ideal é ser outra tabela
                 RespostaGradeEscolhida = 1,
-                RespostaNota = Util.GeraNota(0, questao.QuestaoGradeFidelidadeAoTema)
+
+                /*o professor é quem dará a nota*/
+                RespostaNota = 0,
+                RespostaNotaConcluida = false
             };
             
             
