@@ -83,6 +83,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             vm.Questao = respostaParaAtualizar.Questao;
             vm.Usuario = respostaParaAtualizar.Usuario;
             vm.Candidato = respostaParaAtualizar.Candidato;
+            vm.RespostaControleVersao = respostaControleVersao;
 
             //verificar se foi apagado
             if (respostaParaAtualizar == null)
@@ -118,6 +119,15 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 ModelState.AddModelError(string.Empty, $"O intervalo válido para Organização de ideias é {0,00} a {vm.Questao.QuestaoGradeOrganizacaoIdeias}");
                 return View(vm);
             }
+            //a soma dos ranges deve dar o total esperado de pontos
+            decimal totalGrade = vm.Questao.QuestaoGradeDominioDasRegras + vm.Questao.QuestaoGradeFidelidadeAoTema + vm.Questao.QuestaoGradeNivelDeLinguagem + vm.Questao.QuestaoGradeOrganizacaoIdeias;
+            decimal totalAtual = vm.RespostaGradeDominioDasRegras + vm.RespostaGradeFidelidadeAoTema + vm.RespostaGradeNivelDeLinguagem + vm.RespostaGradeOrganizacaoIdeias;
+            if (totalAtual < totalGrade) {
+                ModelState.AddModelError(string.Empty, $"O total de pontos deve ser {totalGrade}. Até agora o total de pontos é {totalAtual}. Faltam {totalGrade-totalAtual} pontos.");
+                return View(vm);
+            }
+
+            
             #endregion
 
             try
