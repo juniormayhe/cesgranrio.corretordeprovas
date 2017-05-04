@@ -183,12 +183,14 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <param name="usuarioCPF"></param>
         /// <param name="usuarioSenha"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<string>> Autenticar(string usuarioCPF, string usuarioSenha)
+        public async Task<Usuario> Autenticar(string usuarioCPF, string usuarioSenha)
         {
+            
             ObjectContext o = ((IObjectContextAdapter)_context).ObjectContext;
             
-            var lista = await _context.Database.SqlQuery<string>("EXEC Autenticar {0}, {1}", usuarioCPF, usuarioSenha).ToListAsync();
-            return lista.AsEnumerable();
+            var lista = await _context.Database.SqlQuery<Usuario>("EXEC Autenticar {0}, {1}", usuarioCPF, usuarioSenha).ToListAsync();
+            return lista.FirstOrDefault();
+            
             //return await Task.Run(() => o.ExecuteFunction<string>("Autenticar", new ObjectParameter("UsuarioCPF", usuarioCPF), new ObjectParameter("UsuarioSenha", usuarioSenha)));
         }
 

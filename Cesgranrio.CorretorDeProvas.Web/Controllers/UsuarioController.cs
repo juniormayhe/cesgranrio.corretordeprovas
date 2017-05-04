@@ -76,24 +76,23 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     {
                         
                         var usuario = await _repository.Autenticar(lvm.CPF.RetirarFormato(), lvm.Senha.ConverterParaMD5());
-                        List<string> logins = usuario.ToList();
-
-                        bool autenticou = logins != null && logins.FirstOrDefault() == "1";
-                        if (autenticou)
-                        {
-                            //memoriza cpf que se autenticou para mostrar em outras áreas do site
-                            Session.Gravar<string>("CPF", lvm.CPF);
-                            return this.RedirectToLocal(returnUrl);
-                        }
-                        else
-                        {
+                        if (usuario==null)
                             ModelState.AddModelError(string.Empty, "Usuário ou senha inválida.");
-                            
+                        else { 
+                            //memoriza dados do usuario
+                            Session.Gravar<Usuario>("USUARIO", usuario);
+
+                            if (string.IsNullOrEmpty(returnUrl))
+                                if (usuario.GrupoID == (int)GrupoAcesso.ELABORADOR)
+                                    return RedirectToAction("Listar", "Questao");
+                                else
+                                    return RedirectToAction("CorrigirRespostas", "Resposta");
+                            else
+                                return RedirectToLocal(returnUrl);
                         }
                     }
                     else {
-                        ModelState.AddModelError(string.Empty, "CPF é inválido.");
-                        
+                        ModelState.AddModelError(string.Empty, "Usuário é inválido.");
                     }
                 }
             }
@@ -116,7 +115,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         {
             try
             {
-                bool autenticou = Session.Ler<string>("CPF")!=null; 
+                bool autenticou = Session.Ler<Usuario>("USUARIO")!=null; 
                 if (autenticou)
                 {
                     Session.Abandon();

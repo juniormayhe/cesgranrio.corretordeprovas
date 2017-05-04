@@ -47,7 +47,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         public async Task<ActionResult> CorrigirRespostas(int? page = 1)
         {
             _logger.LogInformation($"****** ");
-            _logger.LogInformation($"{Session.Ler<string>("CPF")} está visualizando a página {page}");
+            _logger.LogInformation($"{Session.Ler<Usuario>("USUARIO").UsuarioCPF} está visualizando a página {page}");
             _logger.LogInformation($"****** ");
             var lista = await _repository.ListarAsync();
             
@@ -66,7 +66,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         public async Task<ActionResult> Corrigir(int? id)
         {
             _logger.LogInformation($"****** ");
-            _logger.LogInformation($"{Session.Ler<string>("CPF")} está reservando para correção a resposta #{id}");
+            _logger.LogInformation($"{Session.Ler<Usuario>("USUARIO").UsuarioCPF} está reservando para correção a resposta #{id}");
             _logger.LogInformation($"****** ");
             if (id == null)
             {
@@ -92,7 +92,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,GradeEscolhida,RespostaGradeEscolhida,RespostaNota")] RespostaVM vm, byte[] respostaControleVersao)
         {
             _logger.LogInformation($"****** ");
-            _logger.LogInformation($"{Session.Ler<string>("CPF")} está tentando atualizar a resposta #{vm.RespostaID}");
+            _logger.LogInformation($"{Session.Ler<Usuario>("USUARIO").UsuarioCPF} está tentando atualizar a resposta #{vm.RespostaID}");
             _logger.LogInformation($"****** ");
             if (vm == null || vm.RespostaID == 0) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -156,7 +156,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                         respostaParaAtualizar.RespostaNotaConcluida = true;
                         await _repository.AlterarAsync(respostaParaAtualizar, respostaControleVersao);
                         _logger.LogInformation($"****** ");
-                        _logger.LogInformation($"****** {Session.Ler<string>("CPF")} corrigiu a resposta #{vm.RespostaID} com nota {respostaParaAtualizar.RespostaNota}");
+                        _logger.LogInformation($"****** {Session.Ler<Usuario>("USUARIO").UsuarioCPF} corrigiu a resposta #{vm.RespostaID} com nota {respostaParaAtualizar.RespostaNota}");
                         _logger.LogInformation($"****** ");
                         //levamos para corrigir outra prova de modo aleatorio
                         try

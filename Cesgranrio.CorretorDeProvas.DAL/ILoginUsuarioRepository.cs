@@ -10,7 +10,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     public interface ILoginUsuarioRepository<T> : IRepository<T>
     {
         
-        Task<IEnumerable<string>> Autenticar(string v1, string v2);
+        Task<Usuario> Autenticar(string v1, string v2);
         
     }
 }

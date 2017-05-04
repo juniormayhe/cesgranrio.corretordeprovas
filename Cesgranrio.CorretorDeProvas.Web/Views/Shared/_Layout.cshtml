@@ -1,5 +1,5 @@
 ﻿@{
-    var cpf = Session.Ler<string>("CPF");
+    Usuario usuario = Session.Ler<Usuario>("USUARIO");
     
 }
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
                     </li>
                     
 
-                    @if (cpf == null)
+                    @if (usuario == null)
                     {
                         <li class="@ViewContext.ObterEstiloMenuAtivo("Usuario")">
                             <a href="/Usuario/Login">
@@ -60,7 +60,7 @@
                     else
                     {
                         <li>
-                            <a href="javascript:" onclick="$('#sessao').submit();" title="Terminar sessão de @Html.Raw(cpf.FormatarCPF())">
+                            <a href="javascript:" onclick="$('#sessao').submit();" title="Terminar sessão de @Html.Raw(usuario.UsuarioCPF.FormatarCPF())">
                                 <i class="glyphicon glyphicon-off"></i>
                                 <p>Sair</p>
                             </a>
@@ -93,14 +93,14 @@
                         @Html.AntiForgeryToken();
 
                         <ul class="nav navbar-nav navbar-right">
-                        @if (cpf == null)
+                        @if (usuario == null)
                         {
                             <li>@Html.ActionLink("Entrar", "Login", "Usuario")</li>
                         }
                         else
                         {
                             <li>
-                                <span>Bem-vindo <strong class="texto">@Html.Raw(cpf.FormatarCPF())</strong></span>
+                                <span>Bem-vindo <strong class="texto">@Html.Raw(usuario.UsuarioCPF.FormatarCPF())</strong></span>
                             </li>
                             <li>
                                 <a href="javascript:" onclick="$('#sessao2').submit();">Sair</a>

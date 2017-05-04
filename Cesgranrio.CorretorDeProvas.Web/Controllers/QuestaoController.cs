@@ -17,6 +17,7 @@ using X.PagedList;
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
     [VerificarAcessoFilter]
+    [SomenteElaboradorFilter]
     public class QuestaoController : MainController
     {
         private IQuestaoRepository _repository;
