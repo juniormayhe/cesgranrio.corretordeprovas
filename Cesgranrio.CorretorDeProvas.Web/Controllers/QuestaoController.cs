@@ -59,6 +59,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Adicionar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm)
         {
+            
             if (ModelState.IsValid)
             {
                 bool numeroExiste = await _repository.ExisteAsync(vm.QuestaoNumero);
@@ -157,33 +158,15 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. Por favor verifique os dados informados.");
                 }
             }
-            catch (DbUpdateConcurrencyException dbex)
+            catch (DbUpdateConcurrencyException /*dbex*/)
             {
                 ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças pois outro elaborador acabou de modificar esta questão! Tente mais tarde.");
             }
-            catch (RetryLimitExceededException dex)
+            catch (RetryLimitExceededException /*dex*/)
             {
                 ModelState.AddModelError("", "Não foi possível salvar os dados. Entre em contato com o administrator.");
             }
-
-
-            //if (ModelState.IsValid)
-            //{
-            //    var questao = new Questao {
-            //        QuestaoID = vm.QuestaoID,
-            //        QuestaoNumero = vm.QuestaoNumero,
-            //        QuestaoEnunciado = vm.QuestaoEnunciado,
-            //        QuestaoGradeDominioDasRegras = vm.QuestaoGradeDominioDasRegras,
-            //        QuestaoGradeFidelidadeAoTema = vm.QuestaoGradeFidelidadeAoTema,
-            //        QuestaoGradeNivelDeLinguagem = vm.QuestaoGradeNivelDeLinguagem,
-            //        QuestaoGradeOrganizacaoIdeias = vm.QuestaoGradeOrganizacaoIdeias,
-            //        Resposta = vm.Resposta
-            //    };
-            //    await _repository.AlterarAsync(questao);
-
-            //    return RedirectToAction("Listar");
-            //}
-
+            
             return View(vm);
         }
 

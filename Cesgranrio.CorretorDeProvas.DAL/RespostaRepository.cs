@@ -44,10 +44,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AdicionarAsync(Resposta item)
+        public async Task<int> AdicionarAsync(Resposta item)
         {
             _context.Resposta.Add(item);
-            await _context.SaveChangesAsync();
+            int r = await _context.SaveChangesAsync();
+            _context.Entry(item).Reload();
+            return r;
         }
 
         /// <summary>

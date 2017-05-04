@@ -148,10 +148,10 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. Por favor verifique os dados informados.");
                 }
             }
-            catch (DbUpdateConcurrencyException dbex) {
+            catch (DbUpdateConcurrencyException /*dbex*/) {
                 ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças pois outro professor acabou de modificar esta resposta! Tente mais tarde.");
             }
-            catch (RetryLimitExceededException dex)
+            catch (RetryLimitExceededException /*dex*/)
             {
                 ModelState.AddModelError("", "Não foi possível salvar os dados. Entre em contato com o administrator.");
             }

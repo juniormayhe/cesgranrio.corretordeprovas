@@ -45,10 +45,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AdicionarAsync(Candidato item)
+        public async Task<int> AdicionarAsync(Candidato item)
         {
             _context.Candidato.Add(item);
-            await _context.SaveChangesAsync();
+            int r = await _context.SaveChangesAsync();
+            _context.Entry(item).Reload();
+            return r;
         }
 
         /// <summary>

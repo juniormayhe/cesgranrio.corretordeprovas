@@ -197,7 +197,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             throw new NotImplementedException();
         }
 
-        Task IRepository<Usuario>.AdicionarAsync(Usuario item)
+        Task<int> IRepository<Usuario>.AdicionarAsync(Usuario item)
         {
             throw new NotImplementedException();
         }

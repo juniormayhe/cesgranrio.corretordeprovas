@@ -10,7 +10,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     public interface IRepository<T>
     {
         int Adicionar(T item);
-        Task AdicionarAsync(T item);
+        Task<int> AdicionarAsync(T item);
 
         IEnumerable<T> Listar();
         Task<IEnumerable<T>> ListarAsync();

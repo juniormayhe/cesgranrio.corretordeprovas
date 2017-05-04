@@ -15,7 +15,7 @@ var somatorio = function () {
     catch (err) { }
 };
 $(document).ready(function () {
-
+    $('.grade').each(function () { if ($(this).val() == '') $(this).val('0,00');});
     $('.grade').on('change', function () {
         try {
             var valor = $(this).val();
@@ -23,7 +23,7 @@ $(document).ready(function () {
                 valor = parseFloat(valor.replace(',', '.'));
             }
             if (isNaN(valor)) {
-                valor = '';
+                valor = '0,00';
             }
             else {
                 valor = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, useGrouping: false }).format(valor);

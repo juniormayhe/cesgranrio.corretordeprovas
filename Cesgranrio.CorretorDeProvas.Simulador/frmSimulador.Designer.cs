@@ -72,7 +72,7 @@
             this.btnGerar.TabIndex = 2;
             this.btnGerar.Text = "Gerar respostas";
             this.btnGerar.UseVisualStyleBackColor = false;
-            this.btnGerar.Click += new System.EventHandler(this.btnGerar_Click);
+            this.btnGerar.Click += new System.EventHandler(this.BtnGerar_Click);
             // 
             // progressBar1
             // 

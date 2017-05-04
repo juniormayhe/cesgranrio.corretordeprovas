@@ -44,12 +44,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AdicionarAsync(Questao item)
+        public async Task<int> AdicionarAsync(Questao item)
         {
-            
             _context.Questao.Add(item);
-            await _context.SaveChangesAsync();
-            
+            int r = await _context.SaveChangesAsync();
+            _context.Entry(item).Reload();
+            return r;
         }
 
         /// <summary>
@@ -61,6 +61,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         {
             _context.Questao.Add(item);
             return _context.SaveChanges();
+            
         }
 
         /// <summary>
@@ -111,7 +112,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// Alterar questão
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="original"></param>
         /// <returns></returns>
         public async Task AlterarAsync(Questao item)
         {

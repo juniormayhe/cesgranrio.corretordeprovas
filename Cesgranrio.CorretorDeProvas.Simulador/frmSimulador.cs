@@ -40,7 +40,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// </summary>
         /// <param name="indice"></param>
         /// <param name="mensagem"></param>
-        private void logarSaida(int indice, string mensagem) {
+        private void LogarSaida(int indice, string mensagem) {
             if (lsbSaida.Items.Count > 10000) {
                 lsbSaida.Items.Add("Descartando entradas anteriores...");
                 lsbSaida.Items.Clear();
@@ -60,7 +60,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// <summary>
         /// gera imagens de respostas
         /// </summary>
-        private void gerarImagens()
+        private void GerarImagens()
         {
             Invoke(new Action(() => { btnGerar.Text = "Aguarde..."; }));
             
@@ -121,13 +121,13 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                             //gera uma imagem
                             Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoNome);
                             //adiciona uma resposta com a imagem
-                            Resposta resposta = criarResposta(elaborador, questao, candidato, img);
+                            Resposta resposta = CriarResposta(elaborador, questao, candidato, img);
                             _repostaRepository.Adicionar(resposta);
 
                             //mostra ultima imagem gerada
                             Invoke(new Action(() => { pictureBox1.Image = img; }));
                             
-                            logarSaida(contaResposta++, $"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
+                            LogarSaida(contaResposta++, $"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
                             System.Diagnostics.Trace.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
                             
                         }
@@ -157,7 +157,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                     Task.WaitAll(grupo.ToArray());
 
                 }
-                atualizaProgresso(i);
+                AtualizaProgresso(i);
                 
                 _questaoRepository = null;
                 _repostaRepository = null;
@@ -174,7 +174,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// atualiza progresso geral
         /// </summary>
         /// <param name="i"></param>
-        private void atualizaProgresso(int i) {
+        private void AtualizaProgresso(int i) {
             Invoke(new Action(() => { progressBar1.Value = i; lblProgresso.Text = $"Progresso {(i * 100 / TOTAL_CANDIDATOS)}%"; }));
         }
         
@@ -186,7 +186,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// <param name="candidato"></param>
         /// <param name="img"></param>
         /// <returns></returns>
-        private static Resposta criarResposta(Usuario elaborador, Questao questao, Candidato candidato, Image img)
+        private static Resposta CriarResposta(Usuario elaborador, Questao questao, Candidato candidato, Image img)
         {
             var resposta = new Resposta
             {
@@ -227,9 +227,9 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
             return resposta;
         }
 
-        private void btnGerar_Click(object sender, EventArgs e)
+        private void BtnGerar_Click(object sender, EventArgs e)
         {
-            gerarImagens();
+            GerarImagens();
          
         }
     }
