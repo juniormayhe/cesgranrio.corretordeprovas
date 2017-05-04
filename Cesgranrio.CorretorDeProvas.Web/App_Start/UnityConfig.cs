@@ -3,6 +3,8 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 using Cesgranrio.CorretorDeProvas.DAL;
 using Cesgranrio.CorretorDeProvas.DAL.Model;
+using Microsoft.Extensions.Logging;
+using Cesgranrio.CorretorDeProvas.Web.Controllers;
 
 namespace Cesgranrio.CorretorDeProvas.Web
 {
@@ -16,7 +18,6 @@ namespace Cesgranrio.CorretorDeProvas.Web
             //injecao de dependencias builtin
             container.RegisterType<ICorretorDeProvasDbContext, CorretorDeProvasDbContext>(new PerThreadLifetimeManager(), new InjectionConstructor());
             container.RegisterType<IQuestaoRepository, QuestaoRepository>();
-            //container.RegisterType<IRepository<Questao>, QuestaoRepository>();
             container.RegisterType<IRepository<Resposta>, RespostaRepository>();
             container.RegisterType<ILoginUsuarioRepository<Usuario>, UsuarioRepository>();
 

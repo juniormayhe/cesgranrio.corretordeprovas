@@ -12,6 +12,8 @@ using System.Web;
 using System.Web.Mvc;
 using X.PagedList;
 using System.Data.Entity.Infrastructure;
+using Microsoft.Extensions.Logging;
+using Cesgranrio.CorretorDeProvas.Util;
 
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
@@ -19,12 +21,22 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
     public class RespostaController : MainController
     {
         private IRepository<Resposta> _repository;
+        static ILogger _logger;
 
         const int pageSize = 5;
 
         public RespostaController(IRepository<Resposta> repository)
         {
             _repository = repository;
+
+
+            ILoggerFactory loggerFactory = new LoggerFactory()
+                .AddConsole()
+                .AddDebug();
+            _logger = loggerFactory.CreateLogger<RespostaController>();
+            
+            
+            
         }
 
         /// <summary>
@@ -34,7 +46,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         /// <returns></returns>
         public async Task<ActionResult> CorrigirRespostas(int? page = 1)
         {
-            //TODO: RANDOMIZAR APRESENTACAO DA LISTA
+            _logger.LogInformation($"****** ");
+            _logger.LogInformation($"{Session.Ler<string>("CPF")} está visualizando a página {page}");
+            _logger.LogInformation($"****** ");
             var lista = await _repository.ListarAsync();
             
             IPagedList<Resposta> paginaComRespostas = lista.OrderBy(p => p.RespostaID).ToPagedList(page ?? 1, pageSize);
@@ -51,6 +65,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // GET: Questao/Editar/5
         public async Task<ActionResult> Corrigir(int? id)
         {
+            _logger.LogInformation($"****** ");
+            _logger.LogInformation($"{Session.Ler<string>("CPF")} está reservando para correção a resposta #{id}");
+            _logger.LogInformation($"****** ");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -74,6 +91,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,GradeEscolhida,RespostaGradeEscolhida,RespostaNota")] RespostaVM vm, byte[] respostaControleVersao)
         {
+            _logger.LogInformation($"****** ");
+            _logger.LogInformation($"{Session.Ler<string>("CPF")} está tentando atualizar a resposta #{vm.RespostaID}");
+            _logger.LogInformation($"****** ");
             if (vm == null || vm.RespostaID == 0) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -99,7 +119,10 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             #endregion
 
             #region validação de negócio
-
+            if (!(vm.RespostaGradeEscolhida >= 1 && vm.RespostaGradeEscolhida <= 4)) {
+                ModelState.AddModelError(string.Empty, $"Selecione a grade desejada");
+                return View(vm);
+            }
             if (vm.RespostaGradeEscolhida == 1 && !(vm.RespostaNota >= 0 && vm.RespostaNota <= vm.Questao.QuestaoGradeFidelidadeAoTema))
             {
                 ModelState.AddModelError(string.Empty, $"O intervalo válido para Fidelidade Ao Tema é {0,00} a {vm.Questao.QuestaoGradeFidelidadeAoTema}");
@@ -132,6 +155,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     {
                         respostaParaAtualizar.RespostaNotaConcluida = true;
                         await _repository.AlterarAsync(respostaParaAtualizar, respostaControleVersao);
+                        _logger.LogInformation($"****** ");
+                        _logger.LogInformation($"****** {Session.Ler<string>("CPF")} corrigiu a resposta #{vm.RespostaID} com nota {respostaParaAtualizar.RespostaNota}");
+                        _logger.LogInformation($"****** ");
                         //levamos para corrigir outra prova de modo aleatorio
                         try
                         {
