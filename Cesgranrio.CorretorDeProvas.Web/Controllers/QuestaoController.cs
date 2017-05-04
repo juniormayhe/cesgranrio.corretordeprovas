@@ -5,6 +5,7 @@ using Cesgranrio.CorretorDeProvas.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -116,25 +117,73 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Editar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm)
+        public async Task<ActionResult> Editar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm, byte[] questaoControleVersao)
         {
-            if (ModelState.IsValid)
+            if (vm == null || vm.QuestaoID == 0)
             {
-                var questao = new Questao {
-                    QuestaoID = vm.QuestaoID,
-                    QuestaoNumero = vm.QuestaoNumero,
-                    QuestaoEnunciado = vm.QuestaoEnunciado,
-                    QuestaoGradeDominioDasRegras = vm.QuestaoGradeDominioDasRegras,
-                    QuestaoGradeFidelidadeAoTema = vm.QuestaoGradeFidelidadeAoTema,
-                    QuestaoGradeNivelDeLinguagem = vm.QuestaoGradeNivelDeLinguagem,
-                    QuestaoGradeOrganizacaoIdeias = vm.QuestaoGradeOrganizacaoIdeias,
-                    Resposta = vm.Resposta
-                };
-                await _repository.AlterarAsync(questao);
-                
-                return RedirectToAction("Listar");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
+            Questao questaoParaAtualizar = await _repository.ProcurarAsync(vm.QuestaoID);
+            vm.QuestaoControleVersao = questaoControleVersao;
+
+            #region verificar se foi apagado
+            if (questaoParaAtualizar == null)
+            {
+                Questao questaoApagada = new Questao();
+                TryUpdateModel(questaoApagada);
+                ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. A questão foi apagada.");
+                return View(vm);
+            }
+            #endregion
+
+            try
+            {
+                if (TryUpdateModel(questaoParaAtualizar, new string[] { "QuestaoID", "QuestaoNumero", "QuestaoEnunciado", "QuestaoGradeFidelidadeAoTema", "QuestaoGradeOrganizacaoIdeias", "QuestaoGradeNivelDeLinguagem", "QuestaoGradeDominioDasRegras", "QuestaoControleVersao" }))
+                {
+
+                    if (ModelState.IsValid)
+                    {
+                        await _repository.AlterarAsync(questaoParaAtualizar, questaoControleVersao);
+                        return RedirectToAction("Listar");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. Por favor verifique os dados informados.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. Por favor verifique os dados informados.");
+                }
+            }
+            catch (DbUpdateConcurrencyException dbex)
+            {
+                ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças pois outro professor acabou de modificar esta resposta! Tente mais tarde.");
+            }
+            catch (RetryLimitExceededException dex)
+            {
+                ModelState.AddModelError("", "Não foi possível salvar os dados. Entre em contato com o administrator.");
+            }
+
+
+            //if (ModelState.IsValid)
+            //{
+            //    var questao = new Questao {
+            //        QuestaoID = vm.QuestaoID,
+            //        QuestaoNumero = vm.QuestaoNumero,
+            //        QuestaoEnunciado = vm.QuestaoEnunciado,
+            //        QuestaoGradeDominioDasRegras = vm.QuestaoGradeDominioDasRegras,
+            //        QuestaoGradeFidelidadeAoTema = vm.QuestaoGradeFidelidadeAoTema,
+            //        QuestaoGradeNivelDeLinguagem = vm.QuestaoGradeNivelDeLinguagem,
+            //        QuestaoGradeOrganizacaoIdeias = vm.QuestaoGradeOrganizacaoIdeias,
+            //        Resposta = vm.Resposta
+            //    };
+            //    await _repository.AlterarAsync(questao);
+
+            //    return RedirectToAction("Listar");
+            //}
+
             return View(vm);
         }
 

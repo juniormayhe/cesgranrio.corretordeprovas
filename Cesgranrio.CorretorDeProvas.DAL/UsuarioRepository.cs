@@ -242,7 +242,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             throw new NotImplementedException();
         }
 
-        Task IRepository<Usuario>.AlterarAsync(Usuario item, byte[] respostaControleVersao)
+        Task IRepository<Usuario>.AlterarAsync(Usuario item, byte[] controleVersao)
         {
             throw new NotImplementedException();
         }

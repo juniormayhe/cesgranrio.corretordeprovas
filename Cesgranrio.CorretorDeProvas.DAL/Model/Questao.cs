@@ -34,5 +34,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Resposta> Resposta { get; set; }
+
+        [Timestamp]
+        public byte[] QuestaoControleVersao { get; set; }
+
     }
 }

@@ -29,6 +29,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
             this.QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema;
             this.QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem;
             this.QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias;
+            this.QuestaoControleVersao = questao.QuestaoControleVersao;
             this.Resposta = questao.Resposta;
         }
 
@@ -72,6 +73,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
         public decimal QuestaoGradeDominioDasRegras { get; set; }
 
         public virtual ICollection<Resposta> Resposta { get; set; }
+
+        [Timestamp]
+        public byte[] QuestaoControleVersao { get; set; }
 
         /// <summary>
         /// Lista de questões cadastradas pelo elaborador

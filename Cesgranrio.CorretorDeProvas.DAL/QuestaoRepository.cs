@@ -117,6 +117,21 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         {
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            _context.Entry(item).Reload();
+        }
+
+        /// <summary>
+        /// Alterar questão
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="controleVersao"></param>
+        /// <returns></returns>
+        public async Task AlterarAsync(Questao item, byte[] controleVersao)
+        {
+            _context.Entry(item).OriginalValues["QuestaoControleVersao"] = controleVersao;
+            _context.Entry(item).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            _context.Entry(item).Reload();
         }
 
         /// <summary>
@@ -188,9 +203,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             return _context.Questao.FirstOrDefaultAsync(t => t.QuestaoNumero == numero);
         }
 
-        public Task AlterarAsync(Questao item, byte[] respostaControleVersao)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

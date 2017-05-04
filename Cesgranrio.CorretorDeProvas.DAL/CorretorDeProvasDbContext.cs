@@ -109,6 +109,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             modelBuilder.Entity<Resposta>()
                 .Property(p => p.RespostaControleVersao).IsConcurrencyToken();
 
+            modelBuilder.Entity<Questao>()
+                .Property(p => p.QuestaoControleVersao).IsConcurrencyToken();
         }
 
         //public System.Data.Entity.DbSet<Cesgranrio.CorretorDeProvas.Web.Models.RespostaVM> RespostaVMs { get; set; }

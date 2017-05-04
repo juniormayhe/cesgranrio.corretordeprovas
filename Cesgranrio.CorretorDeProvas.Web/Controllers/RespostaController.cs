@@ -85,7 +85,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             vm.Candidato = respostaParaAtualizar.Candidato;
             vm.RespostaControleVersao = respostaControleVersao;
 
-            //verificar se foi apagado
+            #region verificar se foi apagado
             if (respostaParaAtualizar == null)
             {
                 Resposta respostaApagada = new Resposta();
@@ -93,9 +93,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. A resposta foi apagada.");
                 return View(vm);
             }
+            #endregion
 
             #region validação de negócio
-            
             bool rangeNotaParaDominioÉValido = vm.RespostaGradeDominioDasRegras >= 0 &&  vm.RespostaGradeDominioDasRegras <= vm.Questao.QuestaoGradeDominioDasRegras;
             bool rangeNotaParaFidelidadeÉValido = vm.RespostaGradeFidelidadeAoTema >= 0 && vm.RespostaGradeFidelidadeAoTema <= vm.Questao.QuestaoGradeFidelidadeAoTema;
             bool rangeNotaParaLinguagemÉValido = vm.RespostaGradeNivelDeLinguagem >= 0 && vm.RespostaGradeNivelDeLinguagem <= vm.Questao.QuestaoGradeNivelDeLinguagem;
@@ -126,8 +126,6 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 ModelState.AddModelError(string.Empty, $"O total de pontos deve ser {totalGrade}. Até agora o total de pontos é {totalAtual}. Faltam {totalGrade-totalAtual} pontos.");
                 return View(vm);
             }
-
-            
             #endregion
 
             try
@@ -135,17 +133,25 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 if (TryUpdateModel(respostaParaAtualizar, new string[] { "RespostaID", "UsuarioID", "CandidatoID", "QuestaoID", "RespostaGradeFidelidadeAoTema", "RespostaGradeOrganizacaoIdeias", "RespostaGradeNivelDeLinguagem", "RespostaGradeDominioDasRegras", "RespostaControleVersao" }))
                 {
 
-                    await _repository.AlterarAsync(respostaParaAtualizar, respostaControleVersao);
-                    return RedirectToAction("CorrigirRespostas");
+                    if (ModelState.IsValid)
+                    {
+                        await _repository.AlterarAsync(respostaParaAtualizar, respostaControleVersao);
+                        return RedirectToAction("CorrigirRespostas");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. Por favor verifique os dados informados.");
+                    }
+                }
+                else {
+                    ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. Por favor verifique os dados informados.");
                 }
             }
             catch (DbUpdateConcurrencyException dbex) {
                 ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças pois outro professor acabou de modificar esta resposta! Tente mais tarde.");
-
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch (RetryLimitExceededException dex)
             {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Não foi possível salvar os dados. Entre em contato com o administrator.");
             }
             

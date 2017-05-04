@@ -12,7 +12,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     /// <summary>
     /// Repositório de respostas
     /// </summary>
-    public class RespostaRepository : IRepository<Resposta>, IRepositoryControleVersao<Resposta>
+    public class RespostaRepository : IRepository<Resposta>
     {
         private ICorretorDeProvasDbContext _context;
         
@@ -111,9 +111,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AlterarAsync(Resposta item, byte[] respostaControleVersao)
+        public async Task AlterarAsync(Resposta item, byte[] controleVersao)
         {
-            _context.Entry(item).OriginalValues["RespostaControleVersao"] = respostaControleVersao;
+            _context.Entry(item).OriginalValues["RespostaControleVersao"] = controleVersao;
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             _context.Entry(item).Reload();

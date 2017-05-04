@@ -52,18 +52,6 @@
     <Compile Include="CorretorDeProvasDbContext.cs" />
     <Compile Include="ICorretorDeProvasDbContext.cs" />
     <Compile Include="ILoginUsuarioRepository.cs" />
-    <Compile Include="Migrations\201705022332066_initialcreate.cs" />
-    <Compile Include="Migrations\201705022332066_initialcreate.Designer.cs">
-      <DependentUpon>201705022332066_initialcreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705022333342_RespostaControleVersao.cs" />
-    <Compile Include="Migrations\201705022333342_RespostaControleVersao.Designer.cs">
-      <DependentUpon>201705022333342_RespostaControleVersao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705031848423_Resposta.cs" />
-    <Compile Include="Migrations\201705031848423_Resposta.Designer.cs">
-      <DependentUpon>201705031848423_Resposta.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Candidato.cs" />
     <Compile Include="Model\Grupo.cs" />
@@ -83,17 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705022332066_initialcreate.resx">
-      <DependentUpon>201705022332066_initialcreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705022333342_RespostaControleVersao.resx">
-      <DependentUpon>201705022333342_RespostaControleVersao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705031848423_Resposta.resx">
-      <DependentUpon>201705031848423_Resposta.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
