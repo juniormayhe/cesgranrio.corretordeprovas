@@ -26,16 +26,14 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
             this.QuestaoID = resposta.QuestaoID;
             this.UsuarioID= resposta.UsuarioID;
             this.CandidatoID = resposta.CandidatoID;
-            this.RespostaGradeDominioDasRegras = resposta.RespostaGradeDominioDasRegras;
-            this.RespostaGradeFidelidadeAoTema = resposta.RespostaGradeFidelidadeAoTema;
-            this.RespostaGradeNivelDeLinguagem = resposta.RespostaGradeNivelDeLinguagem;
-            this.RespostaGradeOrganizacaoIdeias = resposta.RespostaGradeOrganizacaoIdeias;
-            //this.RespostaControleVersao = Convert.ToBase64String(resposta.RespostaControleVersao);
+            this.RespostaGradeEscolhida = resposta.RespostaGradeEscolhida;
+            this.RespostaNota = resposta.RespostaNota;
             this.RespostaControleVersao = resposta.RespostaControleVersao;
             this.RespostaImagem = resposta.RespostaImagem;
             this.Questao = resposta.Questao;
             this.Usuario = resposta.Usuario;
             this.Candidato = resposta.Candidato;
+            this.RespostaNotaConcluida = resposta.RespostaNotaConcluida;
         }
 
         [Key]
@@ -54,30 +52,18 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
         [Display(Name = "Imagem da prova")]
         public byte[] RespostaImagem { get; set; }
 
+        [Required]
+        public int GradeEscolhida { get; set; }
+
         //[Required(ErrorMessage = "Por favor informe os pontos para Fidelidade ao tema")]
-        [Display(Name = "Fidelidade ao tema")]
-        [Range(0.00, 999.99, ErrorMessage ="Os pontos devem estar entre 0,01 e 999,99")]
-        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal RespostaGradeFidelidadeAoTema { get; set; }
+        [Display(Name = "Nota da prova")]
+        //[Range(0.00, 10.00, ErrorMessage ="Os pontos devem estar entre 0,00 a 10,00 conforme grade escolhida")]
+        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número válido")]
+        public decimal RespostaNota { get; set; }
 
-        //[Required(ErrorMessage = "Por favor informe os pontos para Organização de ideias")]
-        [Display(Name = "Organização de ideias")]
-        [Range(0.00, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
-        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal RespostaGradeOrganizacaoIdeias { get; set; }
+        public int RespostaGradeEscolhida { get; set; }
 
-        //[Required(ErrorMessage = "Por favor informe os pontos para Nível de Linguagem")]
-        [Display(Name = "Nível de Linguagem")]
-        [Range(0.00, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
-        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal RespostaGradeNivelDeLinguagem { get; set; }
 
-        //[Required(ErrorMessage = "Por favor informe os pontos para Domínio das Regras")]
-        [Display(Name = "Domínio das Regras")]
-        [Range(0.00, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
-        [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
-        public decimal RespostaGradeDominioDasRegras { get; set; }
-        
         [Timestamp]
         public byte[] RespostaControleVersao { get; set; }
 
@@ -89,5 +75,6 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
         /// Lista de respostas a serem pontuadas pelo professor
         /// </summary>
         public IPagedList<Resposta> Lista { get; set; }
+        public bool? RespostaNotaConcluida { get; private set; }
     }
 }

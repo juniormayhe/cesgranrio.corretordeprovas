@@ -27,7 +27,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         Task<bool> ExisteAsync(int id);
         int MaximoID();
         Task<int> MaximoIDAsync();
-        
+        Task<Resposta> GetRandom();
     }
 
     public interface IQuestaoRepository : IRepository<Questao>

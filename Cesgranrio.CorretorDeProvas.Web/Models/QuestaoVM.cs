@@ -50,25 +50,25 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
 
         //[Required(ErrorMessage = "Por favor informe os pontos para Fidelidade ao tema")]
         [Display(Name = "Fidelidade ao tema")]
-        [Range(0.00, 999.99, ErrorMessage ="Os pontos devem estar entre 0,01 e 999,99")]
+        [Range(0.00, 10.00, ErrorMessage ="Os pontos devem estar entre 0,00 a 10,00")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeFidelidadeAoTema { get; set; }
 
         //[Required(ErrorMessage = "Por favor informe os pontos para Organização de ideias")]
         [Display(Name = "Organização de ideias")]
-        [Range(0.00, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
+        [Range(0.00, 10.00, ErrorMessage = "Os pontos devem estar entre 0,00 a 10,00")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeOrganizacaoIdeias { get; set; }
 
         //[Required(ErrorMessage = "Por favor informe os pontos para Nível de Linguagem")]
         [Display(Name = "Nível de Linguagem")]
-        [Range(0.00, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
+        [Range(0.00, 10.00, ErrorMessage = "Os pontos devem estar entre 0,00 a 10,00")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeNivelDeLinguagem { get; set; }
 
         //[Required(ErrorMessage = "Por favor informe os pontos para Domínio das Regras")]
         [Display(Name = "Domínio das Regras")]
-        [Range(0.00, 999.99, ErrorMessage = "Os pontos devem estar entre 0,01 e 999,99")]
+        [Range(0.00, 10.00, ErrorMessage = "Os pontos devem estar entre 0,00 a 10,00")]
         [RegularExpression(@"^[0-9]{1,3}(\,[0-9]{1,2})?$|^(\d{3})[\,]$", ErrorMessage = "Por favor informe um número até 999,99")]
         public decimal QuestaoGradeDominioDasRegras { get; set; }
 

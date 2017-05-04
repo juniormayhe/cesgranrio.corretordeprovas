@@ -21,7 +21,12 @@ ul.logado, ul.logado li:last-child {
 .texto {
     color: #9a73da;
 }
-
+.nobullet {
+    list-style:none;
+}
+    .nobullet li label {
+        cursor:pointer;
+    }
 .form-corretor .text-danger {
     margin-top:10px;
     display:block;

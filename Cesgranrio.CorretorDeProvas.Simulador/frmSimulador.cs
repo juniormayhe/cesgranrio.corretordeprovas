@@ -200,28 +200,14 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 Usuario = elaborador,
 
                 /*folha de redação*/
-                RespostaImagem = Util.ConverterParaArray(img)
+                RespostaImagem = Util.ConverterParaArray(img),
+                
+                //por falta de tempo vamos deixar a grade fixa "1" o ideal é ser outra tabela
+                RespostaGradeEscolhida = 1,
+                RespostaNota = Util.GeraNota(0, questao.QuestaoGradeFidelidadeAoTema)
             };
-            /*pontuacao dada pelo professor deve ser com base na grade de correcao*/
-            decimal sobra = 50;
-            resposta.RespostaGradeDominioDasRegras = Util.GeraNota(0, resposta.Questao.QuestaoGradeDominioDasRegras);
-            sobra -= resposta.RespostaGradeDominioDasRegras;
-            if (sobra > 0)
-            {
-                resposta.RespostaGradeFidelidadeAoTema = Util.GeraNota(0, Convert.ToInt32(sobra));
-                sobra -= resposta.RespostaGradeFidelidadeAoTema;
-            }
-
-            if (sobra > 0)
-            {
-                resposta.RespostaGradeNivelDeLinguagem = Util.GeraNota(0, Convert.ToInt32(sobra));
-                sobra -= resposta.RespostaGradeNivelDeLinguagem;
-            }
-
-            if (sobra > 0)
-            {
-                resposta.RespostaGradeOrganizacaoIdeias = Convert.ToDecimal(sobra);
-            }
+            
+            
             return resposta;
         }
 

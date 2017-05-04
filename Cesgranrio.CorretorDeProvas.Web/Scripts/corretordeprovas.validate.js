@@ -31,13 +31,13 @@ $(document).ready(function () {
             }
             $(this).val(valor);
 
-            somatorio();
+            //somatorio();
             
         }
         catch (err) {
         }
     });
-    somatorio();    
+    //somatorio();    
 
 });
 

@@ -13,6 +13,7 @@
             <th>Questão N&ordm;</th>
             <th>Enunciado</th>
             <th>Candidato</th>
+            <th>Corrigida?</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -28,6 +29,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Candidato.CandidatoNome)
+                </td>
+                <td>
+                    @(item.RespostaNotaConcluida.HasValue && item.RespostaNotaConcluida.Value==true?"Sim":"Não")
                 </td>
                 <td>
                     <a href="data:image/jpg;base64,@(Convert.ToBase64String(item.RespostaImagem))" alt="Imagem da resposta" data-lightbox="image-@i++" data-title="Mostrar resposta gerada pelo simulador">Ver imagem</a>

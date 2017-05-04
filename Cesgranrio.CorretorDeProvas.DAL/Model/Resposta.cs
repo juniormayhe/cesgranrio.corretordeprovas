@@ -18,10 +18,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
         public int QuestaoID { get; set; }
         [Column(TypeName = "image")]
         public byte[] RespostaImagem { get; set; }
-        public decimal RespostaGradeFidelidadeAoTema { get; set; }
-        public decimal RespostaGradeOrganizacaoIdeias { get; set; }
-        public decimal RespostaGradeNivelDeLinguagem { get; set; }
-        public decimal RespostaGradeDominioDasRegras { get; set; }
+        public decimal RespostaNota { get; set; }
+        public int RespostaGradeEscolhida { get; set; }
 
         public virtual Candidato Candidato { get; set; }
         public virtual Questao Questao { get; set; }
@@ -29,5 +27,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Model
 
         [Timestamp]
         public byte[] RespostaControleVersao { get; set; }
+        public bool? RespostaNotaConcluida { get; set; }
     }
 }

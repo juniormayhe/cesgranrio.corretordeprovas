@@ -15,7 +15,8 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     public class RespostaRepository : IRepository<Resposta>
     {
         private ICorretorDeProvasDbContext _context;
-        
+        private static Random rand = new Random();
+
         public RespostaRepository(ICorretorDeProvasDbContext context)
         {
             _context = context;
@@ -27,9 +28,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public async Task<IEnumerable<Resposta>> ListarAsync()
         {
+            _context.Refresh();
             return await _context.Resposta.ToListAsync();
         }
-
+        
         /// <summary>
         /// Listar respostas
         /// </summary>
@@ -191,7 +193,17 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             _context.Database.ExecuteSqlCommand("exec LimparRespostas");
             
         }
-
         
+        /// <summary>
+        /// obtem uma resposta para dar nota de modo aleatorio
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Resposta> GetRandom()
+        {
+            _context.Refresh();
+            var lista = await _context.Resposta.ToListAsync();
+            lista = lista.Where(x => x.RespostaNotaConcluida == null || x.RespostaNotaConcluida == false).ToList();
+            return lista.ElementAtOrDefault(rand.Next(lista.Count()));
+        }
     }
 }

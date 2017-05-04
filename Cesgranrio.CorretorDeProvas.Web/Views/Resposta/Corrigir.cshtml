@@ -39,17 +39,15 @@
                                     @Html.ValidationMessageFor(model => model.QuestaoID, "", new { @class = "text-danger" })
 
                                     
-                                    <h5>Grade de correção</h5>
-                                    <ul>
+                                    <h5>Grade de correção (escolha apenas uma)</h5>
+                                    <ul class="nobullet">
+                                        <li><input type="radio" name="grade" value="1" id="grade1" @Html.Raw(Model.RespostaGradeEscolhida==1?"checked='checked'":"")/> <label for="grade1">Fidelidade ao tema: 0,00 a @Html.Raw(Model.Questao.QuestaoGradeFidelidadeAoTema.ToString("N2"))</label></li>
+                                        <li><input type="radio" name="grade" value="2" id="grade2" @Html.Raw(Model.RespostaGradeEscolhida==2?"checked='checked'":"") /> <label for="grade2">Organizacao de ideias: 0,00 a @Html.Raw(Model.Questao.QuestaoGradeOrganizacaoIdeias.ToString("N2"))</label></li>
+                                        <li><input type="radio" name="grade" value="3" id="grade3" @Html.Raw(Model.RespostaGradeEscolhida==3?"checked='checked'":"")/> <label for="grade3">Nivel de Linguagem: 0,00 a @Html.Raw(Model.Questao.QuestaoGradeNivelDeLinguagem.ToString("N2"))</label></li>
+                                        <li><input type="radio" name="grade" value="4" id="grade4" @Html.Raw(Model.RespostaGradeEscolhida==4?"checked='checked'":"") /> <label for="grade4">Domínio das regras: 0,00 a @Html.Raw(Model.Questao.QuestaoGradeDominioDasRegras.ToString("N2"))</label></li>
                                         
-                                        <li>Fidelidade ao tema: @Html.Raw(Model.Questao.QuestaoGradeFidelidadeAoTema.ToString("N2"))</li>
-                                        <li>Organizacao de ideias: @Html.Raw(Model.Questao.QuestaoGradeOrganizacaoIdeias.ToString("N2"))</li>
-                                        <li>Nivel de Linguagem: @Html.Raw(Model.Questao.QuestaoGradeNivelDeLinguagem.ToString("N2"))</li>
-                                        <li>Domínio das regras: @Html.Raw(Model.Questao.QuestaoGradeDominioDasRegras.ToString("N2"))</li>
-                                        <li><hr /><strong>Total: @Html.Raw(Model.Questao.QuestaoGradeDominioDasRegras + Model.Questao.QuestaoGradeFidelidadeAoTema + Model.Questao.QuestaoGradeNivelDeLinguagem + Model.Questao.QuestaoGradeOrganizacaoIdeias) pontos</strong></li>
+                                        @Html.HiddenFor(model => model.RespostaGradeEscolhida)
                                     </ul>
-
-
                                 </div>
                             </div>
                         </div>
@@ -88,53 +86,15 @@
                         <div class="col-md-12">
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.RespostaGradeFidelidadeAoTema, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.RespostaNota, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.RespostaGradeFidelidadeAoTema, new { htmlAttributes = new { @class = "form-control grade" } })
-                                    @Html.ValidationMessageFor(model => model.RespostaGradeFidelidadeAoTema, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.RespostaNota, new { htmlAttributes = new { @class = "form-control grade" } })
+                                    @Html.ValidationMessageFor(model => model.RespostaNota, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.RespostaGradeOrganizacaoIdeias, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.RespostaGradeOrganizacaoIdeias, new { htmlAttributes = new { @class = "form-control grade" } })
-                                    @Html.ValidationMessageFor(model => model.RespostaGradeOrganizacaoIdeias, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.RespostaGradeNivelDeLinguagem, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.RespostaGradeNivelDeLinguagem, new { htmlAttributes = new { @class = "form-control grade" } })
-                                    @Html.ValidationMessageFor(model => model.RespostaGradeNivelDeLinguagem, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.RespostaGradeDominioDasRegras, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.RespostaGradeDominioDasRegras, new { htmlAttributes = new { @class = "form-control grade" } })
-                                    @Html.ValidationMessageFor(model => model.RespostaGradeDominioDasRegras, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-12">
 
@@ -164,4 +124,19 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(document).ready(function () {
+        $('input[name=grade]').change(function () {
+            
+            if ($(this).is(':checked'))
+                $('input[name=RespostaGradeEscolhida]').val($(this).val());
+
+            console.log($('input[name=RespostaGradeEscolhida]').val());
+        });
+        
+
+    });
+</script>
+
+
     }

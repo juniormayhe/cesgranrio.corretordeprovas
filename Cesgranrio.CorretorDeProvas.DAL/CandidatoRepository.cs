@@ -193,6 +193,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         {
             return _context.Candidato.Max(t => t.CandidatoID);
         }
-        
+
+        public Task<Resposta> GetRandom()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             _context.Refresh();
             return await _context.Questao.ToListAsync();
         }
-
+        
         /// <summary>
         /// Listar questoes
         /// </summary>
@@ -224,6 +224,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             return _context.Questao.FirstOrDefaultAsync(t => t.QuestaoNumero == numero);
         }
 
-        
+        public Task<Resposta> GetRandom()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

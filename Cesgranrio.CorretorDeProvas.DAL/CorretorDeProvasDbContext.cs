@@ -83,20 +83,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             
 
             modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaGradeFidelidadeAoTema)
+                .Property(e => e.RespostaNota)
                 .HasPrecision(5, 2);
 
-            modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaGradeOrganizacaoIdeias)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaGradeNivelDeLinguagem)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<Resposta>()
-                .Property(e => e.RespostaGradeDominioDasRegras)
-                .HasPrecision(5, 2);
 
             modelBuilder.Entity<Usuario>()
                 .Property(e => e.UsuarioCPF)
