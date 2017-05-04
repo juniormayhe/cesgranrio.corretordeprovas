@@ -16,8 +16,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         Task<IEnumerable<T>> ListarAsync();
         T Procurar(int id);
         Task<T> ProcurarAsync(int id);
+        
         int Remover(int id);
-        Task RemoverAsync(int id);
+        Task RemoverAsync(T item);
         int Alterar(T item);
         Task AlterarAsync(T item);
         Task AlterarAsync(T item, byte[] controleVersao);
@@ -26,7 +27,13 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         Task<bool> ExisteAsync(int id);
         int MaximoID();
         Task<int> MaximoIDAsync();
-
+        
     }
-    
+
+    public interface IQuestaoRepository : IRepository<Questao>
+    {
+        void Recarregar(Questao item);
+        Task<bool> ExisteNumeroAsync(int numero);
+        Task<int> MaximoNumeroAsync();
+    }
 }

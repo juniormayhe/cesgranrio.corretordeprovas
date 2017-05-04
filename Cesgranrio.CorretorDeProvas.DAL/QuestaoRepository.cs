@@ -12,7 +12,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     /// <summary>
     /// Repositório de questões
     /// </summary>
-    public class QuestaoRepository : IRepository<Questao>
+    public class QuestaoRepository : IQuestaoRepository
     {
         private ICorretorDeProvasDbContext _context;
         
@@ -27,6 +27,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public async Task<IEnumerable<Questao>> ListarAsync()
         {
+            _context.Refresh();
             return await _context.Questao.ToListAsync();
         }
 
@@ -49,6 +50,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             _context.Questao.Add(item);
             int r = await _context.SaveChangesAsync();
             _context.Entry(item).Reload();
+            _context.Refresh();
             return r;
         }
 
@@ -89,11 +91,19 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task RemoverAsync(int id)
+        public async Task RemoverAsync(Questao item)
         {
-            var entity = _context.Questao.First(t => t.QuestaoID == id);
-            _context.Questao.Remove(entity);
+            //var entity = _context.Questao.First(t => t.QuestaoID == id);
+            //_context.Questao.Remove(entity);
+            //await _context.SaveChangesAsync();
+            //_context.Entry(item).Reload();
+            _context.Entry(item).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
+            
+        }
+
+        public void Recarregar(Questao item) { 
+            _context.Entry(item).Reload();
         }
 
         /// <summary>
@@ -118,6 +128,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             _context.Entry(item).Reload();
+            _context.Refresh();
         }
 
         /// <summary>
@@ -132,6 +143,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             _context.Entry(item).Reload();
+            _context.Refresh();
         }
 
         /// <summary>
@@ -170,18 +182,27 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="numero"></param>
         /// <returns></returns>
-        public Task<bool> ExisteNumeroAsync(int numero)
+        public async Task<bool> ExisteNumeroAsync(int numero)
         {
-            return _context.Questao.AnyAsync(t => t.QuestaoNumero == numero);
+            return await _context.Questao.AnyAsync(t => t.QuestaoNumero == numero);
         }
 
         /// <summary>
         /// Retorna o maior valor de QuestaoID no banco de dados
         /// </summary>
         /// <returns></returns>
-        public Task<int> MaximoIDAsync()
+        public async Task<int> MaximoIDAsync()
         {
-            return _context.Questao.MaxAsync(t => t.QuestaoID);
+            return await _context.Questao.MaxAsync(t => t.QuestaoID);
+        }
+
+        /// <summary>
+        /// retorna o maioir numero de questao
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> MaximoNumeroAsync()
+        {
+            return await _context.Questao.MaxAsync(t => t.QuestaoNumero); 
         }
 
         /// <summary>

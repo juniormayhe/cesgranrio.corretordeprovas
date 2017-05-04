@@ -12,12 +12,11 @@ namespace Cesgranrio.CorretorDeProvas.Web
         {
 			var container = new UnityContainer();
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-
-            // e.g. container.RegisterType<ITestService, TestService>();
+            
+            //injecao de dependencias builtin
             container.RegisterType<ICorretorDeProvasDbContext, CorretorDeProvasDbContext>(new PerThreadLifetimeManager(), new InjectionConstructor());
-            container.RegisterType<IRepository<Questao>, QuestaoRepository>();
+            container.RegisterType<IQuestaoRepository, QuestaoRepository>();
+            //container.RegisterType<IRepository<Questao>, QuestaoRepository>();
             container.RegisterType<IRepository<Resposta>, RespostaRepository>();
             container.RegisterType<ILoginUsuarioRepository<Usuario>, UsuarioRepository>();
 

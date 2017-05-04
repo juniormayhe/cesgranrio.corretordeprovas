@@ -100,10 +100,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task RemoverAsync(int id)
+        public async Task RemoverAsync(Candidato item)
         {
-            var entity = _context.Candidato.First(t => t.CandidatoID == id);
-            _context.Candidato.Remove(entity);
+            
+            _context.Candidato.Remove(item);
             await _context.SaveChangesAsync();
         }
 

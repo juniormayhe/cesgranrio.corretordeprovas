@@ -1,4 +1,4 @@
-﻿@model Cesgranrio.CorretorDeProvas.Web.Models.QuestaoVM
+﻿@model Cesgranrio.CorretorDeProvas.DAL.Model.Questao
 
 @{
     ViewBag.Title = "Remover";
@@ -15,7 +15,7 @@
 
             </div>
             <div class="content">
-
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -107,7 +107,8 @@
                             @using (Html.BeginForm())
                             {
                                 @Html.AntiForgeryToken()
-
+                                @Html.HiddenFor(model => model.QuestaoID)
+                                @Html.HiddenFor(model => model.QuestaoControleVersao)
                                 <div class="form-actions no-color">
                                     <input type="submit" value="Remover" class="btn btn-danger btn-lg mb" />
                                     

@@ -4,6 +4,7 @@ using Cesgranrio.CorretorDeProvas.Web.Controllers.Shared;
 using Cesgranrio.CorretorDeProvas.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -18,12 +19,12 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
     [VerificarAcessoFilter]
     public class QuestaoController : MainController
     {
-        private IRepository<Questao> _repository;
+        private IQuestaoRepository _repository;
 
         //5 itens por página
         const int pageSize = 5;
 
-        public QuestaoController(IRepository<Questao> repository)
+        public QuestaoController(IQuestaoRepository repository)
         {
             _repository = repository;
         }
@@ -59,24 +60,28 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Adicionar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm)
         {
-            
+
+            bool numeroExiste = await _repository.ExisteNumeroAsync(vm.QuestaoNumero);
+            //caso o número já esteja em uso, o sistema pode ser mais simpático 
+            //e propor um novo número ao elaborador 
+            if (numeroExiste)
+            {
+
+                int numeroSugerido = 0;
+                try
+                {
+                    numeroSugerido = await _repository.MaximoNumeroAsync();
+                }
+                catch { }
+                numeroSugerido++;
+                ModelState.AddModelError("QuestaoNumero", $"Este número de questão já existe. Tente outro como por exemplo: {numeroSugerido}");
+                return View(vm);
+            }
+
+
             if (ModelState.IsValid)
             {
-                bool numeroExiste = await _repository.ExisteAsync(vm.QuestaoNumero);
-                //caso o número já esteja em uso, o sistema pode ser mais simpático 
-                //e propor um novo número ao elaborador 
-                if (numeroExiste) {
-
-                    int numeroSugerido = 0;
-                    try {
-                        numeroSugerido = await _repository.MaximoIDAsync();
-                    }
-                    catch { }
-                    numeroSugerido++;
-                    ModelState.AddModelError("QuestaoNumero", $"Este número de questão já existe. Tente outro como por exemplo: {numeroSugerido}");
-                    return View(vm);
-                }
-
+                
                 var questao = new Questao
                 {
                     QuestaoID = vm.QuestaoID,
@@ -146,6 +151,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     if (ModelState.IsValid)
                     {
                         await _repository.AlterarAsync(questaoParaAtualizar, questaoControleVersao);
+                        _repository.Recarregar(questaoParaAtualizar);
                         return RedirectToAction("Listar");
                     }
                     else
@@ -171,7 +177,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         }
 
         // GET: Questao/Remover/5
-        public async Task<ActionResult> Remover(int? id)
+        public async Task<ActionResult> Remover(int? id, bool? erroDeConcorrencia)
         {
             if (id == null)
             {
@@ -180,28 +186,59 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             Questao questao = await _repository.ProcurarAsync(id.Value);
             if (questao== null)
             {
+                if (erroDeConcorrencia.GetValueOrDefault())
+                {
+                    return RedirectToAction("Listar");
+                }
                 return HttpNotFound();
             }
-            return View(new QuestaoVM
+            _repository.Recarregar(questao);
+            if (erroDeConcorrencia.GetValueOrDefault())
             {
-                QuestaoID = questao.QuestaoID,
-                QuestaoNumero = questao.QuestaoNumero,
-                QuestaoEnunciado = questao.QuestaoEnunciado,
-                QuestaoGradeDominioDasRegras = questao.QuestaoGradeDominioDasRegras,
-                QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema,
-                QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem,
-                QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias,
-                Resposta = questao.Resposta
-            });
+                
+                ModelState.AddModelError(string.Empty, "O registro que você tentou remover já foi alterado por outro elaborador");
+            }
+            return View(questao);
+            //return View(new QuestaoVM
+            //{
+            //    QuestaoID = questao.QuestaoID,
+            //    QuestaoNumero = questao.QuestaoNumero,
+            //    QuestaoEnunciado = questao.QuestaoEnunciado,
+            //    QuestaoGradeDominioDasRegras = questao.QuestaoGradeDominioDasRegras,
+            //    QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema,
+            //    QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem,
+            //    QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias,
+            //    QuestaoControleVersao = questao.QuestaoControleVersao,
+            //    Resposta = questao.Resposta
+            //});
         }
 
         // POST: Questao/RemocaoConcluida/5
         [HttpPost, ActionName("Remover")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RemocaoConcluida(int id)
+        public async Task<ActionResult> RemocaoConcluida(Questao questao)
         {
-            await _repository.RemoverAsync(id);
-            return RedirectToAction("Listar");
+            try
+            {
+                Questao questaoAtual = await _repository.ProcurarAsync(questao.QuestaoID);
+                _repository.Recarregar(questaoAtual);
+
+                if (Convert.ToBase64String(questaoAtual.QuestaoControleVersao) != Convert.ToBase64String(questao.QuestaoControleVersao)) { 
+                    ModelState.AddModelError(string.Empty, "Este registro acabade ter sido modificado por outro elaborador. Caso deseje realmente remover o registro, clique novamente em Remover.");
+                    return View(questaoAtual);
+                }
+                await _repository.RemoverAsync(questaoAtual);
+                return RedirectToAction("Listar");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                ModelState.AddModelError(string.Empty, "Não foi possível remover este registro pois ele pode ter sido modificado por outro elaborador.");
+                return RedirectToAction("Remover", new { id = questao.QuestaoID, erroDeConcorrencia = true });
+            }
+            catch (DataException) {
+                ModelState.AddModelError(string.Empty, "Não foi possível remover este registro. Tente novamente.");
+                return RedirectToAction("Remover", new { id = questao.QuestaoID, erroDeConcorrencia = true });
+            }
         }
 
 

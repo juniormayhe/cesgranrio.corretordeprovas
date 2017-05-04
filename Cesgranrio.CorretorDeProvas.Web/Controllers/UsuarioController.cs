@@ -127,8 +127,8 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             {
                 Console.Write(ex);
             }
-            
-            return this.View();
+
+            return this.RedirectToAction("Login");
         }
 
         // GET: Usuario

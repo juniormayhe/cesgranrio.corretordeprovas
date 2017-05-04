@@ -26,8 +26,6 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         RespostaRepository _repostaRepository;
         UsuarioRepository _professorRepository;
         CandidatoRepository _candidatoRepository;
-        CorretorDeProvasDbContext _db;
-
         public frmSimulador()
         {
             InitializeComponent();

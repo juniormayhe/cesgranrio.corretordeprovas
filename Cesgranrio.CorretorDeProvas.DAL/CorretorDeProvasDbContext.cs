@@ -22,6 +22,11 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Candidato> Candidato { get; set; }
 
+        public void Refresh() {
+            foreach (var item in this.ChangeTracker.Entries())
+                item.Reload();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             

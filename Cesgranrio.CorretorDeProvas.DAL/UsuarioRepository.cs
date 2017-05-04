@@ -97,10 +97,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task RemoverAsync(int id)
+        public async Task RemoverAsync(Usuario item)
         {
-            var entity = _context.Usuario.First(t => t.UsuarioID == id);
-            _context.Usuario.Remove(entity);
+            
+            _context.Usuario.Remove(item);
             await _context.SaveChangesAsync();
         }
 
@@ -227,7 +227,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             throw new NotImplementedException();
         }
 
-        Task IRepository<Usuario>.RemoverAsync(int id)
+        Task IRepository<Usuario>.RemoverAsync(Usuario item)
         {
             throw new NotImplementedException();
         }

@@ -14,7 +14,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         DbSet<Questao> Questao { get; set; }
         DbSet<Usuario> Usuario { get; set; }
         DbSet<Candidato> Candidato{ get; set; }
-
+        void Refresh();
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         Task<int> SaveChangesAsync();

@@ -88,10 +88,10 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task RemoverAsync(int id)
+        public async Task RemoverAsync(Resposta item)
         {
-            var entity = _context.Resposta.First(t => t.RespostaID == id);
-            _context.Resposta.Remove(entity);
+            
+            _context.Resposta.Remove(item);
             await _context.SaveChangesAsync();
         }
 
