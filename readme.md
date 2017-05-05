@@ -9,18 +9,6 @@ The solution provides comprehensive modules such as:
 * Cesgranrio.CorretorDeProvas.Util:  module containing helpers and extension methods
 * Cesgranrio.CorretorDeProvas.DAL: Repositories for accessing data with Entity Framework (Please consider using UnitOfWork!)
 
-## Contributing
-
-If you are interested in fixing issues and contributing directly to the code base, you can fork the project and mention the original source code or [contact me here](https://about.me/juniormayhe) to understand:
-
-* How to build and run from source code
-* Coding Guidelines
-* Submitting pull requests
-
-## Feedback
-
-You can ask a question, request a new feature, file a bug on [About.me](https://about.me/juniormayhe).
-
 ## Related Packages
 Many of the core components and extensions live in their own repositories on NugGet Package Manager. For example:
 
@@ -85,3 +73,15 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+
+## Contributing
+
+If you are interested in fixing issues and contributing directly to the code base, you can fork the project and mention the original source code or [contact me here](https://about.me/juniormayhe) to understand:
+
+* How to build and run from source code
+* Coding Guidelines
+* Submitting pull requests
+
+## Feedback
+
+You can ask a question, request a new feature, file a bug on [About.me](https://about.me/juniormayhe).
