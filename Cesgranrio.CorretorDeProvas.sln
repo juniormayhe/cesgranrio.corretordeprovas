@@ -11,6 +11,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cesgranrio.CorretorDeProvas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cesgranrio.CorretorDeProvas.Simulador", "Cesgranrio.CorretorDeProvas.Simulador\Cesgranrio.CorretorDeProvas.Simulador.csproj", "{E97647FD-576D-4695-816D-FC42D14EBE72}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1) Instruções", "1) Instruções", "{853C2D5B-9FA0-4762-A0D5-DB3B9928B440}"
+	ProjectSection(SolutionItems) = preProject
+		LEIAME.txt = LEIAME.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2) Banco de Dados", "2) Banco de Dados", "{7CD783F9-D767-4D0A-AE71-D241C699A016}"
+	ProjectSection(SolutionItems) = preProject
+		Cesgranrio.CorretorDeProvas.DB\banco.zip = Cesgranrio.CorretorDeProvas.DB\banco.zip
+		Cesgranrio.CorretorDeProvas.DB\script.sql = Cesgranrio.CorretorDeProvas.DB\script.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
