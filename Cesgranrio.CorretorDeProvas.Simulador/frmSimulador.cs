@@ -58,21 +58,22 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
         /// <summary>
         /// gera imagens de respostas
         /// </summary>
-        private void GerarImagens()
+        private async Task GerarImagensAsync()
         {
             Invoke(new Action(() => { btnGerar.Text = "Aguarde..."; }));
-            
-            
+
+
             //sempre num único contexto
-            using (var _db = new CorretorDeProvasDbContext()) {
-                
+            using (var _db = new CorretorDeProvasDbContext())
+            {
+
                 #region inicializa    
                 _questaoRepository = new QuestaoRepository(_db);
                 _repostaRepository = new RespostaRepository(_db);
                 _professorRepository = new UsuarioRepository(_db);
                 _candidatoRepository = new CandidatoRepository(_db);
-                
-                
+
+
                 //descobre qual elaborador podemos pegar da base para registrar a simulação do grupo 1 elaboradores
                 Usuario elaborador = _db.Usuario.FirstOrDefault(x => x.GrupoID == 1);
 
@@ -82,7 +83,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                     return;
                 }
 
-                var questoes = _db.Questao.ToList();
+                var questoes = await _questaoRepository.ListarAsync(false);
                 //nao existem questoes cadastradas?
                 if (0 == questoes.Count())
                 {
@@ -91,51 +92,52 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                 }
                 #endregion
 
+                lock (questoes) {
+                    _repostaRepository.LimparRespostasCandidatos();
+                }
 
-                _repostaRepository.LimparRespostasCandidatos();
-                
                 //informa a barra de progresso de questoes ao valor máximo possível da barra
                 int totalQuestoes = TOTAL_CANDIDATOS * questoes.Count();
-                
+
 
                 //geramos uma populacao de candidatos com cpfs unicos
                 int i = 0;
-                
+
                 int contaResposta = 1;
                 List<Task> tarefas = new List<Task>();
                 for (i = 0; i < TOTAL_CANDIDATOS; i++)
                 {
-                    System.Diagnostics.Trace.WriteLine($"i={i}");
+                    //System.Diagnostics.Trace.WriteLine($"i={i}");
                     Candidato candidato = new Candidato { CandidatoCPF = Util.GerarCPF(i), CandidatoNome = Util.GerarNomeCandidato() };
                     #region adicionamos uma nova thread
                     Task tarefa = new Task(() =>
                     {
-                        
+
                         //adiciona um candidato
                         _candidatoRepository.Adicionar(candidato);
-                        
+
                         foreach (Questao questao in questoes)
                         {
                             //gera uma imagem
                             Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoNome);
                             //adiciona uma resposta com a imagem
                             Resposta resposta = CriarResposta(elaborador, questao, candidato, img);
-                            
+
                             _repostaRepository.Adicionar(resposta);
 
                             //mostra ultima imagem gerada
                             Invoke(new Action(() => { pictureBox1.Image = img; }));
-                            
+
                             LogarSaida(contaResposta++, $"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
                             System.Diagnostics.Trace.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
-                            
+
                         }
-                        
+
                     });
                     tarefas.Add(tarefa);
                     #endregion
 
-                    
+
                 }
                 //Parallel.For não é uma opção pois não se aconselha manipular dbcontext com multiplas threads
                 //então temos que abrir oito ações diferentes e dispará-las de forma sincrona
@@ -144,9 +146,9 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
 
                     int total = tarefas.Count() < 0 ? tarefas.Count() : TOTAL_THREADS;
 
-                    
+
                     var grupo = tarefas.Take(TOTAL_THREADS).ToList();
-                    
+
                     foreach (var item in grupo)
                     {
                         System.Diagnostics.Trace.WriteLine($"....Executando tarefa");
@@ -157,13 +159,13 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
                         System.Diagnostics.Trace.WriteLine($"tarefas count {tarefas.Count()}");
                     }
                     System.Diagnostics.Trace.WriteLine("Aguardando o grupo de tarefas");
-                    
+
                     //aguardamos o processamento do lote
                     Task.WaitAll(grupo.ToArray());
 
                 }
                 AtualizaProgresso(i);
-                
+
                 _questaoRepository = null;
                 _repostaRepository = null;
                 _professorRepository = null;
@@ -172,7 +174,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
             }//using
 
             Invoke(new Action(() => { btnGerar.Enabled = true; btnGerar.Text = "Gerar respostas"; }));
-            
+
         }
 
         /// <summary>
@@ -223,7 +225,7 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
 
         private void BtnGerar_Click(object sender, EventArgs e)
         {
-            GerarImagens();
+            GerarImagensAsync();
          
         }
     }

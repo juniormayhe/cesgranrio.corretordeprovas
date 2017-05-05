@@ -25,10 +25,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <summary>
         /// Listar usuários
         /// </summary>
+        /// <param name="rastrear">default true para raestrar entidades</param>
         /// <returns></returns>
-        public async Task<IEnumerable<Usuario>> ListarAsync()
+        public async Task<IEnumerable<Usuario>> ListarAsync(bool? rastrear = true)
         {
-            return await _context.Usuario.ToListAsync();
+            _context.Refresh();
+            return rastrear.Value ? await _context.Usuario.AsNoTracking().ToListAsync() : await _context.Usuario.AsNoTracking().ToListAsync();
         }
 
         /// <summary>
@@ -208,12 +210,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         {
             throw new NotImplementedException();
         }
-
-        Task<IEnumerable<Usuario>> IRepository<Usuario>.ListarAsync()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         Usuario IRepository<Usuario>.Procurar(int id)
         {
             throw new NotImplementedException();

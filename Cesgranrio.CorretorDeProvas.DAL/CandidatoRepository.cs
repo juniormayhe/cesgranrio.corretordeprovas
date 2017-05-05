@@ -25,10 +25,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <summary>
         /// Listar candidatos
         /// </summary>
+        /// <param name="rastrear">default true para raestrar entidades</param>
         /// <returns></returns>
-        public async Task<IEnumerable<Candidato>> ListarAsync()
+        public async Task<IEnumerable<Candidato>> ListarAsync(bool? rastrear = true)
         {
-            return await _context.Candidato.ToListAsync();
+            _context.Refresh();
+            return rastrear.Value ? await _context.Candidato.AsNoTracking().ToListAsync() : await _context.Candidato.AsNoTracking().ToListAsync();
         }
 
         /// <summary>
@@ -60,7 +62,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public int Adicionar(Candidato item)
         {
-            
             _context.Candidato.Add(item);
             return _context.SaveChanges();
         }

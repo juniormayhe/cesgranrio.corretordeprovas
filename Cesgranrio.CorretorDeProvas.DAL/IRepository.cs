@@ -13,7 +13,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         Task<int> AdicionarAsync(T item);
 
         IEnumerable<T> Listar();
-        Task<IEnumerable<T>> ListarAsync();
+        Task<IEnumerable<T>> ListarAsync(bool? rastrear = true);
         T Procurar(int id);
         Task<T> ProcurarAsync(int id);
         
