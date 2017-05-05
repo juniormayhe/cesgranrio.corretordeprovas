@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -50,7 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorretorDeProvasDbContext.cs" />
+    <Compile Include="Database\DatabaseFactory.cs" />
+    <Compile Include="Database\IDatabaseFactory.cs" />
+    <Compile Include="Database\SimuladorRepository.cs" />
     <Compile Include="ICorretorDeProvasDbContext.cs" />
+    <Compile Include="IDatabase.cs" />
     <Compile Include="ILoginUsuarioRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Candidato.cs" />

@@ -21,6 +21,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL
 
         DbEntityEntry Entry(object o);
         
-        Database Database { get; }
+        System.Data.Entity.Database Database { get; }
     }
 }

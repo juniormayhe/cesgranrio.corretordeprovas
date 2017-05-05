@@ -24,12 +24,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <summary>
         /// Listar questoes
         /// </summary>
-        /// <param name="rastrear">default true para raestrar entidades</param>
+        
         /// <returns></returns>
-        public async Task<IEnumerable<Questao>> ListarAsync(bool? rastrear=true)
+        public async Task<IEnumerable<Questao>> ListarAsync()
         {
             _context.Refresh();
-            return rastrear.Value ? await _context.Questao.AsNoTracking().ToListAsync() : await _context.Questao.AsNoTracking().ToListAsync();
+            return await _context.Questao.ToListAsync();
         }
         
         /// <summary>

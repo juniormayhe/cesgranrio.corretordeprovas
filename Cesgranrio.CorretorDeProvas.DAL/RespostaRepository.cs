@@ -25,12 +25,12 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <summary>
         /// Listar respostas
         /// </summary>
-        /// <param name="rastrear">default true para raestrar entidades</param>
+        
         /// <returns></returns>
-        public async Task<IEnumerable<Resposta>> ListarAsync(bool? rastrear = true)
+        public async Task<IEnumerable<Resposta>> ListarAsync()
         {
             _context.Refresh();
-            return rastrear.Value ? await _context.Resposta.AsNoTracking().ToListAsync() : await _context.Resposta.AsNoTracking().ToListAsync();
+            return await _context.Resposta.ToListAsync();
         }
         
         /// <summary>
@@ -184,15 +184,6 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         public int MaximoID()
         {
             return _context.Resposta.Max(t => t.RespostaID);
-        }
-        
-        /// <summary>
-        /// Limpar respostas e candidatos
-        /// </summary>
-        public void LimparRespostasCandidatos()
-        {
-            _context.Database.ExecuteSqlCommand("exec LimparRespostas");
-            
         }
         
         /// <summary>
