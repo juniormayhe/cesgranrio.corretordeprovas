@@ -39,10 +39,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
             routeData.Values["action"] = "PaginaNaoEncontrada";
             routeData.Values.Add("Erro", excecaoOriginal.GetType().FullName);
             routeData.Values.Add("Descrição", excecaoOriginal.Message);
-
-            //Response.StatusCode = (int)HttpStatusCode.BadRequest;
             
-
             if (excecaoOriginal is HttpException)
             {
                 /*aqui podemos tratar erros http*/
@@ -60,7 +57,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
                             {
                                 routeData.Values["controller"] = "Erro";
                                 routeData.Values["action"] = "RequisicaoInvalida";
-                                Response.StatusCode = (int)HttpStatusCode.Conflict;/*400*/
+                                //Response.StatusCode = (int)HttpStatusCode.Conflict;/*400*/
                             }
                         }
                         else
@@ -85,9 +82,6 @@ namespace Cesgranrio.CorretorDeProvas.Web
                 //falha da própria aplicação
                 routeData.Values["controller"] = "Erro";
                 routeData.Values["action"] = "FalhaNaAplicacao";
-                Response.StatusCode = (int)HttpStatusCode.InternalServerError; /*500*/
-
-
             }
 
             //Executa o controller de erro onthefly!
