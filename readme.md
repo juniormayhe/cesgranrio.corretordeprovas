@@ -25,6 +25,9 @@ The solution provides comprehensive modules such as:
 
 ## Funny error pages
 
+Access denied
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_22h00_55.png?raw=true)]()
+
 Page not found
 [![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h19_53.png?raw=true)]()
 
