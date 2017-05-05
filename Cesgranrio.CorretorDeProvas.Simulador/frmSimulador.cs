@@ -115,23 +115,23 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
 
                         //adiciona um candidato
                         _candidatoRepository.Adicionar(candidato);
-
+                        Image img = null;
                         foreach (Questao questao in questoes)
                         {
                             //gera uma imagem
-                            Image img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoNome);
-                            //adiciona uma resposta com a imagem
-                            Resposta resposta = CriarResposta(elaborador, questao, candidato, img);
+                            img = Imagem.GerarFolha(questao.QuestaoNumero.ToString(), candidato.CandidatoNome);
 
+                            //adiciona uma resposta da questao para candidato com a imagem
+                            var resposta = CriarResposta(elaborador, questao, candidato, img);
                             _repostaRepository.Adicionar(resposta);
-
-                            //mostra ultima imagem gerada
-                            Invoke(new Action(() => { pictureBox1.Image = img; }));
-
+                            
                             LogarSaida(contaResposta++, $"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
                             System.Diagnostics.Trace.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.fff")}, {resposta.ParaTexto()}");
-
+                            
                         }
+                        //mostra ultima imagem gerada
+                        Invoke(new Action(() => { pictureBox1.Image = img; }));
+
 
                     });
                     tarefas.Add(tarefa);
