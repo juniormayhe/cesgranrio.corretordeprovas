@@ -1,6 +1,6 @@
 # Online Exam Reviewer / Corretor de Provas Online
 
-[Corretor de Provas Online](https://github.com/juniormayhe/cesgranrio.corretordeprovas) is mvc 5 concept application where is being used Microsoft Practices Unity, Microsoft Extensions Logging, Security, Image generation, among others.
+[Corretor de Provas Online](https://github.com/juniormayhe/cesgranrio.corretordeprovas) is MVC 5 concept application where is being used Microsoft Practices Unity, Microsoft Extensions Logging, Security, Image generation, XPagedList, among others.
 
 The solution provides comprehensive modules such as:
 
@@ -8,6 +8,32 @@ The solution provides comprehensive modules such as:
 * Cesgranrio.CorretorDeProvas.Simulador: Windows Forms module for creating fake candidates and random answers. Images of the exams are saved as content into SQL Server database.
 * Cesgranrio.CorretorDeProvas.Util:  module containing helpers and extension methods
 * Cesgranrio.CorretorDeProvas.DAL: Repositories for accessing data with Entity Framework (Please consider using UnitOfWork!)
+
+## Screenshots
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h14_56.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h18_05.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h18_28.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h18_53.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h19_12.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h19_22.png?raw=true)]()
+
+## Funny error pages
+
+Page not found
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h19_53.png?raw=true)]()
+
+Invalid Request
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h25_26.png?raw=true)]()
+
+Internal Server Error
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h36_44.png?raw=true)]()
+
 
 ## Related Packages
 Many of the core components and extensions live in their own repositories on NugGet Package Manager. For example:
