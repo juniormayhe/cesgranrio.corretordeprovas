@@ -11,7 +11,29 @@ The solution provides comprehensive modules such as:
 
 ## Screenshots
 
-[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h14_56.png?raw=true)]
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h14_56.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h18_05.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h18_28.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h18_53.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h19_12.png?raw=true)]()
+
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h19_22.png?raw=true)]()
+
+## Funny error pages
+
+Page not found
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h19_53.png?raw=true)]()
+
+Invalid Request
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h25_26.png?raw=true)]()
+
+Internal Server Error
+[![](https://github.com/juniormayhe/cesgranrio.corretordeprovas/blob/master/Cesgranrio.CorretorDeProvas.Web/Content/2017-05-04_21h36_44.png?raw=true)]()
+
 
 ## Related Packages
 Many of the core components and extensions live in their own repositories on NugGet Package Manager. For example:
