@@ -261,6 +261,7 @@
     </Compile>
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SomenteProfessorFilter.cs" />
     <Compile Include="UIHelper.cs" />
     <Compile Include="SomenteElaboradorFilter.cs" />
     <Compile Include="VerificarAcessoFilter.cs" />

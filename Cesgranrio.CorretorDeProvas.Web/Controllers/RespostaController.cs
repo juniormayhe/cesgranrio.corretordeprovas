@@ -17,6 +17,7 @@ using Cesgranrio.CorretorDeProvas.Util;
 
 namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 {
+    [SomenteProfessorFilter]
     [VerificarAcessoFilter]
     public class RespostaController : MainController
     {

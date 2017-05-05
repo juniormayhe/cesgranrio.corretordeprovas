@@ -10,9 +10,9 @@ using Cesgranrio.CorretorDeProvas.DAL.Model;
 namespace Cesgranrio.CorretorDeProvas.Web
 {
     /// <summary>
-    /// Verifica se o usuário é elaborador para acessar controller (ex: controller de questao)
+    /// Verifica se o usuário é professor para acessar controller (ex: controller de resposta)
     /// </summary>
-    public partial class SomenteElaboradorFilter : ActionFilterAttribute
+    public partial class SomenteProfessorFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -30,7 +30,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
             
             var usuario = HttpContext.Current.Session["USUARIO"] as Usuario;
 
-            if (usuario!=null && usuario.GrupoID != (int)GrupoAcesso.ELABORADOR)
+            if (usuario!=null && usuario.GrupoID != (int)GrupoAcesso.PROFESSOR)
             {
                 //redirecionar usuário para página de acesso negado
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary {

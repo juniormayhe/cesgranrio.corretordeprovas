@@ -17,8 +17,8 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
 {
     public partial class frmSimulador : Form
     {
-        const int TOTAL_CANDIDATOS = 10;
-        const int TOTAL_THREADS = 8;
+        const int TOTAL_CANDIDATOS = 10000;
+        const int TOTAL_THREADS = 100;
         const int PROFESSOR_ID = 6;
 
         readonly ParallelOptions opcaoParalelismo = new ParallelOptions() { MaxDegreeOfParallelism = TOTAL_THREADS };
@@ -137,22 +137,28 @@ namespace Cesgranrio.CorretorDeProvas.Simulador
 
                     
                 }
-                //nao se aconselha manipular dbcontext com multithread então temos que abrir diferentes ações e dispará-las de forma sincrona
+                //Parallel.For não é uma opção pois não se aconselha manipular dbcontext com multiplas threads
+                //então temos que abrir oito ações diferentes e dispará-las de forma sincrona
                 while (tarefas.Count > 0)
                 {
 
-                    int total = tarefas.Count() < 0 ? tarefas.Count() : 8;
-                    var grupo = tarefas.Take(8).ToList();
-                    System.Diagnostics.Trace.WriteLine($">grupo de 8 threads");
+                    int total = tarefas.Count() < 0 ? tarefas.Count() : TOTAL_THREADS;
+
+                    
+                    var grupo = tarefas.Take(TOTAL_THREADS).ToList();
+                    
                     foreach (var item in grupo)
                     {
                         System.Diagnostics.Trace.WriteLine($"....Executando tarefa");
+                        //dbcontext não é threadsafe
                         item.RunSynchronously();
                         //remove da lista o item executado
                         tarefas.Remove(item);
                         System.Diagnostics.Trace.WriteLine($"tarefas count {tarefas.Count()}");
                     }
-                    System.Diagnostics.Trace.WriteLine("Aguardando o grupo de oito tarefas");
+                    System.Diagnostics.Trace.WriteLine("Aguardando o grupo de tarefas");
+                    
+                    //aguardamos o processamento do lote
                     Task.WaitAll(grupo.ToArray());
 
                 }

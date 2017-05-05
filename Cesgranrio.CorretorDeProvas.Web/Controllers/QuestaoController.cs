@@ -33,7 +33,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 
         public async Task<ActionResult> Listar(int? page = 1)
         {
-            throw new ApplicationException("Falha de comunicação");
+            
             var lista = await _repository.ListarAsync();
 
             IPagedList<Questao> paginaComQuestoes = lista.OrderBy(p => p.QuestaoNumero).ToPagedList(page ?? 1, pageSize);
