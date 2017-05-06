@@ -20,17 +20,17 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         public RespostaRepository(ICorretorDeProvasDbContext context)
         {
             _context = context;
+            _context.Database.CommandTimeout = 120;
         }
 
         /// <summary>
         /// Listar respostas
         /// </summary>
-        
         /// <returns></returns>
         public async Task<IEnumerable<Resposta>> ListarAsync()
         {
             _context.Refresh();
-            return await _context.Resposta.ToListAsync();
+            return await _context.Resposta.AsNoTracking().Where(x=>x.RespostaNotaConcluida != true) .Take(1000).ToListAsync();
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// <returns></returns>
         public IEnumerable<Resposta> Listar()
         {
-            return _context.Resposta.ToList();
+            return _context.Resposta.AsNoTracking().AsEnumerable<Resposta>();
         }
 
         /// <summary>
@@ -194,8 +194,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         public async Task<Resposta> GetRandom()
         {
             _context.Refresh();
-            var lista = await _context.Resposta.ToListAsync();
-            lista = lista.Where(x => x.RespostaNotaConcluida == null || x.RespostaNotaConcluida == false).ToList();
+            var lista =  await _context.Resposta.AsNoTracking().Where(x => x.RespostaNotaConcluida == null || x.RespostaNotaConcluida == false).ToListAsync();
             return lista.ElementAtOrDefault(rand.Next(lista.Count()));
         }
 

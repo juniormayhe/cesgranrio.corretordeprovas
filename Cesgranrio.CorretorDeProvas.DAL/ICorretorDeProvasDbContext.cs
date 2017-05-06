@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Cesgranrio.CorretorDeProvas.DAL
 {
-    public interface ICorretorDeProvasDbContext : IDisposable
+    public interface ICorretorDeProvasDbContext
     {
         DbSet<Grupo> Grupo { get; set; }
         DbSet<Resposta> Resposta { get; set; }

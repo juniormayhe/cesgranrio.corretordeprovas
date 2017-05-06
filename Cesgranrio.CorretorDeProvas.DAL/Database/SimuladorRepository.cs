@@ -25,10 +25,13 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Database
             using (SqlConnection db = (SqlConnection)_factory.CriarConexao())
             {
                 if (db.State == ConnectionState.Closed) db.Open();
-                var command = new SqlCommand("LimparRespostas", db);
-                command.CommandType = CommandType.StoredProcedure;
+                var command = new SqlCommand("LimparRespostas", db)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 //a limpeza não pode ser assincrona pois pode causar efeitos colaterais
                 command.ExecuteNonQuery();
+                db.Close();
             }
             
         }
@@ -44,11 +47,11 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Database
             using (SqlConnection db = (SqlConnection)_factory.CriarConexao())
             {
                 if (db.State == ConnectionState.Closed)
-                    db.Open();    
-                var command = new SqlCommand("CriarResposta", db);
-
-
-                command.CommandType = CommandType.StoredProcedure;
+                    db.Open();
+                var command = new SqlCommand("CriarResposta", db)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 command.Parameters.AddWithValue("@UsuarioID", r.UsuarioID);
                 command.Parameters.AddWithValue("@CandidatoID", r.CandidatoID);
                 command.Parameters.AddWithValue("@QuestaoID", r.QuestaoID);
@@ -61,7 +64,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Database
                 //command.Parameters["@ID"].Value = customerID;
 
                 i = await command.ExecuteNonQueryAsync();
-
+                db.Close();
             }
             return i;
         }

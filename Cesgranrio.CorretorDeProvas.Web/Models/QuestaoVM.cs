@@ -14,24 +14,21 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
     public class QuestaoVM
     {
         
-
-        public QuestaoVM()
-        {
-            this.Resposta = new HashSet<Resposta>();
+        public static QuestaoVM CriarQuestaoVM(Questao questao) {
+            return new QuestaoVM
+            {
+                QuestaoID = questao.QuestaoID,
+                QuestaoNumero = questao.QuestaoNumero,
+                QuestaoEnunciado = questao.QuestaoEnunciado,
+                QuestaoGradeDominioDasRegras = questao.QuestaoGradeDominioDasRegras,
+                QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema,
+                QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem,
+                QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias,
+                QuestaoControleVersao = questao.QuestaoControleVersao,
+                Resposta = questao.Resposta
+            };
         }
-
-        public QuestaoVM(Questao questao)
-        {
-            this.QuestaoID = questao.QuestaoID;
-            this.QuestaoNumero = questao.QuestaoNumero;
-            this.QuestaoEnunciado = questao.QuestaoEnunciado;
-            this.QuestaoGradeDominioDasRegras = questao.QuestaoGradeDominioDasRegras;
-            this.QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema;
-            this.QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem;
-            this.QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias;
-            this.QuestaoControleVersao = questao.QuestaoControleVersao;
-            this.Resposta = questao.Resposta;
-        }
+        
 
         [Key]
         [Display(Name = "ID")]

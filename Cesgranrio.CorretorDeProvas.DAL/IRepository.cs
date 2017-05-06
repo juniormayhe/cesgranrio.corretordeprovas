@@ -33,6 +33,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
 
     public interface IRespostaRepository : IRepository<Resposta> {
         Task<Resposta> GetRandom();
+        
     }
 
     public interface IQuestaoRepository : IRepository<Questao>

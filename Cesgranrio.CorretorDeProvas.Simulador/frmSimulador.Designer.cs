@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSimulador));
-            this.lsbSaida = new System.Windows.Forms.ListBox();
             this.btnGerar = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,20 +40,6 @@
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lsbSaida
-            // 
-            this.lsbSaida.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsbSaida.FormattingEnabled = true;
-            this.lsbSaida.HorizontalScrollbar = true;
-            this.lsbSaida.ItemHeight = 21;
-            this.lsbSaida.Location = new System.Drawing.Point(30, 64);
-            this.lsbSaida.Name = "lsbSaida";
-            this.lsbSaida.ScrollAlwaysVisible = true;
-            this.lsbSaida.Size = new System.Drawing.Size(1156, 361);
-            this.lsbSaida.TabIndex = 0;
-            // 
             // btnGerar
             // 
             this.btnGerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -62,7 +47,7 @@
             this.btnGerar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGerar.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.btnGerar.Location = new System.Drawing.Point(1031, 16);
+            this.btnGerar.Location = new System.Drawing.Point(582, 81);
             this.btnGerar.Name = "btnGerar";
             this.btnGerar.Size = new System.Drawing.Size(155, 63);
             this.btnGerar.TabIndex = 2;
@@ -76,7 +61,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(217, 23);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(969, 23);
+            this.progressBar1.Size = new System.Drawing.Size(520, 23);
             this.progressBar1.TabIndex = 3;
             // 
             // label2
@@ -86,9 +71,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(36, 79);
+            this.label2.Location = new System.Drawing.Point(36, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1150, 21);
+            this.label2.Size = new System.Drawing.Size(701, 48);
             this.label2.TabIndex = 4;
             this.label2.Text = "Para gerar 10 mil novas respostas, clique no botão abaixo. As respostas atuais se" +
     "rão descartadas do banco de dados.";
@@ -118,22 +103,21 @@
             this.panel1.BackColor = System.Drawing.Color.DarkOrchid;
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.btnGerar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1213, 118);
+            this.panel1.Size = new System.Drawing.Size(764, 118);
             this.panel1.TabIndex = 8;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lblProgresso);
-            this.panel2.Controls.Add(this.lsbSaida);
             this.panel2.Controls.Add(this.progressBar1);
+            this.panel2.Controls.Add(this.btnGerar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 118);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1213, 463);
+            this.panel2.Size = new System.Drawing.Size(764, 184);
             this.panel2.TabIndex = 9;
             // 
             // frmSimulador
@@ -141,14 +125,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1213, 581);
+            this.ClientSize = new System.Drawing.Size(764, 302);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(631, 400);
+            this.MinimumSize = new System.Drawing.Size(764, 184);
             this.Name = "frmSimulador";
             this.Text = "Fundação Cesgranrio - Simulador de Respostas de Candidatos";
             this.panel1.ResumeLayout(false);
@@ -159,8 +144,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox lsbSaida;
         private System.Windows.Forms.Button btnGerar;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label2;

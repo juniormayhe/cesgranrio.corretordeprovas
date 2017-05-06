@@ -38,7 +38,8 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 
             IPagedList<Questao> paginaComQuestoes = lista.OrderBy(p => p.QuestaoNumero).ToPagedList(page ?? 1, pageSize);
 
-            QuestaoVM vm = new QuestaoVM { Lista = paginaComQuestoes };
+            QuestaoVM vm = QuestaoVM.CriarQuestaoVM(new Questao());
+            vm.Lista = paginaComQuestoes;
 
             if (Request.IsAjaxRequest())
             {
@@ -113,7 +114,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             if (questao == null)
                 return HttpNotFound();
 
-            var vm = new QuestaoVM(questao);
+            var vm = QuestaoVM.CriarQuestaoVM(questao);
             
             
             return View(vm);

@@ -20,22 +20,25 @@ namespace Cesgranrio.CorretorDeProvas.Web.Models
             
         }
 
-        public RespostaVM(Resposta resposta)
-        {
-            this.RespostaID = resposta.RespostaID;
-            this.QuestaoID = resposta.QuestaoID;
-            this.UsuarioID= resposta.UsuarioID;
-            this.CandidatoID = resposta.CandidatoID;
-            this.RespostaGradeEscolhida = resposta.RespostaGradeEscolhida;
-            this.RespostaNota = resposta.RespostaNota;
-            this.RespostaControleVersao = resposta.RespostaControleVersao;
-            this.RespostaImagem = resposta.RespostaImagem;
-            this.Questao = resposta.Questao;
-            this.Usuario = resposta.Usuario;
-            this.Candidato = resposta.Candidato;
-            this.RespostaNotaConcluida = resposta.RespostaNotaConcluida;
-        }
+        public static RespostaVM CriarRespostaVM(Resposta resposta) {
 
+            return new RespostaVM
+            {
+                RespostaID = resposta.RespostaID,
+                QuestaoID = resposta.QuestaoID,
+                UsuarioID = resposta.UsuarioID,
+                CandidatoID = resposta.CandidatoID,
+                RespostaGradeEscolhida = resposta.RespostaGradeEscolhida,
+                RespostaNota = resposta.RespostaNota,
+                RespostaControleVersao = resposta.RespostaControleVersao,
+                RespostaImagem = resposta.RespostaImagem,
+                Questao = resposta.Questao,
+                Usuario = resposta.Usuario,
+                Candidato = resposta.Candidato,
+                RespostaNotaConcluida = resposta.RespostaNotaConcluida
+            };
+        }
+        
         [Key]
         [Display(Name = "ID")]
         public int RespostaID { get; set; }

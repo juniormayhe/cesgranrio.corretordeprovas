@@ -20,6 +20,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         public CandidatoRepository(ICorretorDeProvasDbContext context)
         {
             _context = context;
+            _context.Database.CommandTimeout = 120;
         }
 
         /// <summary>

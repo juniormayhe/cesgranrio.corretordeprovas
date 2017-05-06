@@ -19,6 +19,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         public QuestaoRepository(ICorretorDeProvasDbContext context)
         {
             _context = context;
+            _context.Database.CommandTimeout = 120;
         }
 
         /// <summary>

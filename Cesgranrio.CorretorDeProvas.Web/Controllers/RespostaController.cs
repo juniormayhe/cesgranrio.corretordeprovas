@@ -50,9 +50,14 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             _logger.LogInformation($"****** ");
             _logger.LogInformation($"{Session.Ler<Usuario>("USUARIO").UsuarioCPF} está visualizando a página {page}");
             _logger.LogInformation($"****** ");
+
+            //TODO: OUT OF MEMORY! TALVEZ TENHA QUE ABRIR A PAGINA DE CORRECAO DIRETAMENTE
             var lista = await _repository.ListarAsync();
             
-            IPagedList<Resposta> paginaComRespostas = lista.OrderBy(p => p.RespostaID).ToPagedList(page ?? 1, pageSize);
+            IPagedList<Resposta> paginaComRespostas = await lista.ToPagedListAsync(page ?? 1, pageSize);
+            
+
+            //IPagedList<Resposta> paginaComRespostas = lista.OrderBy(p => p.RespostaID).ToPagedList(page ?? 1, pageSize);
 
             RespostaVM vm = new RespostaVM { Lista = paginaComRespostas };
 
@@ -79,9 +84,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             if (resposta == null)
                 return HttpNotFound();
 
-            var vm = new RespostaVM(resposta);
-            
-            
+            var vm = RespostaVM.CriarRespostaVM(resposta);
             return View(vm);
         }
 
@@ -106,13 +109,15 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             vm.Candidato = respostaParaAtualizar.Candidato;
             vm.RespostaControleVersao = RespostaControleVersao;
             vm.RespostaImagem = respostaParaAtualizar.RespostaImagem;
-            //vm.RespostaGradeEscolhida = respostaParaAtualizar.RespostaGradeEscolhida;
             
             #region verificar se foi apagado
             if (respostaParaAtualizar == null)
             {
                 Resposta respostaApagada = new Resposta();
                 TryUpdateModel(respostaApagada);
+                _logger.LogInformation($"****** ");
+                _logger.LogInformation($"****** {Session.Ler<Usuario>("USUARIO").UsuarioCPF} tentou corrigir a resposta #{vm.RespostaID} com nota {respostaParaAtualizar.RespostaNota} mas já havia sido apagada anteriormente.");
+                _logger.LogInformation($"****** ");
                 ModelState.AddModelError(string.Empty, "Não foi possível salvar as mudanças. A resposta foi apagada.");
                 return View(vm);
             }
@@ -145,6 +150,9 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             }
 
             if (vm.RespostaNotaConcluida.HasValue && vm.RespostaNotaConcluida.Value) {
+                _logger.LogInformation($"****** ");
+                _logger.LogInformation($"****** {Session.Ler<Usuario>("USUARIO").UsuarioCPF} tentou corrigir a resposta #{vm.RespostaID} com nota {respostaParaAtualizar.RespostaNota} mas uma nota já havia sido definida anteriormente.");
+                _logger.LogInformation($"****** ");
                 ModelState.AddModelError(string.Empty, "Uma nota já foi atribuída a esta avaliação.");
                 return View(vm);
             }
@@ -164,18 +172,16 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                         _logger.LogInformation($"****** ");
                         _logger.LogInformation($"****** {Session.Ler<Usuario>("USUARIO").UsuarioCPF} corrigiu a resposta #{vm.RespostaID} com nota {respostaParaAtualizar.RespostaNota}");
                         _logger.LogInformation($"****** ");
-                        //levamos para corrigir outra prova de modo aleatorio
+                        //levamos professor para corrigir outra prova de modo aleatorio
                         try
                         {
-                            Resposta r = await _repository.GetRandom();
+                            Resposta r = await _repository.GetRandom();   
                             return RedirectToAction("Corrigir", new { id = r.RespostaID });
                         }
-                        catch (Exception ex) {
+                        catch (Exception /*ex*/) {
                             //se random falhar, podem ter acabado as respostas para corrigir
                             return RedirectToAction("CorrigirRespostas");
                         }
-
-
                     }
                     else
                     {

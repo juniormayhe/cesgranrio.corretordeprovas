@@ -219,31 +219,17 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         }
 
         // GET: Usuario/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public Task<ActionResult> Delete(int? id)
         {
             throw new NotImplementedException();
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Usuario usuario = await db.Usuario.FindAsync(id);
-            //if (usuario == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(usuario);
         }
 
         // POST: Usuario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public Task<ActionResult> DeleteConfirmed(int id)
         {
             throw new NotImplementedException();
-            //Usuario usuario = await db.Usuario.FindAsync(id);
-            //db.Usuario.Remove(usuario);
-            //await db.SaveChangesAsync();
-            //return RedirectToAction("Index");
         }
 
         
