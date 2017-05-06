@@ -21,12 +21,12 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
     [VerificarAcessoFilter]
     public class RespostaController : MainController
     {
-        private IRepository<Resposta> _repository;
+        private IRespostaRepository _repository;
         static ILogger _logger;
 
         const int pageSize = 5;
 
-        public RespostaController(IRepository<Resposta> repository)
+        public RespostaController(IRespostaRepository repository)
         {
             _repository = repository;
 
@@ -90,7 +90,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,GradeEscolhida,RespostaGradeEscolhida,RespostaNota")] RespostaVM vm, byte[] respostaControleVersao)
+        public async Task<ActionResult> Corrigir([Bind(Include = "RespostaID,UsuarioID,CandidatoID,QuestaoID,GradeEscolhida,RespostaGradeEscolhida,RespostaNota")] RespostaVM vm, byte[] RespostaControleVersao)
         {
             _logger.LogInformation($"****** ");
             _logger.LogInformation($"{Session.Ler<Usuario>("USUARIO").UsuarioCPF} está tentando atualizar a resposta #{vm.RespostaID}");
@@ -99,13 +99,12 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Resposta respostaParaAtualizar = await _repository.ProcurarAsync(vm.RespostaID);
-
             //O corretor deverá poder selecionar apenas uma das notas na grade de correção. Após salvar o documento atual, o sistema deve retornar um outro documento aleatoriamente para o corretor.
+            Resposta respostaParaAtualizar = await _repository.ProcurarAsync(vm.RespostaID);
             vm.Questao = respostaParaAtualizar.Questao;
             vm.Usuario = respostaParaAtualizar.Usuario;
             vm.Candidato = respostaParaAtualizar.Candidato;
-            vm.RespostaControleVersao = respostaControleVersao;
+            vm.RespostaControleVersao = RespostaControleVersao;
             vm.RespostaImagem = respostaParaAtualizar.RespostaImagem;
             //vm.RespostaGradeEscolhida = respostaParaAtualizar.RespostaGradeEscolhida;
             
@@ -144,7 +143,12 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 ModelState.AddModelError(string.Empty, $"O intervalo válido para Domínio das regras é {0,00} a {vm.Questao.QuestaoGradeDominioDasRegras}");
                 return View(vm);
             }
-            
+
+            if (vm.RespostaNotaConcluida.HasValue && vm.RespostaNotaConcluida.Value) {
+                ModelState.AddModelError(string.Empty, "Uma nota já foi atribuída a esta avaliação.");
+                return View(vm);
+            }
+
             #endregion
 
             try
@@ -155,7 +159,8 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                     if (ModelState.IsValid)
                     {
                         respostaParaAtualizar.RespostaNotaConcluida = true;
-                        await _repository.AlterarAsync(respostaParaAtualizar, respostaControleVersao);
+                        await _repository.AlterarAsync(respostaParaAtualizar, RespostaControleVersao);
+                        _repository.Recarregar(respostaParaAtualizar);
                         _logger.LogInformation($"****** ");
                         _logger.LogInformation($"****** {Session.Ler<Usuario>("USUARIO").UsuarioCPF} corrigiu a resposta #{vm.RespostaID} com nota {respostaParaAtualizar.RespostaNota}");
                         _logger.LogInformation($"****** ");

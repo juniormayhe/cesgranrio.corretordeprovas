@@ -266,9 +266,18 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             throw new NotImplementedException();
         }
 
-        public Task<Resposta> GetRandom()
+        public Task<Usuario> GetRandom()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Recarregar item
+        /// </summary>
+        /// <param name="item"></param>
+        public void Recarregar(Usuario item)
+        {
+            _context.Entry(item).Reload();
         }
     }
 }

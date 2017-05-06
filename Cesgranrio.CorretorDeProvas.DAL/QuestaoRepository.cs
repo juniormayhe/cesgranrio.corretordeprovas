@@ -102,11 +102,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             await _context.SaveChangesAsync();
             
         }
-
-        public void Recarregar(Questao item) { 
-            _context.Entry(item).Reload();
-        }
-
+        
         /// <summary>
         /// Remover questao
         /// </summary>
@@ -225,9 +221,22 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             return _context.Questao.FirstOrDefaultAsync(t => t.QuestaoNumero == numero);
         }
 
-        public Task<Resposta> GetRandom()
+        /// <summary>
+        /// Random
+        /// </summary>
+        /// <returns></returns>
+        public Task<Questao> GetRandom()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Recarregar item
+        /// </summary>
+        /// <param name="item"></param>
+        public void Recarregar(Questao item)
+        {
+            _context.Entry(item).Reload();
         }
     }
 }

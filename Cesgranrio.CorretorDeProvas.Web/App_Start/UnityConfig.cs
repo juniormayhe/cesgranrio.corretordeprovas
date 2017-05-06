@@ -18,7 +18,7 @@ namespace Cesgranrio.CorretorDeProvas.Web
             //injecao de dependencias builtin
             container.RegisterType<ICorretorDeProvasDbContext, CorretorDeProvasDbContext>(new PerThreadLifetimeManager(), new InjectionConstructor());
             container.RegisterType<IQuestaoRepository, QuestaoRepository>();
-            container.RegisterType<IRepository<Resposta>, RespostaRepository>();
+            container.RegisterType<IRespostaRepository, RespostaRepository>();
             container.RegisterType<ILoginUsuarioRepository<Usuario>, UsuarioRepository>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

@@ -124,7 +124,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Editar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm, byte[] questaoControleVersao)
+        public async Task<ActionResult> Editar([Bind(Include = "QuestaoID,QuestaoNumero,QuestaoEnunciado,QuestaoGradeFidelidadeAoTema,QuestaoGradeOrganizacaoIdeias,QuestaoGradeNivelDeLinguagem,QuestaoGradeDominioDasRegras")] QuestaoVM vm, byte[] QuestaoControleVersao)
         {
             if (vm == null || vm.QuestaoID == 0)
             {
@@ -132,7 +132,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
             }
 
             Questao questaoParaAtualizar = await _repository.ProcurarAsync(vm.QuestaoID);
-            vm.QuestaoControleVersao = questaoControleVersao;
+            vm.QuestaoControleVersao = QuestaoControleVersao;
             
             #region verificar se foi apagado
             if (questaoParaAtualizar == null)
@@ -151,7 +151,7 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
 
                     if (ModelState.IsValid)
                     {
-                        await _repository.AlterarAsync(questaoParaAtualizar, questaoControleVersao);
+                        await _repository.AlterarAsync(questaoParaAtualizar, QuestaoControleVersao);
                         _repository.Recarregar(questaoParaAtualizar);
                         return RedirectToAction("Listar");
                     }
@@ -200,18 +200,6 @@ namespace Cesgranrio.CorretorDeProvas.Web.Controllers
                 ModelState.AddModelError(string.Empty, "O registro que você tentou remover já foi alterado por outro elaborador");
             }
             return View(questao);
-            //return View(new QuestaoVM
-            //{
-            //    QuestaoID = questao.QuestaoID,
-            //    QuestaoNumero = questao.QuestaoNumero,
-            //    QuestaoEnunciado = questao.QuestaoEnunciado,
-            //    QuestaoGradeDominioDasRegras = questao.QuestaoGradeDominioDasRegras,
-            //    QuestaoGradeFidelidadeAoTema = questao.QuestaoGradeFidelidadeAoTema,
-            //    QuestaoGradeNivelDeLinguagem = questao.QuestaoGradeNivelDeLinguagem,
-            //    QuestaoGradeOrganizacaoIdeias = questao.QuestaoGradeOrganizacaoIdeias,
-            //    QuestaoControleVersao = questao.QuestaoControleVersao,
-            //    Resposta = questao.Resposta
-            //});
         }
 
         // POST: Questao/RemocaoConcluida/5

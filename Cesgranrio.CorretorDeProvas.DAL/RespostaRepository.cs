@@ -12,7 +12,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
     /// <summary>
     /// Repositório de respostas
     /// </summary>
-    public class RespostaRepository : IRepository<Resposta>
+    public class RespostaRepository : IRespostaRepository
     {
         private ICorretorDeProvasDbContext _context;
         private static Random rand = new Random();
@@ -122,6 +122,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             _context.Entry(item).Reload();
+            _context.Refresh();
         }
 
         /// <summary>
@@ -196,6 +197,15 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             var lista = await _context.Resposta.ToListAsync();
             lista = lista.Where(x => x.RespostaNotaConcluida == null || x.RespostaNotaConcluida == false).ToList();
             return lista.ElementAtOrDefault(rand.Next(lista.Count()));
+        }
+
+        /// <summary>
+        /// Recarregar item
+        /// </summary>
+        /// <param name="item"></param>
+        public void Recarregar(Resposta item)
+        {
+            _context.Entry(item).Reload();
         }
     }
 }

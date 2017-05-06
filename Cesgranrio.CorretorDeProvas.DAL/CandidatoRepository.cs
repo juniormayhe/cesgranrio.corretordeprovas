@@ -125,9 +125,9 @@ namespace Cesgranrio.CorretorDeProvas.DAL
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AlterarAsync(Candidato item, byte[] respostaControleVersao)
+        public async Task AlterarAsync(Candidato item, byte[] controleVersao)
         {
-            _context.Entry(item).OriginalValues["CandidatoControleVersao"] = respostaControleVersao;
+            _context.Entry(item).OriginalValues["CandidatoControleVersao"] = controleVersao;
             _context.Entry(item).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             _context.Entry(item).Reload();
@@ -195,9 +195,22 @@ namespace Cesgranrio.CorretorDeProvas.DAL
             return _context.Candidato.Max(t => t.CandidatoID);
         }
 
-        public Task<Resposta> GetRandom()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Task<Candidato> GetRandom()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Recarregar item
+        /// </summary>
+        /// <param name="item"></param>
+        public void Recarregar(Candidato item)
+        {
+            _context.Entry(item).Reload();
         }
     }
 }
