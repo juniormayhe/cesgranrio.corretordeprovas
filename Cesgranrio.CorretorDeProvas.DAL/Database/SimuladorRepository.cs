@@ -27,6 +27,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Database
                 if (db.State == ConnectionState.Closed) db.Open();
                 var command = new SqlCommand("LimparRespostas", db);
                 command.CommandType = CommandType.StoredProcedure;
+                //a limpeza não pode ser assincrona pois pode causar efeitos colaterais
                 command.ExecuteNonQuery();
             }
             
@@ -37,7 +38,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Database
         /// </summary>
         /// <param name="r"></param>
         /// <returns></returns>
-        public int CriarResposta(Resposta r)
+        public async Task<int> CriarResposta(Resposta r)
         {
             int i = 0;
             using (SqlConnection db = (SqlConnection)_factory.CriarConexao())
@@ -59,7 +60,7 @@ namespace Cesgranrio.CorretorDeProvas.DAL.Database
 
                 //command.Parameters["@ID"].Value = customerID;
 
-                i = command.ExecuteNonQuery();
+                i = await command.ExecuteNonQueryAsync();
 
             }
             return i;

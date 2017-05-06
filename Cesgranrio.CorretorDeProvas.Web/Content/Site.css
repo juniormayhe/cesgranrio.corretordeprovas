@@ -168,3 +168,11 @@ textarea {
 .img-responsive {margin:auto
 }
 
+.transicao {
+    opacity: 0;
+    transition: opacity 2s;
+    -webkit-transition: opacity 2s;
+    -moz-transition: opacity 2s;
+    -ms-transition: opacity 2s; /* Internet Explorer */
+    -o-transition: opacity 2s; /* Opera < 12.1 */
+}

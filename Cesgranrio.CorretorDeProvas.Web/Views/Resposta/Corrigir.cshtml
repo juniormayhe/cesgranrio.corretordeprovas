@@ -20,7 +20,7 @@
                     <p class="category">Dê as notas para a resposta abaixo</p>
 
                 </div>
-                <div class="content">
+                <div class="content transicao" id="transicao">
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.RespostaID)

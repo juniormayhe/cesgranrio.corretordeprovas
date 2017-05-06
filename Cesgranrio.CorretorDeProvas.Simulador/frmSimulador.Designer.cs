@@ -62,7 +62,7 @@
             this.btnGerar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGerar.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.btnGerar.Location = new System.Drawing.Point(1031, 37);
+            this.btnGerar.Location = new System.Drawing.Point(1031, 16);
             this.btnGerar.Name = "btnGerar";
             this.btnGerar.Size = new System.Drawing.Size(155, 63);
             this.btnGerar.TabIndex = 2;
@@ -81,18 +81,21 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(36, 79);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(812, 21);
+            this.label2.Size = new System.Drawing.Size(1150, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "Para gerar 10 mil novas respostas, clique no botão abaixo. As respostas atuais se" +
     "rão descartadas do banco de dados.";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(32, 18);
@@ -144,10 +147,11 @@
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(631, 400);
             this.Name = "frmSimulador";
             this.Text = "Fundação Cesgranrio - Simulador de Respostas de Candidatos";
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);

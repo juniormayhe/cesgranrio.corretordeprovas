@@ -12,7 +12,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body onload="if ($('#transicao').length) $('#transicao').css('opacity', '1');">
     <div class="wrapper">
         <div class="sidebar" data-color="purple" data-image="/Content/tema/sidebar-2.jpg">
 
