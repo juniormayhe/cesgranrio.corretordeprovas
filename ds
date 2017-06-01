@@ -1,0 +1,338 @@
+[33mcommit 661f62d46c6de5ee9d360efebc9d775ca4b7d42c[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 17 17:51:50 2017 -0300
+
+    removed site zip
+
+[33mcommit f9bd3aecf15df3463979a391c988914f2cb4737e[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Sat May 6 15:05:47 2017 -0300
+
+    Fixed out of memory exception for larger answer lists
+
+[33mcommit b8e1c8458ed793d2c6975148719be980ba647cd6[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri May 5 22:22:41 2017 -0300
+
+    fixed concurrency issues
+
+[33mcommit c0ee5c683360dc61cc6a9d25f747ddbf5608e00b[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri May 5 21:21:35 2017 -0300
+
+    fixed simulator threads
+
+[33mcommit b4e566c59633a63dd49d6e97f909a3c9c36365cc[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri May 5 19:07:42 2017 -0300
+
+    fixed threads
+
+[33mcommit d8c4ea31457075612c4e937260ec7f5efd64053e[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri May 5 15:38:10 2017 -0300
+
+    testing threads
+
+[33mcommit 1028982791dd233554f7bafb6c10e602d803ce55[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri May 5 15:04:04 2017 -0300
+
+    fixed issues
+
+[33mcommit 9a61da0a79aa26667862d42b7f4d48a7826ea0c7[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri May 5 14:38:36 2017 -0300
+
+    fixed layout
+
+[33mcommit 61c1b7d2e829be4a12198e5d9571f0d1bd15fdd1[m
+Merge: f3e30f6 6fd2fb6
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 23:52:46 2017 -0300
+
+    Merge branch 'master' of https://github.com/juniormayhe/cesgranrio.corretordeprovas
+
+[33mcommit f3e30f6e8b2051280bb8b2f508421eee637ad383[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 23:25:35 2017 -0300
+
+    added database backup and script
+
+[33mcommit 6fd2fb6d9e0c3e20d53a92195822ae947504c1fb[m
+Author: Junior M <Juniormayhe@gmail.com>
+Date:   Thu May 4 23:04:26 2017 -0300
+
+    Set theme jekyll-theme-cayman
+
+[33mcommit 9014c9fd6526008631472401b7e7562e5d06ece9[m
+Author: Junior M <Juniormayhe@gmail.com>
+Date:   Thu May 4 22:04:27 2017 -0300
+
+    Update readme.md
+
+[33mcommit e8481a286aefd2856aa5e84909f2e1c6405f8d04[m
+Merge: f3dbf7c 27bb708
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 22:02:39 2017 -0300
+
+    Merge branch 'master' of https://github.com/juniormayhe/cesgranrio.corretordeprovas
+
+[33mcommit f3dbf7cb48a3152cfda9116d5e3abecec909eaa6[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 22:01:55 2017 -0300
+
+    Added screenshot
+
+[33mcommit 27bb708d5b3b379a537d9333879154288110b213[m
+Author: Junior M <Juniormayhe@gmail.com>
+Date:   Thu May 4 21:59:14 2017 -0300
+
+    Update readme.md
+
+[33mcommit 74870f660337226e5a72f5cc9a8d909d023b9865[m
+Author: Junior M <Juniormayhe@gmail.com>
+Date:   Thu May 4 21:51:12 2017 -0300
+
+    Update readme.md
+
+[33mcommit 7b51724d2f63f8e50585bc414d0bb0e878893dd6[m
+Merge: 5480a64 f92c0dc
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 21:44:08 2017 -0300
+
+    Merge branch 'master' of https://github.com/juniormayhe/cesgranrio.corretordeprovas
+
+[33mcommit 5480a6498625555ac0e4f3ebd15aa2880e65d470[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 21:39:26 2017 -0300
+
+    added screenshots
+
+[33mcommit 1c30267a08ec833ae02e7da6cc6397a9081ed477[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 21:37:37 2017 -0300
+
+    fix error pages
+
+[33mcommit f92c0dc30d82f041bc9ce8e1a6f7a7dee9dcd50b[m
+Author: Junior M <Juniormayhe@gmail.com>
+Date:   Thu May 4 21:13:56 2017 -0300
+
+    Update readme.md
+
+[33mcommit c8a2a93f7912c2f6500075d9aeb4df2e40c53c5b[m
+Author: Junior M <Juniormayhe@gmail.com>
+Date:   Thu May 4 21:13:07 2017 -0300
+
+    Create readme.md
+
+[33mcommit c022e66b35abb2fda8a0a0576d70e0b4042b8359[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 20:45:27 2017 -0300
+
+    removed test project
+
+[33mcommit 4fd3105f4fc377f5d16e6aee4c7bcd7c19a6288a[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 20:15:18 2017 -0300
+
+    Download link for simulator
+
+[33mcommit b002e59154ab877b4973815d9c381413b180431d[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 20:09:55 2017 -0300
+
+    Fixed generation of answers
+
+[33mcommit f509586a4520bb2d9f6b931a913eb2bb40c2856d[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 20:04:54 2017 -0300
+
+    dealing with permissions
+
+[33mcommit 5921fd9da34f062f292e570825c2f4f6b4975c35[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 19:21:12 2017 -0300
+
+    logging
+
+[33mcommit 2d0067ebde18d908f29bc4d61707634bc6e7e431[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 18:20:32 2017 -0300
+
+    adjusting business logic
+
+[33mcommit 4d7298c5a990dbf28ac12a38e03901fa41451400[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 16:08:50 2017 -0300
+
+    fixing concurrency in questions
+
+[33mcommit 9eaac13af0db1125487ade1d05d0b778d7328136[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 13:38:40 2017 -0300
+
+    Fixing question editing
+
+[33mcommit e7db425bc88a36a46dd88fd89d8346bfaca3fada[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Thu May 4 12:41:02 2017 -0300
+
+    improved number formatting
+
+[33mcommit 7e1cf27d869c22e0f2813c71cb917d307bc04023[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 3 22:57:26 2017 -0300
+
+    added row version to question
+
+[33mcommit 7fedc9a9fa40d1d1b20852a25bce528f733888ee[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 3 21:13:08 2017 -0300
+
+    fixing validation
+
+[33mcommit f7b3475c219b7a062b88c51c50aa9988233ee6c0[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 3 20:22:00 2017 -0300
+
+    fixed random for decimal
+
+[33mcommit bfe625ea757ae436d4354d96b21847dc0c68c748[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 3 20:06:54 2017 -0300
+
+    validating correction input
+
+[33mcommit 14ef8407c186bf704977a09beaf1abd82b4be781[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 3 19:02:42 2017 -0300
+
+    fixed responsive menu
+
+[33mcommit 524738c65224d2796c23f7e7cd518f2ece8211ce[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 3 18:34:52 2017 -0300
+
+    Logout view added
+
+[33mcommit 9775bd642071ce4186fdc4ea3529a3a056828aa0[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed May 3 18:28:05 2017 -0300
+
+    dealing with concurrency for editing
+
+[33mcommit af845d67b428c13d7a9501eb81b65412a1869a2b[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Tue May 2 22:05:08 2017 -0300
+
+    added lightbox
+
+[33mcommit 1742fbef3a674555d52c21806e89870b9a830433[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Tue May 2 16:41:19 2017 -0300
+
+    fixing threads
+
+[33mcommit 147b11d74046af15c8e16a8e6392b640586b9703[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Tue May 2 16:02:05 2017 -0300
+
+    refactoring
+
+[33mcommit 35feb465170fe7526661be6095e12524ffd91f79[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Tue May 2 15:32:09 2017 -0300
+
+    fixing proc execution
+
+[33mcommit cc96d25ae0312ee415d92e281b2d97c34b2326a9[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Tue May 2 10:21:04 2017 -0300
+
+    image generarion
+
+[33mcommit 6f8169b3c2d62f4295ca484c20a4d85642c158fb[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Sun Apr 30 19:00:38 2017 -0300
+
+    Unity for ioc added
+
+[33mcommit 689cf9e77937d7c6dea755475f67e1230c0b3a45[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Sun Apr 30 14:01:07 2017 -0300
+
+    removed comments
+
+[33mcommit c491ca7fc50123c037c82b4c590aac2eb7110cb3[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Sun Apr 30 13:59:39 2017 -0300
+
+    added question point layout
+
+[33mcommit a4ca9aa79707991d217c561f1b6be2dbecafc03e[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Sat Apr 29 18:14:54 2017 -0300
+
+    avoid duplicate question number
+
+[33mcommit 8ca33f6b9a55ebfc00a6895fb3e35a8a233221b5[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Sat Apr 29 16:32:26 2017 -0300
+
+    added list, edit layout
+
+[33mcommit 1e9c31a8f8cba5f98e3072f0c90cb649177a3941[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Sat Apr 29 10:23:58 2017 -0300
+
+    Branch for testing layout
+
+[33mcommit d5b2934dc38d8bd8e9c78aaa4d5348faa4c2f79d[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri Apr 28 20:28:42 2017 -0300
+
+    dealing with question points validation
+
+[33mcommit 50633ba834005b568f6dc2a6d03517372ef47305[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri Apr 28 17:40:32 2017 -0300
+
+    Remove question added
+
+[33mcommit 27e11b312d65262b776fc29424bd79f3e2a6e925[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri Apr 28 17:11:21 2017 -0300
+
+    question edit  added
+
+[33mcommit 31e846422703a5da76c9dbe300981f96f7953b92[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri Apr 28 15:19:17 2017 -0300
+
+    Added XPagedList for paging questions
+
+[33mcommit be0319793edf77e2daa787234d5f0f8eb4d7bc4e[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri Apr 28 00:16:00 2017 -0300
+
+    Script de carga
+
+[33mcommit 45eb493cc582ffbf5a03de465547f6898e4500d3[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Fri Apr 28 00:10:00 2017 -0300
+
+    Login form added
+
+[33mcommit 3db0c8a068f75aaa9ca0ea2880eb622298417913[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed Apr 26 17:33:50 2017 -0300
+
+    Add project files.
+
+[33mcommit 5b637af91d63b430bfc825847d5e5abb064f6f0a[m
+Author: Wanderley Mayhe Junior <juniormayhe@gmail.com>
+Date:   Wed Apr 26 17:33:46 2017 -0300
+
+    Add .gitignore and .gitattributes.

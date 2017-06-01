@@ -20,7 +20,7 @@
 
 //INSTRUÇÕES
 
-	# Restaure o banco de dados em localhost com o arquivo da pasta de solução 2) Bancos de dados\banco.zip 
+	# Restaure o banco de dados em localhost com o arquivo da pasta de solução 2) Bancos de dados\banco.bak 
 	ou crie um banco chamado "Cesgranrio.CorretorDeProvas" e execute no banco 2) Bancos de dados\script.sql
 
 	# Configure o projeto Cesgranrio.CorretorDeProvas.Web como startup project e execute o site

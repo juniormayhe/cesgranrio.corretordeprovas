@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1) Instruções", "1) Instr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2) Banco de Dados", "2) Banco de Dados", "{7CD783F9-D767-4D0A-AE71-D241C699A016}"
 	ProjectSection(SolutionItems) = preProject
-		Cesgranrio.CorretorDeProvas.DB\banco.zip = Cesgranrio.CorretorDeProvas.DB\banco.zip
+		Cesgranrio.CorretorDeProvas.DB\banco.bak = Cesgranrio.CorretorDeProvas.DB\banco.bak
 		Cesgranrio.CorretorDeProvas.DB\script.sql = Cesgranrio.CorretorDeProvas.DB\script.sql
 	EndProjectSection
 EndProject
